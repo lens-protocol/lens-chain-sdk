@@ -4,10 +4,16 @@ The official SDK for the Lens Network 🌿.
 
 ## Table of Contents <!-- omit in toc -->
 
+- [Pre-requisites](#pre-requisites)
 - [Setup](#setup)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Pre-requisites
+
+- [Node.js](https://nodejs.org/en/download/) v20.x
+- [pnpm](https://pnpm.io/installation) v8.2.x
 
 ## Setup
 
