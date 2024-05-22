@@ -12,6 +12,10 @@ node_modules
 .DS_Store
 *.pem
 
+# lockfiles
+package-lock.json
+yarn.lock
+
 # debug
 .pnpm-debug.log*
 
