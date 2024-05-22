@@ -4,32 +4,55 @@ The official SDK for the Lens Network 🌿.
 
 ## Table of Contents <!-- omit in toc -->
 
-- [Pre-requisites](#pre-requisites)
-- [Setup](#setup)
-- [Usage](#usage)
+- [Installation](#installation)
+- [Development](#development)
 - [Contributing](#contributing)
 - [License](#license)
 
-## Pre-requisites
+## Installation
+
+```bash
+pnpm add @lens-network/sdk
+
+# or
+
+npm install @lens-network/sdk
+
+# or
+
+yarn add @lens-network/sdk
+```
+
+## Development
+
+This section is for developers who want to contribute to the SDK.
+
+### Setup <!-- omit in toc -->
+
+Pre-requisites:
 
 - [Node.js](https://nodejs.org/en/download/) v20.x
-- [pnpm](https://pnpm.io/installation) v8.2.x
+- [pnpm](https://pnpm.io/installation) >v9.1.2
 
-## Setup
+If you use [nvm](https://github.com/nvm-sh/nvm) to manage your Node.js versions, you can run:
 
-To get started, clone the repository:
+```bash
+nvm use
+```
+
+First, clone the repository:
 
 ```bash
 git clone https://github.com/lens-network/sdk.git
 ```
 
-Install the dependencies:
+Then, install the dependencies:
 
 ```bash
 pnpm install
 ```
 
-## Usage
+### Usage <!-- omit in toc -->
 
 Run the tests:
 
@@ -55,4 +78,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 
-Lens SDK is [MIT licensed](./LICENSE)
+Lens Network SDK is [MIT licensed](./LICENSE)
