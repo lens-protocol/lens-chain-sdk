@@ -5,7 +5,7 @@ The official SDK for the Lens Network 🌿.
 ## Table of Contents <!-- omit in toc -->
 
 - [Installation](#installation)
-- [Development](#development)
+- [Development Workflow](#development-workflow)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -23,16 +23,14 @@ npm install @lens-network/sdk
 yarn add @lens-network/sdk
 ```
 
-## Development
+## Development Workflow
 
 This section is for developers who want to contribute to the SDK.
 
-### Setup <!-- omit in toc -->
+### Pre-requisites: <!-- omit in toc -->
 
-Pre-requisites:
-
-- [Node.js](https://nodejs.org/en/download/) v20.x
-- [pnpm](https://pnpm.io/installation) >v9.1.2
+- Node.js: >= v20. See [installation guide](https://nodejs.org/en/download/package-manager).
+- pnpm: >v9.1.2. See [installation guide](https://pnpm.io/installation).
 
 If you use [nvm](https://github.com/nvm-sh/nvm) to manage your Node.js versions, you can run:
 
@@ -40,13 +38,15 @@ If you use [nvm](https://github.com/nvm-sh/nvm) to manage your Node.js versions,
 nvm use
 ```
 
-First, clone the repository:
+### Initial Setup <!-- omit in toc -->
+
+Clone the repository:
 
 ```bash
 git clone https://github.com/lens-network/sdk.git
 ```
 
-Then, install the dependencies:
+Install the dependencies:
 
 ```bash
 pnpm install
@@ -66,11 +66,38 @@ Compile the code:
 pnpm build
 ```
 
-Publish the package:
+Clean the build:
 
 ```bash
-pnpm publish
+pnpm clean
 ```
+
+### Publishing <!-- omit in toc -->
+
+1. Create a new release branch using the `release/X.Y.Z` naming convention.
+2. Bumps up version number and updates the changelog.
+
+   ```bash
+   pnpm changeset version
+   ```
+
+3. Commit the changes using `chore: bumps up version number` as the commit message.
+4. Push the changes to the remote repository.
+5. Open a pull request to the `main` branch.
+6. Wait for all checks to pass and for the pull request to be approved.
+7. Publish the package.
+
+   ```bash
+   pnpm changeset publish
+   ```
+
+8. Push tags to the remote repository.
+
+   ```bash
+   git push --follow-tags
+   ```
+
+9. Merge the pull request to the `main` branch.
 
 ## Contributing
 
