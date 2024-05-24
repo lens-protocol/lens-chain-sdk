@@ -1,11 +1,18 @@
 import { getDefaultProvider, types } from '@lens-network/sdk/ethers';
 
-const provider = getDefaultProvider(types.Network.Sepolia);
-
-export default [
-  [
-    `<h2>${(await provider.getNetwork()).name}</h2>`,
-    `<p>Chain Id: ${(await provider.getNetwork()).name}</p>`,
-    `<p>Current Block Number: ${await provider.getBlockNumber()}</p>`,
-  ].join('\n'),
+const providers = [
+  getDefaultProvider(types.Network.Sepolia),
+  // getDefaultProvider(types.Network.Mainnet),
 ];
+
+export default await Promise.all(
+  providers.map(async (provider) => {
+    const network = await provider.getNetwork();
+
+    return [
+      `<h2>${network.name}</h2>`,
+      `<p>Chain Id: ${network.chainId}</p>`,
+      `<p>Current Block Number: ${await provider.getBlockNumber()}</p>`,
+    ].join('\n');
+  }),
+);

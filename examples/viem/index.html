@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <h1>Basic Example</h1>
+    <h1>Viem Example</h1>
     <div id="app">Loading...</div>
     <script type="module">
-      import out from "./index.ts";
-      document.querySelector("#app").innerHTML = Array.isArray(out)
-        ? out.map((x) => `<div style="margin-bottom: 16px;">${x}</div>`).join("")
+      import out from './index.ts';
+      document.querySelector('#app').innerHTML = Array.isArray(out)
+        ? out.map((x) => `<div style="margin-bottom: 16px;">${x}</div>`).join('')
         : out;
     </script>
   </body>
