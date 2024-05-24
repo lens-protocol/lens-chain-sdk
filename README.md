@@ -60,6 +60,12 @@ Run the tests:
 pnpm test
 ```
 
+Lint the code:
+
+```bash
+pnpm lint
+```
+
 Compile the code:
 
 ```bash

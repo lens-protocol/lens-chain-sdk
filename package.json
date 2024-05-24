@@ -25,9 +25,14 @@
       ]
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "clean": "rimraf dist",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
     "prepublish": "pnpm clean && pnpm build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -46,6 +51,11 @@
   "devDependencies": {
     "@changesets/cli": "^2.27.3",
     "@types/node": "^20.12.12",
+    "@typescript-eslint/eslint-plugin": "^7.10.0",
+    "@typescript-eslint/parser": "^7.10.0",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
     "ethers": "^6.12.1",
     "rimraf": "^5.0.7",
     "tsup": "^8.0.2",
