@@ -2,7 +2,10 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig((options) => ({
-  entry: ['src/viem.ts', 'src/ethers.ts'],
+  entry: {
+    viem: 'src/viem.ts',
+    ethers: 'src/ethers/index.ts',
+  },
   outDir: 'dist',
   splitting: false,
   sourcemap: true,

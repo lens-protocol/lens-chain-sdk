@@ -1,0 +1,17 @@
+{
+  "name": "example-ethers",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite"
+  },
+  "dependencies": {
+    "@lens-network/sdk": "link:../../",
+    "ethers": "^6.12.1",
+    "zksync-ethers": "^6.7.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11"
+  }
+}
