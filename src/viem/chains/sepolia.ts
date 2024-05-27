@@ -3,7 +3,7 @@ import { chainConfig } from 'viem/zksync';
 
 import { stagingRpcUrl } from '../../constants';
 
-export const zkSyncSepoliaTestnet = /*#__PURE__*/ defineChain({
+export const sepoliaDevelopment = /*#__PURE__*/ defineChain({
   ...chainConfig,
   id: 37111,
   name: 'Lens Development Network',

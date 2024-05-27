@@ -5,7 +5,7 @@ import { createPublicClient, http } from 'viem';
 
 const publicClients = [
   createPublicClient({
-    chain: chains.zkSyncSepoliaTestnet,
+    chain: chains.sepoliaDevelopment,
     transport: http(),
   }),
 ];
