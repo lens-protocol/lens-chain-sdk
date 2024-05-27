@@ -31,8 +31,13 @@
   "scripts": {
     "build": "tsup",
     "clean": "rimraf dist",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix",
+    "lint:code": "eslint . --ignore-pattern 'examples/*'",
+    "lint:examples": "eslint examples/",
+    "lint": "pnpm lint:code",
+    "prepare:examples:ethers_eip-1193": "pnpm i -C examples/ethers_eip-1193",
+    "prepare:examples:ethers_networks": "pnpm i -C examples/ethers_networks",
+    "prepare:examples:viem_networks": "pnpm i -C examples/viem_networks",
+    "prepare:examples": "pnpm prepare:examples:ethers_eip-1193 && pnpm prepare:examples:ethers_networks && pnpm prepare:examples:viem_networks",
     "prepublish": "pnpm clean && pnpm build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
