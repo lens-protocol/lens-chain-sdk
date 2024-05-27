@@ -7,7 +7,7 @@ import { chainConfig } from 'viem/zksync';
 import * as chains from '../chains';
 import { nativeCurrency } from '../constants';
 
-function defineViemChains(chain: chains.ChainDefinition) {
+function defineViemChain(chain: chains.ChainDefinition) {
   return defineChain({
     ...chainConfig,
     id: chain.id,
@@ -30,4 +30,4 @@ function defineViemChains(chain: chains.ChainDefinition) {
   });
 }
 
-export const staging = /*#__PURE__*/ defineViemChains(chains.staging);
+export const staging = /*#__PURE__*/ defineViemChain(chains.staging);
