@@ -1,4 +1,4 @@
-import { Provider } from './Provider';
+import { Provider } from './providers';
 import { Network } from './types';
 import { stagingRpcUrl } from '../constants';
 import { invariant } from '../invariant';
@@ -11,7 +11,7 @@ import { invariant } from '../invariant';
  *
  * @example
  * ```ts
- * import { getDefaultProvider, types } from '@lens-network/sdk';
+ * import { getDefaultProvider, types } from '@lens-network/sdk/ethers';
  *
  * const provider = getDefaultProvider(types.Networks.Sepolia); // Lens Network testnet (L2)
  * const custom = getDefaultProvider('http://localhost:8545/'); // Local node

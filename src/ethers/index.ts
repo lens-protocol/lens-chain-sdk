@@ -1,5 +1,5 @@
 export { getDefaultProvider } from './getDefaultProvider';
 
-export { Provider } from './Provider';
+export { BrowserProvider, Provider } from './providers';
 
 export * as types from './types';

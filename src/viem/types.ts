@@ -7,7 +7,7 @@ export type StorageEntry = {
   writtenValue: Hex;
 };
 
-export type SendTransactionDetails = {
+export type SendRawTransactionDetails = {
   transactionHash: Hash;
   storageLogs: StorageEntry[];
   events: ZkSyncRpcLog[];
@@ -17,6 +17,6 @@ export type PublicLensNetworkRpcSchema = [
   {
     Method: 'zks_sendRawTransactionWithDetailedOutput';
     Parameters: [Hex];
-    ReturnType: SendTransactionDetails;
+    ReturnType: SendRawTransactionDetails;
   },
 ];

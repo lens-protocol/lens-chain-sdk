@@ -1,5 +1,3 @@
-import 'viem/window';
-
 import { chains } from '@lens-network/sdk/viem';
 import { createPublicClient, http } from 'viem';
 
