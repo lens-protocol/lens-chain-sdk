@@ -1,6 +1,6 @@
 import { Provider } from './providers';
 import { Network } from './types';
-import { stagingRpcUrl } from '../constants';
+import { staging } from '../chains';
 import { invariant } from '../invariant';
 
 /**
@@ -23,7 +23,7 @@ export function getDefaultProvider(network: string | Network): Provider {
       return new Provider('http://localhost:4096');
 
     case Network.Sepolia:
-      return new Provider(stagingRpcUrl);
+      return new Provider(staging.rpcUrl);
 
     case Network.Mainnet:
       invariant(false, 'Mainnet is not supported yet');

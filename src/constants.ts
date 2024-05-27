@@ -1,4 +1,8 @@
 /**
- * The Staging RPC server URL.
+ * The native currency of the Lens Network.
  */
-export const stagingRpcUrl = 'https://rpc.staging.lens-network.crtlkey.com/';
+export const nativeCurrency = {
+  name: 'Ether',
+  symbol: 'ETH',
+  decimals: 18,
+} as const;
