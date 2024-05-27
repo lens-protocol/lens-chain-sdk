@@ -1,23 +1,15 @@
-import { Account, Address, Client, Hash, Hex, Transport } from 'viem';
-import type {
-  SendRawTransactionErrorType as SendRawTransactionErrorType_,
-  SendRawTransactionParameters as SendRawTransactionParameters_,
+import { Account, Client, Transport } from 'viem';
+import {
+  type SendRawTransactionErrorType as SendRawTransactionErrorType_,
+  type SendRawTransactionParameters as SendRawTransactionParameters_,
 } from 'viem/actions';
-import { ChainEIP712, ZkSyncRpcLog } from 'viem/zksync';
+import { ChainEIP712 } from 'viem/zksync';
+
+import { PublicLensNetworkRpcSchema, SendTransactionDetails } from '../types';
 
 export type SendRawTransactionWithDetailedOutputParameters = SendRawTransactionParameters_;
 
-export type StorageEntry = {
-  address: Address;
-  key: Hex;
-  writtenValue: Hex;
-};
-
-export type SendRawTransactionWithDetailedOutputReturnType = {
-  transactionHash: Hash;
-  storageLogs: StorageEntry[];
-  events: ZkSyncRpcLog[];
-};
+export type SendRawTransactionWithDetailedOutputReturnType = SendTransactionDetails;
 
 export type SendRawTransactionWithDetailedOutputErrorType = SendRawTransactionErrorType_;
 
@@ -50,8 +42,14 @@ export async function sendRawTransactionWithDetailedOutput<
   TChain extends ChainEIP712 | undefined,
   TAccount extends Account | undefined,
 >(
-  _client: Client<Transport, TChain, TAccount>,
-  _args: SendRawTransactionWithDetailedOutputParameters,
+  client: Client<Transport, TChain, TAccount, PublicLensNetworkRpcSchema>,
+  { serializedTransaction }: SendRawTransactionWithDetailedOutputParameters,
 ): Promise<SendRawTransactionWithDetailedOutputReturnType> {
-  throw new Error('Not implemented');
+  return client.request(
+    {
+      method: 'zks_sendRawTransactionWithDetailedOutput',
+      params: [serializedTransaction],
+    },
+    { retryCount: 0 },
+  );
 }

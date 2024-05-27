@@ -8,3 +8,5 @@ export {
 export * as chains from './chains';
 
 export { type LensNetworkActions, lensNetworkActions } from './decorator';
+
+export { type StorageEntry } from './types';
