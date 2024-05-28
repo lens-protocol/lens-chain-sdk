@@ -1,0 +1,14 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/ethers", "src/viem"],
+  "entryPointStrategy": "Resolve",
+  "name": "Lens Network SDK Reference",
+  "out": "docs",
+  "readme": "none",
+  "plugin": ["typedoc-plugin-markdown"],
+  "hidePageHeader": true,
+  "excludeExternals": true,
+  "excludeInternal": true,
+  "outputFileStrategy": "members",
+  "hideGenerator": true
+}
