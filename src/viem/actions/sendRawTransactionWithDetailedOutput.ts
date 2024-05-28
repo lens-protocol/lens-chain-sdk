@@ -1,17 +1,20 @@
 import { Account, Client, Transport } from 'viem';
-import {
-  type SendRawTransactionErrorType as SendRawTransactionErrorType_,
-  type SendRawTransactionParameters as SendRawTransactionParameters_,
-} from 'viem/actions';
+import { type SendRawTransactionErrorType, type SendRawTransactionParameters } from 'viem/actions';
 import { ChainEIP712 } from 'viem/zksync';
 
 import { PublicLensNetworkRpcSchema, SendRawTransactionDetails } from '../types';
 
-export type SendRawTransactionWithDetailedOutputParameters = SendRawTransactionParameters_;
+export type {
+  SendRawTransactionErrorType,
+  SendRawTransactionParameters,
+  SendRawTransactionDetails,
+};
+
+export type SendRawTransactionWithDetailedOutputParameters = SendRawTransactionParameters;
 
 export type SendRawTransactionWithDetailedOutputReturnType = SendRawTransactionDetails;
 
-export type SendRawTransactionWithDetailedOutputErrorType = SendRawTransactionErrorType_;
+export type SendRawTransactionWithDetailedOutputErrorType = SendRawTransactionErrorType;
 
 /**
  * Executes a transaction and returns its hash, storage logs, and events that would have

@@ -33,8 +33,9 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
 
     /**
      * @deprecated Use `getDefaultProvider` from `@lens-network/sdk/ethers` instead.
+     * @internal
      */
-    static getDefaultProvider(_: unknown): Provider {
+    static getDefaultProvider(_: unknown): TBase {
       throw new Error(`Use 'getDefaultProvider' from '@lens-network/sdk/ethers' instead`);
     }
   };

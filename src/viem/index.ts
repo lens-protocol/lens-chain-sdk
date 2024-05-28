@@ -1,12 +1,7 @@
-export {
-  type SendRawTransactionWithDetailedOutputParameters,
-  type SendRawTransactionWithDetailedOutputErrorType,
-  type SendRawTransactionWithDetailedOutputReturnType,
-  sendRawTransactionWithDetailedOutput,
-} from './actions/sendRawTransactionWithDetailedOutput';
+export * from './actions/sendRawTransactionWithDetailedOutput';
 
 export * as chains from './chains';
 
 export { type LensNetworkActions, lensNetworkActions } from './decorator';
 
-export { type StorageEntry } from './types';
+export { type PublicLensNetworkRpcSchema, type StorageEntry } from './types';
