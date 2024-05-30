@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@lens-network/sdk": "link:../../",
-    "viem": "latest"
+    "viem": "^2.12.0"
   },
   "devDependencies": {
     "typescript": "^5.4.5",
