@@ -4,6 +4,7 @@ export type ChainDefinition = {
   network: string;
   rpcUrl: string;
   blockExplorerUrl: string;
+  testnet: boolean;
 };
 
 /**
@@ -15,4 +16,17 @@ export const staging: ChainDefinition = {
   network: 'lens-development-network',
   rpcUrl: 'https://rpc.staging.lens-network.crtlkey.com/',
   blockExplorerUrl: 'https://explorer.staging.lens.zksync.dev/',
+  testnet: true,
+};
+
+/**
+ * Localhost using staging nodes.
+ */
+export const localhost: ChainDefinition = {
+  id: 37111,
+  name: 'Localhost',
+  network: 'localhost',
+  rpcUrl: 'http://localhost:4096',
+  blockExplorerUrl: 'https://explorer.staging.lens.zksync.dev/',
+  testnet: true,
 };

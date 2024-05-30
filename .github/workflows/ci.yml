@@ -33,5 +33,5 @@ jobs:
 
       - name: Lint Examples
         run: |
-          pnpm prepare:examples
+          pnpm install:examples
           pnpm lint:examples
