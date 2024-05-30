@@ -1,0 +1,16 @@
+{
+  "name": "example-viem-raw-transaction",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vite-node index.ts"
+  },
+  "dependencies": {
+    "@lens-network/sdk": "link:../../",
+    "viem": "^2.13.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "vite-node": "^1.6.0"
+  }
+}

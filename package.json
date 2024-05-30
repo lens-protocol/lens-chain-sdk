@@ -37,7 +37,8 @@
     "install:examples:ethers_eip-1193": "pnpm i -C examples/ethers_eip-1193",
     "install:examples:ethers_networks": "pnpm i -C examples/ethers_networks",
     "install:examples:viem_eip-1193": "pnpm i -C examples/viem_eip-1193",
-    "install:examples": "pnpm install:examples:ethers_eip-1193 && pnpm install:examples:ethers_networks && pnpm install:examples:viem_eip-1193",
+    "install:examples:viem_raw": "pnpm i -C examples/viem_raw",
+    "install:examples": "pnpm install:examples:ethers_eip-1193 && pnpm install:examples:ethers_networks && pnpm install:examples:viem_eip-1193 && pnpm install:examples:viem_raw",
     "prepublish": "pnpm clean && pnpm build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
