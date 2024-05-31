@@ -6,7 +6,7 @@
     "start": "vite-node index.ts"
   },
   "dependencies": {
-    "@lens-network/sdk": "link:../../",
+    "@lens-network/sdk": "file:../../",
     "viem": "^2.13.1"
   },
   "devDependencies": {

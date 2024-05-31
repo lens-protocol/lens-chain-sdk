@@ -1,5 +1,5 @@
 {
-  "name": "example-viem-eip-1193",
+  "name": "example-viem-misc",
   "private": true,
   "type": "module",
   "scripts": {
@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@lens-network/sdk": "file:../../",
-    "viem": "^2.12.0"
+    "viem": "^2.13.2"
   },
   "devDependencies": {
     "typescript": "^5.4.5",

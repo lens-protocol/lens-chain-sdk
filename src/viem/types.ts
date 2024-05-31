@@ -19,4 +19,11 @@ export type PublicLensNetworkRpcSchema = [
     Parameters: [Hex];
     ReturnType: SendRawTransactionDetails;
   },
+  {
+    Method: 'lens_getBlockNumberByTime';
+    Parameters: ['before' | 'after', EpochTimeStamp];
+    ReturnType: string;
+  },
 ];
+
+export type EpochTimeStamp = number;

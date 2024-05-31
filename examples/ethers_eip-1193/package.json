@@ -6,7 +6,7 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@lens-network/sdk": "link:../../",
+    "@lens-network/sdk": "file:../../",
     "ethers": "^6.12.1",
     "zksync-ethers": "^6.7.1"
   },

@@ -1,6 +1,5 @@
-import { Account, Client, Transport } from 'viem';
+import { Account, Chain, Client, Transport } from 'viem';
 import { type SendRawTransactionErrorType, type SendRawTransactionParameters } from 'viem/actions';
-import { ChainEIP712 } from 'viem/zksync';
 
 import { PublicLensNetworkRpcSchema, SendRawTransactionDetails } from '../types';
 
@@ -26,23 +25,21 @@ export type SendRawTransactionWithDetailedOutputErrorType = SendRawTransactionEr
  *
  * @example
  * ```ts
- * import { createWalletClient, http } from 'viem';
- * import { privateKeyToAccount } from 'viem/accounts';
+ * import { createPublicClient, http } from 'viem';
  * import { chains, sendRawTransactionWithDetailedOutput } from '@lens-network/sdk/viem';
  *
- * const client = createWalletClient({
- *   account: privateKeyToAccount('0x…'),
- *   chain: chains.sepoliaDevelopment,
+ * const client = createPublicClient({
+ *   chain: chains.staging,
  *   transport: http(),
  * });
  *
  * const result = await sendRawTransactionWithDetailedOutput(client, {
- *   serializedTransaction: '0x02f8500182031180…'
+ *   serializedTransaction: '0x02f8500182031180…',
  * });
  * ```
  */
 export async function sendRawTransactionWithDetailedOutput<
-  TChain extends ChainEIP712 | undefined,
+  TChain extends Chain | undefined,
   TAccount extends Account | undefined,
 >(
   client: Client<Transport, TChain, TAccount, PublicLensNetworkRpcSchema>,

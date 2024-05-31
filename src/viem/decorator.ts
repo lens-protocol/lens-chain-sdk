@@ -1,12 +1,44 @@
 import { Account, Chain, Client, Transport } from 'viem';
 
 import {
+  GetBlockNumberByTimeParameters,
+  GetBlockNumberByTimeReturnType,
+  getBlockNumberByTime,
+} from './actions/getBlockNumberByTime';
+import {
   sendRawTransactionWithDetailedOutput,
   type SendRawTransactionWithDetailedOutputParameters,
   type SendRawTransactionWithDetailedOutputReturnType,
 } from './actions/sendRawTransactionWithDetailedOutput';
 
 export type LensNetworkActions = {
+  /**
+   * Retrieve the block number closest to the given timestamp.
+   *
+   * @param client - Client to use
+   * @param parameters - {@link GetBlockNumberByTimeParameters}
+   * @returns The block number. {@link GetBlockNumberByTimeReturnType}
+   *
+   * @example
+   * ```ts
+   * import { createPublicClient, http } from 'viem';
+   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
+   *
+   * const client = createPublicClient({
+   *   chain: chains.staging,
+   *   transport: http(),
+   * }).extends(lensNetworkActions());
+   *
+   * const result = await getBlockNumberByTime(client, {
+   *   before: 1630000000,
+   * });
+   *
+   * // result: 0xa
+   * ```
+   */
+  getBlockNumberByTime: (
+    args: GetBlockNumberByTimeParameters,
+  ) => Promise<GetBlockNumberByTimeReturnType>;
   /**
    * Executes a transaction and returns its hash, storage logs, and events that would have
    * been generated if the transaction had already been included in the block.
@@ -16,23 +48,21 @@ export type LensNetworkActions = {
    *
    * @example
    * ```ts
-   * import { createWalletClient, http } from 'viem';
-   * import { privateKeyToAccount } from 'viem/accounts';
-   * import { actions, chains } from '@lens-network/sdk/viem';
+   * import { createPublicClient, http } from 'viem';
+   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
    *
-   * const client = createWalletClient({
-   *   account: privateKeyToAccount('0x…'),
-   *   chain: chains.sepoliaDevelopment,
+   * const client = createPublicClient({
+   *   chain: chains.staging,
    *   transport: http(),
-   * }).extend(publicActionsL1();
+   * }).extend(lensNetworkActions();
    *
    * const result = await client.sendRawTransactionWithDetailedOutput({
-   *   serializedTransaction: '0x02f850018203118080825208808080c080a04012522854168b27e5dc3d5839bab5e6b39e1a0ffd343901ce1622e3d64b48f1a04e00902ae0502c4728cbf12156290df99c3ed7de85b1dbfe20b5c36931733a33'
+   *   serializedTransaction: '0x02f8500182031180…',
    * });
    * ```
    */
   sendRawTransactionWithDetailedOutput: (
-    _args: SendRawTransactionWithDetailedOutputParameters,
+    args: SendRawTransactionWithDetailedOutputParameters,
   ) => Promise<SendRawTransactionWithDetailedOutputReturnType>;
 };
 
@@ -43,6 +73,8 @@ export function lensNetworkActions() {
   >(
     client: Client<Transport, TChain, TAccount>,
   ): LensNetworkActions => ({
+    getBlockNumberByTime: (args) => getBlockNumberByTime(client, args),
+
     sendRawTransactionWithDetailedOutput: (args) =>
       sendRawTransactionWithDetailedOutput(client, args),
   });
