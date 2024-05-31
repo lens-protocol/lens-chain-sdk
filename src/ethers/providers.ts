@@ -2,6 +2,7 @@ import { JsonRpcPayload, ethers, JsonRpcError, JsonRpcResult } from 'ethers';
 import * as zksync from 'zksync-ethers';
 
 import { SendRawTransactionDetails } from './types';
+import { SecondsSinceEpoch, TimeDirection } from '../types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T = object> = new (...args: any[]) => T;
@@ -16,6 +17,19 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
   ProviderType: TBase,
 ) {
   return class Provider extends ProviderType {
+    /**
+     * Retrieve the block number closest to the given timestamp.
+     *
+     * @param closest - The direction to search for the block.
+     * @param timestamp - The timestamp, in seconds, to search the block from.
+     * @returns The block number as an hexadecimal string.
+     */
+    async getBlockNumberByTime(
+      closest: TimeDirection,
+      timestamp: SecondsSinceEpoch,
+    ): Promise<string> {
+      return this.send('lens_getBlockNumberByTime', [closest, timestamp]) as Promise<string>;
+    }
     /**
      * Executes a transaction and returns its hash, storage logs, and events that would have
      * been generated if the transaction had already been included in the block.
@@ -56,6 +70,21 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    *
    * const provider = getDefaultProvider(types.Networks.Sepolia);
    *
+   * const blockNumber = await provider.getBlockNumberByTime('before', 1630000000);
+   * ```
+   */
+  getBlockNumberByTime(closest: TimeDirection, timestamp: SecondsSinceEpoch): Promise<string> {
+    return super.getBlockNumberByTime(closest, timestamp);
+  }
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { Provider, types } from '@lens-network/sdk/ethers';
+   *
+   * const provider = getDefaultProvider(types.Networks.Sepolia);
+   *
    * const signedTransaction = '0x02f8500182031180…';
    * const result = await provider.sendRawTransactionWithDetailedOutput(signedTransaction);
    * ```
@@ -76,6 +105,21 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
  * (e.g., MetaMask, WalletConnect).
  */
 export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider) {
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { BrowserProvider } from '@lens-network/sdk/ethers';
+   *
+   * const provider = new ethers.BrowserProvider(window.ethereum);
+   *
+   * const blockNumber = await provider.getBlockNumberByTime('before', 1630000000);
+   * ```
+   */
+  getBlockNumberByTime(closest: TimeDirection, timestamp: SecondsSinceEpoch): Promise<string> {
+    return super.getBlockNumberByTime(closest, timestamp);
+  }
   /**
    * @inheritDoc
    *

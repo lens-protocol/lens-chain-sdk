@@ -1,6 +1,8 @@
 import { Address, Hash, Hex } from 'viem';
 import { ZkSyncRpcLog } from 'viem/zksync';
 
+export type { SecondsSinceEpoch, TimeDirection } from '../types';
+
 export type StorageEntry = {
   address: Address;
   key: Hex;
@@ -25,5 +27,3 @@ export type PublicLensNetworkRpcSchema = [
     ReturnType: string;
   },
 ];
-
-export type EpochTimeStamp = number;

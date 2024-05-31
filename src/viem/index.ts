@@ -5,4 +5,4 @@ export * as chains from './chains';
 
 export { type LensNetworkActions, lensNetworkActions } from './decorator';
 
-export type { EpochTimeStamp, PublicLensNetworkRpcSchema, StorageEntry } from './types';
+export * from './types';

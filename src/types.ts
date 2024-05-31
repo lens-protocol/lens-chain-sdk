@@ -15,3 +15,13 @@ export type AddEthereumChainParameter = {
   blockExplorerUrls?: string[];
   iconUrls?: string[]; // Currently ignored.
 };
+
+/**
+ * Timestamp in seconds since the Unix epoch.
+ */
+export type SecondsSinceEpoch = number;
+
+/**
+ * Describes a direction of search in time.
+ */
+export type TimeDirection = 'before' | 'after';

@@ -1,7 +1,12 @@
-/** Ethereum network. */
+import { staging } from '../chains';
+
+/**
+ * Network types.
+ */
 export enum Network {
-  Mainnet = 1,
-  Sepolia = 6,
+  Mainnet = 1000000,
+  Testnet = 6000000,
+  Staging = staging.id,
   Localhost = 9,
 }
 

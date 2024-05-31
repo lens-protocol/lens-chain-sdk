@@ -1,17 +1,17 @@
 import { Account, Chain, Client, Hex, Transport } from 'viem';
 import { RequestErrorType } from 'viem/utils';
 
-import { EpochTimeStamp, PublicLensNetworkRpcSchema } from '../types';
+import { SecondsSinceEpoch, PublicLensNetworkRpcSchema, TimeDirection } from '../types';
 
 export type GetBlockNumberByTimeParameters = {
   /**
-   * The direction to search for the block number.
+   * The direction to search for the block.
    */
-  closest: 'before' | 'after';
+  closest: TimeDirection;
   /**
-   * The timestamp to search for.
+   * The timestamp, in seconds, from which to search for the block.
    */
-  timestamp: EpochTimeStamp;
+  timestamp: SecondsSinceEpoch;
 };
 
 export type GetBlockNumberByTimeReturnType = Hex;

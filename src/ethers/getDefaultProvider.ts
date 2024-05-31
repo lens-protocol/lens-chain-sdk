@@ -22,11 +22,12 @@ export function getDefaultProvider(network: string | Network): Provider {
     case Network.Localhost:
       return new Provider('http://localhost:4096');
 
-    case Network.Sepolia:
+    case Network.Staging:
       return new Provider(staging.rpcUrl);
 
+    case Network.Testnet:
     case Network.Mainnet:
-      invariant(false, 'Mainnet is not supported yet');
+      invariant(false, 'Network supported yet');
   }
   return new Provider(network);
 }
