@@ -20,3 +20,5 @@ function defineAddEthereumChainParameter(chain: chains.ChainDefinition): AddEthe
 export type { AddEthereumChainParameter };
 
 export const staging = /*#__PURE__*/ defineAddEthereumChainParameter(chains.staging);
+
+export const localhost = /*#__PURE__*/ defineAddEthereumChainParameter(chains.localhost);
