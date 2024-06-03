@@ -7,21 +7,28 @@
   "sideEffects": false,
   "exports": {
     "./viem": {
-      "types": "./dist/viem.d.ts",
-      "import": "./dist/viem.js"
+      "types": "./dist/viem/index.d.ts",
+      "import": "./dist/viem/index.js"
     },
     "./ethers": {
-      "types": "./dist/ethers.d.ts",
-      "import": "./dist/ethers.js"
+      "types": "./dist/ethers/index.d.ts",
+      "import": "./dist/ethers/index.js"
+    },
+    "./ethers/globals": {
+      "types": "./dist/ethers/globals.d.ts",
+      "import": "./dist/ethers/globals.js"
     }
   },
   "typesVersions": {
     "*": {
       "viem": [
-        "./dist/viem.d.ts"
+        "./dist/viem/index.d.ts"
       ],
       "ethers": [
-        "./dist/ethers.d.ts"
+        "./dist/ethers/index.d.ts"
+      ],
+      "ethers/globals": [
+        "./dist/ethers/globals.d.ts"
       ]
     }
   },

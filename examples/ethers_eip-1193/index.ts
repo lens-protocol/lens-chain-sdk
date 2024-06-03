@@ -1,4 +1,4 @@
-import './globals';
+import '@lens-network/sdk/ethers/globals';
 import { BrowserProvider, chains } from '@lens-network/sdk/ethers';
 import { Eip1193Provider } from 'ethers';
 

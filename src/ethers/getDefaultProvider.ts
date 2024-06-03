@@ -13,7 +13,7 @@ import { invariant } from '../invariant';
  * ```ts
  * import { getDefaultProvider, types } from '@lens-network/sdk/ethers';
  *
- * const provider = getDefaultProvider(types.Networks.Sepolia); // Lens Network testnet (L2)
+ * const provider = getDefaultProvider(types.Networks.Staging); // Lens Network testnet (L2)
  * const custom = getDefaultProvider('http://localhost:8545/'); // Local node
  * ```
  */
