@@ -2,7 +2,15 @@ import { JsonRpcPayload, ethers, JsonRpcError, JsonRpcResult } from 'ethers';
 import * as zksync from 'zksync-ethers';
 
 import { SendRawTransactionDetails } from './types';
-import { SecondsSinceEpoch, TimeDirection } from '../types';
+import {
+  PagingResult,
+  SecondsSinceEpoch,
+  TimeDirection,
+  TxHistoryItem,
+  TxHistoryRequest,
+} from '../types';
+
+export type { PagingResult, TxHistoryItem, TxHistoryRequest };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T = object> = new (...args: any[]) => T;
@@ -18,10 +26,16 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
 ) {
   return class Provider extends ProviderType {
     /**
+     * Retrieve transactions for a given address.
+     */
+    async getTxHistory(request: TxHistoryRequest): Promise<PagingResult<TxHistoryItem>> {
+      return this.send('lens_getTxHistory', [request]) as Promise<PagingResult<TxHistoryItem>>;
+    }
+    /**
      * Retrieve the block number closest to the given timestamp.
      *
      * @param closest - The direction to search for the block.
-     * @param timestamp - The timestamp, in seconds, to search the block from.
+     * @param timestamp - The timestamp, in seconds, from which to search for the block.
      * @returns The block number as an hexadecimal string.
      */
     async getBlockNumberByTime(
@@ -68,7 +82,23 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    * ```ts
    * import { Provider, types } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(types.Networks.Sepolia);
+   * const provider = getDefaultProvider(types.Networks.Staging);
+   *
+   * const { items } = await provider.getTxHistory({
+   *   address: '0x...',
+   * });
+   */
+  getTxHistory(request: TxHistoryRequest): Promise<PagingResult<TxHistoryItem>> {
+    return super.getTxHistory(request);
+  }
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { Provider, types } from '@lens-network/sdk/ethers';
+   *
+   * const provider = getDefaultProvider(types.Networks.Staging);
    *
    * const blockNumber = await provider.getBlockNumberByTime('before', 1630000000);
    * ```
@@ -83,7 +113,7 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    * ```ts
    * import { Provider, types } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(types.Networks.Sepolia);
+   * const provider = getDefaultProvider(types.Networks.Staging);
    *
    * const signedTransaction = '0x02f8500182031180…';
    * const result = await provider.sendRawTransactionWithDetailedOutput(signedTransaction);
@@ -105,6 +135,23 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
  * (e.g., MetaMask, WalletConnect).
  */
 export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider) {
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { BrowserProvider } from '@lens-network/sdk/ethers';
+   *
+   * const provider = new ethers.BrowserProvider(window.ethereum);
+   *
+   * const { items } = await provider.getTxHistory({
+   *   address: '0x...',
+   * });
+   * ```
+   */
+  getTxHistory(request: TxHistoryRequest): Promise<PagingResult<TxHistoryItem>> {
+    return super.getTxHistory(request);
+  }
   /**
    * @inheritDoc
    *
