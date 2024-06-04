@@ -24,8 +24,8 @@ export const staging: ChainDefinition = {
  */
 export const localhost: ChainDefinition = {
   id: 37111,
-  name: 'Localhost',
-  network: 'localhost',
+  name: 'Lens Local Network',
+  network: 'lens-local-network',
   rpcUrl: 'http://localhost:4096',
   blockExplorerUrl: 'https://explorer.staging.lens.zksync.dev/',
   testnet: true,
