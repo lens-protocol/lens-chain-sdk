@@ -30,13 +30,17 @@ This section is for developers who want to contribute to the SDK.
 ### Pre-requisites: <!-- omit in toc -->
 
 - Node.js: >= v20. See [installation guide](https://nodejs.org/en/download/package-manager).
-- pnpm: >v9.1.2. See [installation guide](https://pnpm.io/installation).
+- pnpm: v9.1.2. See [installation guide](https://pnpm.io/installation).
 
 If you use [nvm](https://github.com/nvm-sh/nvm) to manage your Node.js versions, you can run:
 
 ```bash
 nvm use
 ```
+
+to switch to the correct Node.js version.
+
+We recommend to have [corepack](https://www.totaltypescript.com/how-to-use-corepack) enabled to automatically have the correct version of `pnpm`.
 
 ### Initial Setup <!-- omit in toc -->
 
