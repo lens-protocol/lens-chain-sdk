@@ -1,5 +1,5 @@
 {
-  "name": "example-ethers-tx-history",
+  "name": "example-viem-tx-history",
   "private": true,
   "type": "module",
   "scripts": {
@@ -7,8 +7,7 @@
   },
   "dependencies": {
     "@lens-network/sdk": "file:../../",
-    "ethers": "^6.12.1",
-    "zksync-ethers": "^6.7.1"
+    "viem": "^2.12.0"
   },
   "devDependencies": {
     "typescript": "^5.4.5",

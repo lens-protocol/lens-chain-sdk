@@ -36,7 +36,8 @@ export type GetBlockNumberByTimeErrorType = RequestErrorType;
  * });
  *
  * const result = await getBlockNumberByTime(client, {
- *   before: 1630000000,
+ *   closest: 'before',
+ *   timestamp: 1630000000,
  * });
  *
  * // result: 0xa

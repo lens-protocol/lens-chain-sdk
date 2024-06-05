@@ -8,9 +8,10 @@ import {
   TimeDirection,
   TxHistoryItem,
   TxHistoryRequest,
+  TxHistoryResponse,
 } from '../types';
 
-export type { PagingResult, TxHistoryItem, TxHistoryRequest };
+export type { PagingResult, TxHistoryItem, TxHistoryRequest, TxHistoryResponse };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T = object> = new (...args: any[]) => T;
@@ -28,8 +29,8 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
     /**
      * Retrieve transactions for a given address.
      */
-    async getTxHistory(request: TxHistoryRequest): Promise<PagingResult<TxHistoryItem>> {
-      return this.send('lens_getTxHistory', [request]) as Promise<PagingResult<TxHistoryItem>>;
+    async getTxHistory(request: TxHistoryRequest): Promise<TxHistoryResponse> {
+      return this.send('lens_getTxHistory', [request]) as Promise<TxHistoryResponse>;
     }
     /**
      * Retrieve the block number closest to the given timestamp.

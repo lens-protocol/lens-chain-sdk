@@ -1,5 +1,5 @@
 {
-  "name": "example-template",
+  "name": "example-viem-template",
   "private": true,
   "type": "module",
   "scripts": {

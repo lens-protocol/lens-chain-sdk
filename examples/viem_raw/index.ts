@@ -3,21 +3,23 @@ import { Hex, createWalletClient, http, parseEther } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 import { sendRawTransaction } from 'viem/actions';
 
+const chain = chains.staging;
+
 const account = privateKeyToAccount(process.env.PRIVATE_KEY as Hex);
 
 const client = createWalletClient({
   account,
-  chain: chains.localhost,
+  chain,
   transport: http(),
 });
 
 const chainId = await client.getChainId();
 
-if (chainId !== chains.localhost.id) {
+if (chainId !== chain.id) {
   try {
-    await client.switchChain({ id: chains.localhost.id });
+    await client.switchChain({ id: chain.id });
   } catch {
-    await client.addChain({ chain: chains.localhost });
+    await client.addChain({ chain });
   }
 }
 

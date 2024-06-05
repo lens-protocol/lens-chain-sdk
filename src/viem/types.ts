@@ -1,7 +1,9 @@
 import { Address, Hash, Hex } from 'viem';
 import { ZkSyncRpcLog } from 'viem/zksync';
 
-export type { SecondsSinceEpoch, TimeDirection } from '../types';
+import { SecondsSinceEpoch, TimeDirection, TxHistoryRequest } from '../types';
+
+export type { SecondsSinceEpoch, TimeDirection, PagingResult, PagingInformation } from '../types';
 
 export type StorageEntry = {
   address: Address;
@@ -23,7 +25,12 @@ export type PublicLensNetworkRpcSchema = [
   },
   {
     Method: 'lens_getBlockNumberByTime';
-    Parameters: ['before' | 'after', EpochTimeStamp];
+    Parameters: [TimeDirection, SecondsSinceEpoch];
+    ReturnType: string;
+  },
+  {
+    Method: 'lens_getTxHistory';
+    Parameters: [TxHistoryRequest];
     ReturnType: string;
   },
 ];
