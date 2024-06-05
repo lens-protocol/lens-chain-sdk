@@ -1,5 +1,7 @@
 import { staging } from '../chains';
+import { PagingResult } from '../types';
 
+export type { SecondsSinceEpoch, TimeDirection } from '../types';
 /**
  * Network types.
  */
@@ -64,3 +66,41 @@ export type SendRawTransactionDetails = {
   storageLogs: StorageEntry[];
   events: OptimisticLog[];
 };
+
+export type TxHistoryItem = {
+  /**
+   * The transaction hash.
+   */
+  hash: string;
+  to: string;
+  from: string;
+  transactionIndex: string;
+  input: string;
+  value: string;
+  gas: string;
+  gasPrice: string;
+  gasUsed: string;
+  cumulativeGasUsed: string;
+  fee: string;
+  nonce: string;
+  confirmations: string;
+  blockNumber: string;
+  blockHash: string;
+  /**
+   * Timestamp in seconds since the Unix epoch.
+   */
+  timeStamp: string;
+  commitTxHash: string | null;
+  proveTxHash: string | null;
+  executeTxHash: string | null;
+  isL1Originated: string;
+  l1BatchNumber: string;
+  contractAddress: string | null;
+  isError: string;
+  txreceipt_status: string;
+  methodId: string;
+  functionName: string;
+  type: string;
+};
+
+export type TxHistoryResponse = PagingResult<TxHistoryItem>;

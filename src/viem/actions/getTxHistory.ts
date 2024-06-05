@@ -1,4 +1,4 @@
-import { Account, Chain, Client, Transport } from 'viem';
+import { Account, Address, Chain, Client, Hex, Transport } from 'viem';
 import { RequestErrorType } from 'viem/utils';
 
 import { TxHistoryRequest, PagingResult } from '../../types';
@@ -8,36 +8,36 @@ export type TxHistoryItem = {
   /**
    * The transaction hash.
    */
-  hash: string;
-  to: string;
-  from: string;
-  transactionIndex: string;
-  input: string;
-  value: string;
-  gas: string;
-  gasPrice: string;
-  gasUsed: string;
-  cumulativeGasUsed: string;
-  fee: string;
-  nonce: string;
-  confirmations: string;
-  blockNumber: string;
-  blockHash: string;
+  hash: Hex;
+  to: Address;
+  from: Address;
+  transactionIndex: Hex;
+  input: Hex;
+  value: Hex;
+  gas: Hex;
+  gasPrice: Hex;
+  gasUsed: Hex;
+  cumulativeGasUsed: Hex;
+  fee: Hex;
+  nonce: Hex;
+  confirmations: Hex;
+  blockNumber: Hex;
+  blockHash: Hex;
   /**
    * Timestamp in seconds since the Unix epoch.
    */
-  timeStamp: string;
-  commitTxHash?: string;
-  proveTxHash?: string;
-  executeTxHash?: string;
-  isL1Originated: string;
-  l1BatchNumber: string;
-  contractAddress?: string;
-  isError: string;
-  txreceipt_status: string;
-  methodId: string;
+  timeStamp: Hex;
+  commitTxHash: Hex | null;
+  proveTxHash: Hex | null;
+  executeTxHash: Hex | null;
+  isL1Originated: Hex;
+  l1BatchNumber: Hex;
+  contractAddress: Address | null;
+  isError: Hex;
+  txreceipt_status: Hex;
+  methodId: Hex;
   functionName: string;
-  type: string;
+  type: Hex;
 };
 
 export type GetTxHistoryParameters = TxHistoryRequest;

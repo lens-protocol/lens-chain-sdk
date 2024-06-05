@@ -1,17 +1,10 @@
 import { JsonRpcPayload, ethers, JsonRpcError, JsonRpcResult } from 'ethers';
 import * as zksync from 'zksync-ethers';
 
-import { SendRawTransactionDetails } from './types';
-import {
-  PagingResult,
-  SecondsSinceEpoch,
-  TimeDirection,
-  TxHistoryItem,
-  TxHistoryRequest,
-  TxHistoryResponse,
-} from '../types';
+import { SendRawTransactionDetails, TxHistoryResponse } from './types';
+import { SecondsSinceEpoch, TimeDirection, TxHistoryRequest } from '../types';
 
-export type { PagingResult, TxHistoryItem, TxHistoryRequest, TxHistoryResponse };
+export type { TxHistoryRequest };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T = object> = new (...args: any[]) => T;
@@ -89,7 +82,7 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    *   address: '0x...',
    * });
    */
-  getTxHistory(request: TxHistoryRequest): Promise<PagingResult<TxHistoryItem>> {
+  getTxHistory(request: TxHistoryRequest): Promise<TxHistoryResponse> {
     return super.getTxHistory(request);
   }
   /**
@@ -150,7 +143,7 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    * });
    * ```
    */
-  getTxHistory(request: TxHistoryRequest): Promise<PagingResult<TxHistoryItem>> {
+  getTxHistory(request: TxHistoryRequest): Promise<TxHistoryResponse> {
     return super.getTxHistory(request);
   }
   /**
