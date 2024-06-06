@@ -33,7 +33,7 @@ export type PagingInformation = {
 };
 
 export type PagingResult<T> = {
-  items: T[];
+  items: readonly T[];
 };
 
 export type TxHistoryRequest = {
@@ -45,3 +45,10 @@ export type TxHistoryRequest = {
 
   pageInfo: PagingInformation;
 };
+
+export type ContractCreationAddresses =
+  | [string]
+  | [string, string]
+  | [string, string, string]
+  | [string, string, string, string]
+  | [string, string, string, string, string];

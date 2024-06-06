@@ -104,3 +104,11 @@ export type TxHistoryItem = {
 };
 
 export type TxHistoryResponse = PagingResult<TxHistoryItem>;
+
+export type ContractsCreationResult = {
+  contractAddress: string;
+  contractCreator: string;
+  txHash: string;
+};
+
+export type ContractCreationResponse = ReadonlyArray<ContractsCreationResult>;

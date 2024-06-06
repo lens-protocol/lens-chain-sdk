@@ -48,7 +48,7 @@
     "install:examples:viem_raw": "pnpm i -C examples/viem_raw",
     "install:examples": "pnpm install:examples:ethers_eip-1193 && pnpm install:examples:ethers_networks && pnpm install:examples:viem_eip-1193 && pnpm install:examples:viem_networks && pnpm install:examples:viem_raw",
     "prepublish": "pnpm clean && pnpm build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest"
   },
   "keywords": [
     "lens-network",
@@ -77,6 +77,7 @@
     "typedoc-plugin-markdown": "^4.0.3",
     "typescript": "^5.4.5",
     "viem": "^2.12.0",
+    "vitest": "^1.6.0",
     "zksync-ethers": "^6.7.1"
   },
   "peerDependencies": {

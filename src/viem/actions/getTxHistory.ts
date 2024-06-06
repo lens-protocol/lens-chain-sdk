@@ -1,44 +1,8 @@
-import { Account, Address, Chain, Client, Hex, Transport } from 'viem';
+import { Account, Chain, Client, Transport } from 'viem';
 import { RequestErrorType } from 'viem/utils';
 
 import { TxHistoryRequest, PagingResult } from '../../types';
-import { PublicLensNetworkRpcSchema } from '../types';
-
-export type TxHistoryItem = {
-  /**
-   * The transaction hash.
-   */
-  hash: Hex;
-  to: Address;
-  from: Address;
-  transactionIndex: Hex;
-  input: Hex;
-  value: Hex;
-  gas: Hex;
-  gasPrice: Hex;
-  gasUsed: Hex;
-  cumulativeGasUsed: Hex;
-  fee: Hex;
-  nonce: Hex;
-  confirmations: Hex;
-  blockNumber: Hex;
-  blockHash: Hex;
-  /**
-   * Timestamp in seconds since the Unix epoch.
-   */
-  timeStamp: Hex;
-  commitTxHash: Hex | null;
-  proveTxHash: Hex | null;
-  executeTxHash: Hex | null;
-  isL1Originated: Hex;
-  l1BatchNumber: Hex;
-  contractAddress: Address | null;
-  isError: Hex;
-  txreceipt_status: Hex;
-  methodId: Hex;
-  functionName: string;
-  type: Hex;
-};
+import { PublicLensNetworkRpcSchema, TxHistoryItem } from '../types';
 
 export type GetTxHistoryParameters = TxHistoryRequest;
 

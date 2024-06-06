@@ -1,10 +1,15 @@
 import { JsonRpcPayload, ethers, JsonRpcError, JsonRpcResult } from 'ethers';
 import * as zksync from 'zksync-ethers';
 
-import { SendRawTransactionDetails, TxHistoryResponse } from './types';
-import { SecondsSinceEpoch, TimeDirection, TxHistoryRequest } from '../types';
+import { ContractCreationResponse, SendRawTransactionDetails, TxHistoryResponse } from './types';
+import {
+  ContractCreationAddresses,
+  SecondsSinceEpoch,
+  TimeDirection,
+  TxHistoryRequest,
+} from '../types';
 
-export type { TxHistoryRequest };
+export type { ContractCreationAddresses, TxHistoryRequest };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T = object> = new (...args: any[]) => T;
@@ -19,6 +24,22 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
   ProviderType: TBase,
 ) {
   return class Provider extends ProviderType {
+    /**
+     * Retrieve contracts creation details, up to 5 at a time.
+     *
+     * @param addresses - The addresses of the contracts to retrieve.
+     * @returns The contracts creation details.
+     */
+    async getContractCreation(
+      addresses: ContractCreationAddresses,
+    ): Promise<ContractCreationResponse> {
+      const result = (await this.send(
+        'lens_getContractCreation',
+        addresses,
+      )) as ContractCreationResponse | null;
+
+      return result ?? [];
+    }
     /**
      * Retrieve transactions for a given address.
      */
@@ -69,6 +90,23 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
  * It supports RPC endpoints within the `zks` namespace.
  */
 export class Provider extends LensNetworkProvider(zksync.Provider) {
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { Provider, types } from '@lens-network/sdk/ethers';
+   *
+   * const provider = getDefaultProvider(types.Networks.Staging);
+   *
+   * const [result] = await provider.getContractCreation([
+   *  '0x175a469603aa24ee4ef1f9b0b609e3f0988668b1'
+   * ]);
+   * ```
+   */
+  getContractCreation(addresses: ContractCreationAddresses): Promise<ContractCreationResponse> {
+    return super.getContractCreation(addresses);
+  }
   /**
    * @inheritDoc
    *
@@ -129,6 +167,23 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
  * (e.g., MetaMask, WalletConnect).
  */
 export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider) {
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { BrowserProvider } from '@lens-network/sdk/ethers';
+   *
+   * const provider = new ethers.BrowserProvider(window.ethereum);
+   *
+   * const [result] = await provider.getContractCreation([
+   *  '0x175a469603aa24ee4ef1f9b0b609e3f0988668b1'
+   * ]);
+   * ```
+   */
+  getContractCreation(addresses: ContractCreationAddresses): Promise<ContractCreationResponse> {
+    return super.getContractCreation(addresses);
+  }
   /**
    * @inheritDoc
    *

@@ -6,6 +6,11 @@ import {
   getBlockNumberByTime,
 } from './actions/getBlockNumberByTime';
 import {
+  GetContractCreationParameters,
+  GetContractCreationReturnType,
+  getContractCreation,
+} from './actions/getContractCreation';
+import {
   GetTxHistoryParameters,
   GetTxHistoryReturnType,
   getTxHistory,
@@ -18,7 +23,32 @@ import {
 
 export type LensNetworkActions = {
   /**
-   * Retrieve the block number closest to the given timestamp.
+   * Retrieve contracts creation details, up to 5 at a time.
+   *
+   * @param client - Client to use
+   * @param parameters - {@link GetContractCreationParameters}
+   * @returns The contract creation details - {@link GetContractCreationReturnType}
+   *
+   * @example
+   * ```ts
+   * import { createPublicClient, http } from 'viem';
+   * import { chains, getContractCreation } from '@lens-network/sdk/viem';
+   *
+   * const client = createPublicClient({
+   *   chain: chains.staging,
+   *   transport: http(),
+   * }).extend(lensNetworkActions();
+   *
+   * const result = await client.getContractCreation([
+   *   '0x1234567890123456789012345678901234567890',
+   * ]);
+   *
+   * // result: [ContractsCreationResult, ContractsCreationResult, ...]
+   * ```
+   */
+  getContractCreation(args: GetContractCreationParameters): Promise<GetContractCreationReturnType>;
+  /**
+   * Retrieve transactions for a given address.
    *
    * @param parameters - {@link GetTxHistoryParameters}
    * @returns The transactions for the given address. {@link GetTxHistoryReturnType}
@@ -103,6 +133,8 @@ export function lensNetworkActions() {
   >(
     client: Client<Transport, TChain, TAccount>,
   ): LensNetworkActions => ({
+    getContractCreation: (args) => getContractCreation(client, args),
+
     getTxHistory: (args) => getTxHistory(client, args),
 
     getBlockNumberByTime: (args) => getBlockNumberByTime(client, args),
