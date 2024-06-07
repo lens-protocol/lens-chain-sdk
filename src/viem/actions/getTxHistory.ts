@@ -14,7 +14,7 @@ export type GetTxHistoryErrorType = RequestErrorType;
  * Retrieve transactions for a given address.
  *
  * @param client - Client to use
- * @param parameters - {@link GetTxHistoryParameters}
+ * @param params - {@link GetTxHistoryParameters}
  * @returns The transactions for the given address. {@link GetTxHistoryReturnType}
  *
  * @example
@@ -39,12 +39,12 @@ export async function getTxHistory<
   TAccount extends Account | undefined,
 >(
   client: Client<Transport, TChain, TAccount, PublicLensNetworkRpcSchema>,
-  request: GetTxHistoryParameters,
+  params: GetTxHistoryParameters,
 ): Promise<GetTxHistoryReturnType> {
   return client.request(
     {
       method: 'lens_getTxHistory',
-      params: [request],
+      params: [params],
     },
     { retryCount: 0 },
   );

@@ -22,7 +22,7 @@ export type GetBlockNumberByTimeErrorType = RequestErrorType;
  * Retrieve the block number closest to the given timestamp.
  *
  * @param client - Client to use
- * @param parameters - {@link GetBlockNumberByTimeParameters}
+ * @param params - {@link GetBlockNumberByTimeParameters}
  * @returns The block number. {@link GetBlockNumberByTimeReturnType}
  *
  * @example

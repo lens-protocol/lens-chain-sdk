@@ -1,7 +1,12 @@
 import { JsonRpcPayload, ethers, JsonRpcError, JsonRpcResult } from 'ethers';
 import * as zksync from 'zksync-ethers';
 
-import { ContractCreationResponse, SendRawTransactionDetails, TxHistoryResponse } from './types';
+import {
+  ContractCreationResponse,
+  SendRawTransactionDetails,
+  TokenInfoResult,
+  TxHistoryResponse,
+} from './types';
 import {
   ContractCreationAddresses,
   SecondsSinceEpoch,
@@ -24,6 +29,17 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
   ProviderType: TBase,
 ) {
   return class Provider extends ProviderType {
+    /**
+     * Retrieve token information.
+     *
+     * Token price, liquidity and icon are retrieved from CoinGecko. The data is updated every 24 hours.
+     *
+     * @param address - The address of the token.
+     * @returns The token information
+     */
+    getTokenInfo(address: string): Promise<TokenInfoResult | null> {
+      return this.send('lens_getTokenInfo', [address]) as Promise<TokenInfoResult | null>;
+    }
     /**
      * Retrieve contracts creation details, up to 5 at a time.
      *
@@ -90,6 +106,21 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
  * It supports RPC endpoints within the `zks` namespace.
  */
 export class Provider extends LensNetworkProvider(zksync.Provider) {
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { Provider, types } from '@lens-network/sdk/ethers';
+   *
+   * const provider = getDefaultProvider(types.Networks.Staging);
+   *
+   * const result = await provider.getTokenInfo('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1');
+   * ```
+   */
+  getTokenInfo(address: string): Promise<TokenInfoResult | null> {
+    return super.getTokenInfo(address);
+  }
   /**
    * @inheritDoc
    *
@@ -167,6 +198,21 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
  * (e.g., MetaMask, WalletConnect).
  */
 export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider) {
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { BrowserProvider } from '@lens-network/sdk/ethers';
+   *
+   * const provider = new ethers.BrowserProvider(window.ethereum);
+   *
+   * const result = await provider.getTokenInfo('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1');
+   * ```
+   */
+  getTokenInfo(address: string): Promise<TokenInfoResult | null> {
+    return super.getTokenInfo(address);
+  }
   /**
    * @inheritDoc
    *

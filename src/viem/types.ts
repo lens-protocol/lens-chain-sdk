@@ -28,6 +28,17 @@ export type ContractsCreationResult = {
   txHash: Hex;
 };
 
+export type TokenInfoResult = {
+  contractAddress: Address;
+  tokenName: string;
+  symbol: string;
+  tokenDecimal: string;
+  tokenPriceUSD: string;
+  liquidity: string;
+  l1Address: string;
+  iconURL: string;
+};
+
 export type TxHistoryItem = {
   /**
    * The transaction hash.
@@ -84,5 +95,10 @@ export type PublicLensNetworkRpcSchema = [
     Method: 'lens_getContractCreation';
     Parameters: ContractCreationAddresses;
     ReturnType: readonly ContractsCreationResult[] | null;
+  },
+  {
+    Method: 'lens_getTokenInfo';
+    Parameters: [string];
+    ReturnType: TokenInfoResult | null;
   },
 ];

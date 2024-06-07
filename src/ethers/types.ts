@@ -112,3 +112,14 @@ export type ContractsCreationResult = {
 };
 
 export type ContractCreationResponse = ReadonlyArray<ContractsCreationResult>;
+
+export type TokenInfoResult = {
+  contractAddress: string;
+  tokenName: string;
+  symbol: string;
+  tokenDecimal: string;
+  tokenPriceUSD: string;
+  liquidity: string;
+  l1Address: string;
+  iconURL: string;
+};

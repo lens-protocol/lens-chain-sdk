@@ -2,12 +2,13 @@ import { createPublicClient, http } from 'viem';
 import { expect, describe, it } from 'vitest';
 
 import { chains, getBlockNumberByTime, getContractCreation } from '.';
+import { getTokenInfo } from './actions/getTokenInfo';
 
 describe('Given the Viem actions', () => {
   describe(`When calling "${getBlockNumberByTime.name}"`, () => {
     it('Then it should return the closest block number', async () => {
       const client = createPublicClient({
-        chain: chains.localhost,
+        chain: chains.staging,
         transport: http(),
       });
 
@@ -16,41 +17,71 @@ describe('Given the Viem actions', () => {
         timestamp: Math.floor(Date.now() / 1000),
       });
 
-      expect(result).toMatchObject(expect.stringMatching(/^0x[0-9a-f]+$/i));
+      expect(result).toEqual(expect.hexString());
     });
   });
 
   describe(`When calling "${getContractCreation.name}"`, () => {
+    const client = createPublicClient({
+      chain: chains.staging,
+      transport: http(),
+    });
+
     it('Then it should return the relevant contract creation information', async () => {
-      const client = createPublicClient({
-        chain: chains.localhost,
-        transport: http(),
+      const [details] = await getContractCreation(client, {
+        addresses: ['0x175a469603aa24ee4ef1f9b0b609e3f0988668b1'],
       });
 
-      const [details] = await getContractCreation(client, [
-        '0x175a469603aa24ee4ef1f9b0b609e3f0988668b1',
-      ]);
-
       expect(details).toMatchObject({
-        contractAddress: '0x175a469603aa24ee4ef1f9b0b609e3f0988668b1',
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        contractCreator: expect.stringMatching(/^0x[0-9a-f]{40}$/i),
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        txHash: expect.stringMatching(/^0x[0-9a-f]{64}$/),
+        contractAddress: expect.evmAddress(),
+        contractCreator: expect.evmAddress(),
+        txHash: expect.hexString(),
       });
     });
 
-    it('The it should return an empty array if no contract creation information is found', async () => {
+    it('Then it should return an empty array if no contract creation information is found', async () => {
+      const result = await getContractCreation(client, {
+        addresses: ['0x0000000000000000000000000000000000000000'],
+      });
+
+      expect(result).toEqual([]);
+    });
+  });
+
+  describe(`When calling "${getTokenInfo.name}"`, () => {
+    it('Then it should return the given token info', async () => {
       const client = createPublicClient({
         chain: chains.localhost,
         transport: http(),
       });
 
-      const result = await getContractCreation(client, [
-        '0x0000000000000000000000000000000000000000',
-      ]);
+      const result = await getTokenInfo(client, {
+        address: '0x175a469603aa24ee4ef1f9b0b609e3f0988668b1',
+      });
 
-      expect(result).toEqual([]);
+      expect(result).toMatchObject({
+        contractAddress: expect.evmAddress('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1'),
+        iconURL: '',
+        l1Address: '',
+        liquidity: '',
+        symbol: 'MTK',
+        tokenDecimal: '18',
+        tokenName: 'TestErc20Token',
+        tokenPriceUSD: '',
+      });
+    });
+
+    it('Then it should return null if token not found', async () => {
+      const client = createPublicClient({
+        chain: chains.localhost,
+        transport: http(),
+      });
+
+      const result = await getTokenInfo(client, {
+        address: '0x0000000000000000000000000000000000000000',
+      });
+
+      expect(result).toBeNull();
     });
   });
 });
