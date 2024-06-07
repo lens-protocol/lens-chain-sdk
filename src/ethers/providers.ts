@@ -5,16 +5,18 @@ import {
   ContractCreationResponse,
   SendRawTransactionDetails,
   TokenInfoResult,
+  TokenTxHistoryResponse,
   TxHistoryResponse,
 } from './types';
 import {
   ContractCreationAddresses,
   SecondsSinceEpoch,
   TimeDirection,
+  TokenTxHistoryRequest,
   TxHistoryRequest,
 } from '../types';
 
-export type { ContractCreationAddresses, TxHistoryRequest };
+export type { ContractCreationAddresses, TxHistoryRequest, TokenTxHistoryRequest };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T = object> = new (...args: any[]) => T;
@@ -29,6 +31,15 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
   ProviderType: TBase,
 ) {
   return class Provider extends ProviderType {
+    /**
+     * Retrieve token transfers for a given address with ability to filter by token address.
+     *
+     * @param request - The request object.
+     * @returns The transactions for the given address.
+     */
+    getTokenTxHistory(request: TokenTxHistoryRequest): Promise<TokenTxHistoryResponse> {
+      return this.send('lens_getTokenTxHistory', [request]) as Promise<TokenTxHistoryResponse>;
+    }
     /**
      * Retrieve token information.
      *
@@ -58,6 +69,9 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
     }
     /**
      * Retrieve transactions for a given address.
+     *
+     * @param request - The request object.
+     * @returns The transactions for the given address.
      */
     async getTxHistory(request: TxHistoryRequest): Promise<TxHistoryResponse> {
       return this.send('lens_getTxHistory', [request]) as Promise<TxHistoryResponse>;
@@ -113,6 +127,24 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    * ```ts
    * import { Provider, types } from '@lens-network/sdk/ethers';
    *
+   * const provider = getDefaultProvider(types.Network.Staging);
+   *
+   * const result = await provider.getTokenTxHistory({
+   *   address: '0x...',
+   *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
+   * });
+   * ```
+   */
+  getTokenTxHistory(request: TokenTxHistoryRequest): Promise<TokenTxHistoryResponse> {
+    return super.getTokenTxHistory(request);
+  }
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { Provider, types } from '@lens-network/sdk/ethers';
+   *
    * const provider = getDefaultProvider(types.Networks.Staging);
    *
    * const result = await provider.getTokenInfo('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1');
@@ -149,6 +181,7 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    *
    * const { items } = await provider.getTxHistory({
    *   address: '0x...',
+   *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
    * });
    */
   getTxHistory(request: TxHistoryRequest): Promise<TxHistoryResponse> {
@@ -207,6 +240,24 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    *
    * const provider = new ethers.BrowserProvider(window.ethereum);
    *
+   * const result = await provider.getTokenTxHistory({
+   *   address: '0x...',
+   *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
+   * });
+   * ```
+   */
+  getTokenTxHistory(request: TokenTxHistoryRequest): Promise<TokenTxHistoryResponse> {
+    return super.getTokenTxHistory(request);
+  }
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { BrowserProvider } from '@lens-network/sdk/ethers';
+   *
+   * const provider = new ethers.BrowserProvider(window.ethereum);
+   *
    * const result = await provider.getTokenInfo('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1');
    * ```
    */
@@ -241,6 +292,7 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    *
    * const { items } = await provider.getTxHistory({
    *   address: '0x...',
+   *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
    * });
    * ```
    */

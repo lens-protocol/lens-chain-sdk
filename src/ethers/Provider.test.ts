@@ -14,7 +14,7 @@ describe(`Given an ethers.js Provider instance`, () => {
     });
   });
 
-  describe(`When calling "${Provider.prototype.getContractCreation.name}"`, () => {
+  describe(`When calling "${Provider.prototype.getContractCreation.name}" method`, () => {
     const provider = getDefaultProvider(types.Network.Staging);
 
     it('Then it should return the relevant contract creation information', async () => {
@@ -38,7 +38,7 @@ describe(`Given an ethers.js Provider instance`, () => {
     });
   });
 
-  describe(`When calling "${Provider.prototype.getTokenInfo.name}"`, () => {
+  describe(`When calling "${Provider.prototype.getTokenInfo.name}" method`, () => {
     it('Then it should return the given token info', async () => {
       const provider = getDefaultProvider(types.Network.Localhost);
 
@@ -62,6 +62,45 @@ describe(`Given an ethers.js Provider instance`, () => {
       const result = await provider.getTokenInfo('0x0000000000000000000000000000000000000000');
 
       expect(result).toBeNull();
+    });
+  });
+
+  describe(`When calling "${Provider.prototype.getTokenTxHistory.name}" method`, () => {
+    it('Then it should return a paginated list of token transfers', async () => {
+      const provider = getDefaultProvider(types.Network.Localhost);
+
+      const { items } = await provider.getTokenTxHistory({
+        address: '0x00a58ba275e6bfc004e2bf9be121a15a2c543e71',
+        pageInfo: { page: 1, limit: 10, sort: 'asc' },
+      });
+
+      expect(items[0]).toMatchObject({
+        hash: expect.hexString(),
+        to: expect.evmAddress(),
+        from: expect.evmAddress(),
+        transactionIndex: expect.hexString(),
+        input: expect.hexString(),
+        value: expect.hexString(),
+        gas: expect.hexString(),
+        gasPrice: expect.hexString(),
+        gasUsed: expect.hexString(),
+        cumulativeGasUsed: expect.hexString(),
+        fee: expect.hexString(),
+        nonce: expect.hexString(),
+        confirmations: expect.hexString(),
+        blockNumber: expect.hexString(),
+        blockHash: expect.hexString(),
+        l1BatchNumber: expect.hexString(),
+        timeStamp: expect.hexString(),
+        contractAddress: expect.evmAddress(),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        tokenName: expect.any(String),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        tokenSymbol: expect.any(String),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        tokenDecimal: expect.any(String),
+        transactionType: expect.hexString(),
+      });
     });
   });
 });

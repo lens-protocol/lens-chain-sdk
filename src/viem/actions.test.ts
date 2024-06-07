@@ -1,7 +1,7 @@
 import { createPublicClient, http } from 'viem';
 import { expect, describe, it } from 'vitest';
 
-import { chains, getBlockNumberByTime, getContractCreation } from '.';
+import { chains, getBlockNumberByTime, getContractCreation, getTokenTxHistory } from '.';
 import { getTokenInfo } from './actions/getTokenInfo';
 
 describe('Given the Viem actions', () => {
@@ -82,6 +82,48 @@ describe('Given the Viem actions', () => {
       });
 
       expect(result).toBeNull();
+    });
+  });
+
+  describe(`When calling "${getTokenTxHistory.name}"`, () => {
+    it('Then it should return a paginated list of token transfers', async () => {
+      const client = createPublicClient({
+        chain: chains.localhost,
+        transport: http(),
+      });
+
+      const { items } = await getTokenTxHistory(client, {
+        address: '0x00a58ba275e6bfc004e2bf9be121a15a2c543e71',
+        pageInfo: { page: 1, limit: 10, sort: 'asc' },
+      });
+
+      expect(items[0]).toMatchObject({
+        hash: expect.hexString(),
+        to: expect.evmAddress(),
+        from: expect.evmAddress(),
+        transactionIndex: expect.hexString(),
+        input: expect.hexString(),
+        value: expect.hexString(),
+        gas: expect.hexString(),
+        gasPrice: expect.hexString(),
+        gasUsed: expect.hexString(),
+        cumulativeGasUsed: expect.hexString(),
+        fee: expect.hexString(),
+        nonce: expect.hexString(),
+        confirmations: expect.hexString(),
+        blockNumber: expect.hexString(),
+        blockHash: expect.hexString(),
+        l1BatchNumber: expect.hexString(),
+        timeStamp: expect.hexString(),
+        contractAddress: expect.evmAddress(),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        tokenName: expect.any(String),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        tokenSymbol: expect.any(String),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        tokenDecimal: expect.any(String),
+        transactionType: expect.hexString(),
+      });
     });
   });
 });

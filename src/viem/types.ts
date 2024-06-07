@@ -5,6 +5,7 @@ import {
   ContractCreationAddresses,
   SecondsSinceEpoch,
   TimeDirection,
+  TokenTxHistoryRequest,
   TxHistoryRequest,
 } from '../types';
 
@@ -75,6 +76,31 @@ export type TxHistoryItem = {
   type: Hex;
 };
 
+export type TokenTxHistoryItem = {
+  hash: Hex;
+  to: Address;
+  from: Address;
+  transactionIndex: Hex;
+  input: Hex;
+  value: Hex;
+  gas: Hex;
+  gasPrice: Hex;
+  gasUsed: Hex;
+  cumulativeGasUsed: Hex;
+  fee: Hex;
+  nonce: Hex;
+  confirmations: Hex;
+  blockNumber: Hex;
+  blockHash: Hex;
+  l1BatchNumber: Hex;
+  timeStamp: Hex;
+  contractAddress: Address;
+  tokenName: string;
+  tokenSymbol: string;
+  tokenDecimal: string;
+  transactionType: Hex;
+};
+
 export type PublicLensNetworkRpcSchema = [
   {
     Method: 'zks_sendRawTransactionWithDetailedOutput';
@@ -100,5 +126,10 @@ export type PublicLensNetworkRpcSchema = [
     Method: 'lens_getTokenInfo';
     Parameters: [string];
     ReturnType: TokenInfoResult | null;
+  },
+  {
+    Method: 'lens_getTokenTxHistory';
+    Parameters: [TokenTxHistoryRequest];
+    ReturnType: readonly TokenTxHistoryItem[];
   },
 ];

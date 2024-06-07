@@ -52,3 +52,15 @@ export type ContractCreationAddresses =
   | [string, string, string]
   | [string, string, string, string]
   | [string, string, string, string, string];
+
+export type TokenTxHistoryRequest = {
+  address: string;
+
+  filterForContractAddress?: string;
+
+  endBlock?: number;
+
+  startBlock?: number;
+
+  pageInfo: PagingInformation;
+};

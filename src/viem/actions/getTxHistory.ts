@@ -28,10 +28,11 @@ export type GetTxHistoryErrorType = RequestErrorType;
  * });
  *
  * const { items } = await getTxHistory(client, {
- *   before: 1630000000,
+ *   address: '0x1234567890123456789012345678901234567890',
+ *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
  * });
  *
- * // items: [Transaction, Transaction, ...]
+ * // items: [TxHistoryItem, TxHistoryItem, ...]
  * ```
  */
 export async function getTxHistory<

@@ -16,6 +16,11 @@ import {
   getTokenInfo,
 } from './actions/getTokenInfo';
 import {
+  GetTokenTxHistoryParameters,
+  GetTokenTxHistoryReturnType,
+  getTokenTxHistory,
+} from './actions/getTokenTxHistory';
+import {
   GetTxHistoryParameters,
   GetTxHistoryReturnType,
   getTxHistory,
@@ -28,11 +33,35 @@ import {
 
 export type LensNetworkActions = {
   /**
+   * Retrieve token transfers for a given address with ability to filter by token address.
+   *
+   * @param params - {@link GetTokenTxHistoryParameters}
+   * @returns The transactions for the given address. {@link GetTokenTxHistoryReturnType}
+   *
+   * @example
+   * ```ts
+   * import { createPublicClient, http } from 'viem';
+   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
+   *
+   * const client = createPublicClient({
+   *   chain: chains.staging,
+   *   transport: http(),
+   * }).extend(lensNetworkActions();
+   *
+   * const { items } = await client.getTokenTxHistory({
+   *   address: '0x1234567890123456789012345678901234567890',
+   *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
+   * });
+   *
+   * // items: [TokenTxHistoryItem, TokenTxHistoryItem, ...]
+   * ```
+   */
+  getTokenTxHistory(params: GetTokenTxHistoryParameters): Promise<GetTokenTxHistoryReturnType>;
+  /**
    * Retrieve token information.
    *
    * Token price, liquidity and icon are retrieved from CoinGecko. The data is updated every 24 hours.
    *
-   * @param client - Client to use
    * @param params - {@link GetTokenInfoParameters}
    * @returns The token information - {@link GetTokenInfoReturnType}
    *
@@ -44,7 +73,7 @@ export type LensNetworkActions = {
    * const client = createPublicClient({
    *   chain: chains.staging,
    *   transport: http(),
-   * }).extend(lensNetworkActions();;
+   * }).extend(lensNetworkActions();
    *
    * const result = await client.getTokenInfo({
    *   address: '0x1234567890123456789012345678901234567890'
@@ -57,7 +86,6 @@ export type LensNetworkActions = {
   /**
    * Retrieve contracts creation details, up to 5 at a time.
    *
-   * @param client - Client to use
    * @param params - {@link GetContractCreationParameters}
    * @returns The contract creation details - {@link GetContractCreationReturnType}
    *
@@ -102,7 +130,7 @@ export type LensNetworkActions = {
    *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
    * });
    *
-   * // items: [Transaction, Transaction, ...]
+   * // items: [TxHistoryItem, TxHistoryItem, ...]
    * ```
    */
   getTxHistory(params: GetTxHistoryParameters): Promise<GetTxHistoryReturnType>;
@@ -123,8 +151,8 @@ export type LensNetworkActions = {
    * }).extends(lensNetworkActions());
    *
    * const result = await client.getBlockNumberByTime({
-   *   closest: 'before',
-   *   timestamp: 1630000000,
+   *   address: '0x1234567890123456789012345678901234567890',
+   *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
    * });
    *
    * // result: 0xa
@@ -167,6 +195,8 @@ export function lensNetworkActions() {
   >(
     client: Client<Transport, TChain, TAccount>,
   ): LensNetworkActions => ({
+    getTokenTxHistory: (params) => getTokenTxHistory(client, params),
+
     getTokenInfo: (params) => getTokenInfo(client, params),
 
     getContractCreation: (params) => getContractCreation(client, params),

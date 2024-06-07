@@ -123,3 +123,30 @@ export type TokenInfoResult = {
   l1Address: string;
   iconURL: string;
 };
+
+export type TokenTxHistoryItem = {
+  hash: string;
+  to: string;
+  from: string;
+  transactionIndex: string;
+  input: string;
+  value: string;
+  gas: string;
+  gasPrice: string;
+  gasUsed: string;
+  cumulativeGasUsed: string;
+  fee: string;
+  nonce: string;
+  confirmations: string;
+  blockNumber: string;
+  blockHash: string;
+  l1BatchNumber: string;
+  timeStamp: string;
+  contractAddress: string;
+  tokenName: string;
+  tokenSymbol: string;
+  tokenDecimal: string;
+  transactionType: string;
+};
+
+export type TokenTxHistoryResponse = PagingResult<TokenTxHistoryItem>;
