@@ -60,6 +60,15 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
       return this.send('lens_getTokenTxHistory', [request]) as Promise<TokenTxHistoryResponse>;
     }
     /**
+     * Retrieve NFT transfers for a given address with ability to filter by token address.
+     *
+     * @param request - The request object.
+     * @returns The transactions for the given address.
+     */
+    getNftTxHistory(request: TokenTxHistoryRequest): Promise<TokenTxHistoryResponse> {
+      return this.send('lens_getNftTxHistory', [request]) as Promise<TokenTxHistoryResponse>;
+    }
+    /**
      * Retrieve token information.
      *
      * Token price, liquidity and icon are retrieved from CoinGecko. The data is updated every 24 hours.
@@ -186,6 +195,24 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    */
   getTokenTxHistory(request: TokenTxHistoryRequest): Promise<TokenTxHistoryResponse> {
     return super.getTokenTxHistory(request);
+  }
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { Provider, types } from '@lens-network/sdk/ethers';
+   *
+   * const provider = getDefaultProvider(types.Network.Staging);
+   *
+   * const result = await provider.getNftTxHistory({
+   *   address: '0x…',
+   *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
+   * });
+   * ```
+   */
+  getNftTxHistory(request: TokenTxHistoryRequest): Promise<TokenTxHistoryResponse> {
+    return super.getNftTxHistory(request);
   }
   /**
    * @inheritDoc
@@ -327,6 +354,24 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    */
   getTokenTxHistory(request: TokenTxHistoryRequest): Promise<TokenTxHistoryResponse> {
     return super.getTokenTxHistory(request);
+  }
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { BrowserProvider } from '@lens-network/sdk/ethers';
+   *
+   * const provider = new ethers.BrowserProvider(window.ethereum);
+   *
+   * const result = await provider.getNftTxHistory({
+   *   address: '0x…',
+   *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
+   * });
+   * ```
+   */
+  getNftTxHistory(request: TokenTxHistoryRequest): Promise<TokenTxHistoryResponse> {
+    return super.getNftTxHistory(request);
   }
   /**
    * @inheritDoc

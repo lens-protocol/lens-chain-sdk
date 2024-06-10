@@ -4,6 +4,7 @@ export * from './actions/getContractCreation';
 export * from './actions/getTokenBalance';
 export * from './actions/getTokenInfo';
 export * from './actions/getTokenTxHistory';
+export * from './actions/getNftTxHistory';
 export * from './actions/getTxHistory';
 export * from './actions/sendRawTransactionWithDetailedOutput';
 

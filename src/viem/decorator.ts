@@ -16,6 +16,11 @@ import {
   getContractCreation,
 } from './actions/getContractCreation';
 import {
+  GetNftTxHistoryParameters,
+  GetNftTxHistoryReturnType,
+  getNftTxHistory,
+} from './actions/getNftTxHistory';
+import {
   GetTokenBalanceParameters,
   GetTokenBalanceReturnType,
   getTokenBalance,
@@ -91,7 +96,6 @@ export type LensNetworkActions = {
    * ```
    */
   getContractABI({ address }: GetContractAbiParameters): Promise<GetContractAbiReturnType>;
-
   /**
    * Retrieve token transfers for a given address with ability to filter by token address.
    *
@@ -117,6 +121,31 @@ export type LensNetworkActions = {
    * ```
    */
   getTokenTxHistory(params: GetTokenTxHistoryParameters): Promise<GetTokenTxHistoryReturnType>;
+  /**
+   * Retrieve NFT transfers for a given address with ability to filter by token address.
+   *
+   * @param params - {@link GetNftTxHistoryParameters}
+   * @returns The transactions for the given address. {@link GetNftTxHistoryReturnType}
+   *
+   * @example
+   * ```ts
+   * import { createPublicClient, http } from 'viem';
+   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
+   *
+   * const client = createPublicClient({
+   *   chain: chains.staging,
+   *   transport: http(),
+   * }).extend(lensNetworkActions();
+   *
+   * const { items } = await client.getNftTxHistory({
+   *   address: '0x1234567…',
+   *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
+   * });
+   *
+   * // items: [TokenTxHistoryItem, TokenTxHistoryItem, …]
+   * ```
+   */
+  getNftTxHistory(params: GetNftTxHistoryParameters): Promise<GetNftTxHistoryReturnType>;
   /**
    * Retrieve token information.
    *
@@ -260,6 +289,8 @@ export function lensNetworkActions() {
     getContractABI: (params) => getContractABI(client, params),
 
     getTokenTxHistory: (params) => getTokenTxHistory(client, params),
+
+    getNftTxHistory: (params) => getNftTxHistory(client, params),
 
     getTokenInfo: (params) => getTokenInfo(client, params),
 

@@ -138,6 +138,11 @@ export type PublicLensNetworkRpcSchema = [
     ReturnType: readonly TokenTxHistoryItem[];
   },
   {
+    Method: 'lens_getNftTxHistory';
+    Parameters: [TokenTxHistoryRequest];
+    ReturnType: readonly TokenTxHistoryItem[];
+  },
+  {
     Method: 'lens_getContractABI';
     Parameters: [string];
     ReturnType: string;
