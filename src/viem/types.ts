@@ -132,4 +132,9 @@ export type PublicLensNetworkRpcSchema = [
     Parameters: [TokenTxHistoryRequest];
     ReturnType: readonly TokenTxHistoryItem[];
   },
+  {
+    Method: 'lens_getContractABI';
+    Parameters: [string];
+    ReturnType: string;
+  },
 ];

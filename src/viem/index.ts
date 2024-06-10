@@ -1,4 +1,5 @@
 export * from './actions/getBlockNumberByTime';
+export * from './actions/getContractABI';
 export * from './actions/getContractCreation';
 export * from './actions/getTokenTxHistory';
 export * from './actions/getTxHistory';

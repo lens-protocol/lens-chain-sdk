@@ -30,10 +30,10 @@ export type GetContractCreationErrorType = RequestErrorType;
  * });
  *
  * const result = await getContractCreation(client, {
- *   addresses: [ '0x1234567890123456789012345678901234567890' ]
+ *   addresses: [ '0x1234567…' ]
  * });
  *
- * // result: [ContractsCreationResult, ContractsCreationResult, ...]
+ * // result: [ContractsCreationResult, ContractsCreationResult, …]
  * ```
  */
 export async function getContractCreation<

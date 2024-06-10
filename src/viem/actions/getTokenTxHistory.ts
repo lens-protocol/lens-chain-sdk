@@ -28,11 +28,11 @@ export type GetTokenTxHistoryErrorType = RequestErrorType;
  * });
  *
  * const { items } = await getTokenTxHistory(client, {
- *   address: '0x1234567890123456789012345678901234567890',
+ *   address: '0x1234567…',
  *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
  * });
  *
- * // items: [TokenTxHistoryItem, TokenTxHistoryItem, ...]
+ * // items: [TokenTxHistoryItem, TokenTxHistoryItem, …]
  * ```
  */
 export async function getTokenTxHistory<

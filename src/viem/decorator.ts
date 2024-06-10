@@ -6,6 +6,11 @@ import {
   getBlockNumberByTime,
 } from './actions/getBlockNumberByTime';
 import {
+  GetContractAbiParameters,
+  GetContractAbiReturnType,
+  getContractABI,
+} from './actions/getContractABI';
+import {
   GetContractCreationParameters,
   GetContractCreationReturnType,
   getContractCreation,
@@ -33,6 +38,31 @@ import {
 
 export type LensNetworkActions = {
   /**
+   * Retrieve the ABI for a given contract address.
+   *
+   * @param params - {@link GetContractAbiParameters}
+   * @returns The ABI as serialized JSON string. {@link GetContractAbiReturnType}
+   *
+   * @example
+   * ```ts
+   * import { createPublicClient, http } from 'viem';
+   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
+   *
+   * const client = createPublicClient({
+   *   chain: chains.staging,
+   *   transport: http(),
+   * }).extend(lensNetworkActions();
+   *
+   * const abi = await client.getContractABI({
+   *   address: '0x1234567…',
+   * });
+   *
+   * // abi: '[ { inputs: [ … ], … }, … }'
+   * ```
+   */
+  getContractABI({ address }: GetContractAbiParameters): Promise<GetContractAbiReturnType>;
+
+  /**
    * Retrieve token transfers for a given address with ability to filter by token address.
    *
    * @param params - {@link GetTokenTxHistoryParameters}
@@ -49,11 +79,11 @@ export type LensNetworkActions = {
    * }).extend(lensNetworkActions();
    *
    * const { items } = await client.getTokenTxHistory({
-   *   address: '0x1234567890123456789012345678901234567890',
+   *   address: '0x1234567…',
    *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
    * });
    *
-   * // items: [TokenTxHistoryItem, TokenTxHistoryItem, ...]
+   * // items: [TokenTxHistoryItem, TokenTxHistoryItem, …]
    * ```
    */
   getTokenTxHistory(params: GetTokenTxHistoryParameters): Promise<GetTokenTxHistoryReturnType>;
@@ -76,7 +106,7 @@ export type LensNetworkActions = {
    * }).extend(lensNetworkActions();
    *
    * const result = await client.getTokenInfo({
-   *   address: '0x1234567890123456789012345678901234567890'
+   *   address: '0x1234567…'
    * });
    *
    * // result: TokenInfoResult | null
@@ -100,10 +130,10 @@ export type LensNetworkActions = {
    * }).extend(lensNetworkActions();
    *
    * const result = await client.getContractCreation({
-   *   addresses: [ '0x1234567890123456789012345678901234567890' ]
+   *   addresses: [ '0x1234567…' ]
    * }););
    *
-   * // result: [ContractsCreationResult, ContractsCreationResult, ...]
+   * // result: [ContractsCreationResult, ContractsCreationResult, …]
    * ```
    */
   getContractCreation(
@@ -126,11 +156,11 @@ export type LensNetworkActions = {
    * }).extend(lensNetworkActions();
    *
    * const { items } = await client.getTxHistory({
-   *   address: '0x1234...',
+   *   address: '0x1234…',
    *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
    * });
    *
-   * // items: [TxHistoryItem, TxHistoryItem, ...]
+   * // items: [TxHistoryItem, TxHistoryItem, …]
    * ```
    */
   getTxHistory(params: GetTxHistoryParameters): Promise<GetTxHistoryReturnType>;
@@ -151,7 +181,7 @@ export type LensNetworkActions = {
    * }).extends(lensNetworkActions());
    *
    * const result = await client.getBlockNumberByTime({
-   *   address: '0x1234567890123456789012345678901234567890',
+   *   address: '0x1234567…',
    *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
    * });
    *
@@ -195,6 +225,8 @@ export function lensNetworkActions() {
   >(
     client: Client<Transport, TChain, TAccount>,
   ): LensNetworkActions => ({
+    getContractABI: (params) => getContractABI(client, params),
+
     getTokenTxHistory: (params) => getTokenTxHistory(client, params),
 
     getTokenInfo: (params) => getTokenInfo(client, params),

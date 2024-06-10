@@ -32,6 +32,15 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
 ) {
   return class Provider extends ProviderType {
     /**
+     * Retrieve the ABI for a given contract address.
+     *
+     * @param address - The address of the contract.
+     * @returns The ABI as serialized JSON string.
+     */
+    getContractABI(address: string): Promise<string | null> {
+      return this.send('lens_getContractABI', [address]) as Promise<string | null>;
+    }
+    /**
      * Retrieve token transfers for a given address with ability to filter by token address.
      *
      * @param request - The request object.
@@ -129,8 +138,22 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    *
    * const provider = getDefaultProvider(types.Network.Staging);
    *
+   * const abi = await provider.getContractABI('0x123456…');
+   */
+  getContractABI(address: string): Promise<string | null> {
+    return super.getContractABI(address);
+  }
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { Provider, types } from '@lens-network/sdk/ethers';
+   *
+   * const provider = getDefaultProvider(types.Network.Staging);
+   *
    * const result = await provider.getTokenTxHistory({
-   *   address: '0x...',
+   *   address: '0x…',
    *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
    * });
    * ```
@@ -180,7 +203,7 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    * const provider = getDefaultProvider(types.Networks.Staging);
    *
    * const { items } = await provider.getTxHistory({
-   *   address: '0x...',
+   *   address: '0x…',
    *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
    * });
    */
@@ -240,8 +263,23 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    *
    * const provider = new ethers.BrowserProvider(window.ethereum);
    *
+   * const abi = await provider.getContractABI('0x123456…');
+   * ```
+   */
+  getContractABI(address: string): Promise<string | null> {
+    return super.getContractABI(address);
+  }
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { BrowserProvider } from '@lens-network/sdk/ethers';
+   *
+   * const provider = new ethers.BrowserProvider(window.ethereum);
+   *
    * const result = await provider.getTokenTxHistory({
-   *   address: '0x...',
+   *   address: '0x…',
    *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
    * });
    * ```
@@ -291,7 +329,7 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    * const provider = new ethers.BrowserProvider(window.ethereum);
    *
    * const { items } = await provider.getTxHistory({
-   *   address: '0x...',
+   *   address: '0x…',
    *   pageInfo: { page: 1, limit: 10, sort: 'asc' },
    * });
    * ```

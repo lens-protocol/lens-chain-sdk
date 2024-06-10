@@ -9,13 +9,13 @@ expect.extend({
     return {
       pass:
         isHexString(received) && received.length === 42 && expected ? expected === received : true,
-      message: () => `expected ${received} to be an EVM address (0x...)`,
+      message: () => `expected ${received} to be an EVM address (0x…)`,
     };
   },
   hexString: (received) => {
     return {
       pass: isHexString(received) && received.length > 2,
-      message: () => `expected ${received} to be an hex string (0x...)`,
+      message: () => `expected ${received} to be an hex string (0x…)`,
     };
   },
 });

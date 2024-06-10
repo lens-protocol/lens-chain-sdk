@@ -1,7 +1,13 @@
 import { createPublicClient, http } from 'viem';
 import { expect, describe, it } from 'vitest';
 
-import { chains, getBlockNumberByTime, getContractCreation, getTokenTxHistory } from '.';
+import {
+  chains,
+  getBlockNumberByTime,
+  getContractABI,
+  getContractCreation,
+  getTokenTxHistory,
+} from '.';
 import { getTokenInfo } from './actions/getTokenInfo';
 
 describe('Given the Viem actions', () => {
@@ -124,6 +130,34 @@ describe('Given the Viem actions', () => {
         tokenDecimal: expect.any(String),
         transactionType: expect.hexString(),
       });
+    });
+  });
+
+  describe(`When calling "${getContractABI.name}"`, () => {
+    it('Then it should return the contract ABI as JSON string', async () => {
+      const client = createPublicClient({
+        chain: chains.localhost,
+        transport: http(),
+      });
+
+      const abi = await getContractABI(client, {
+        address: '0xA53ef3794DC285C20BEe9B51abD1942Ab5794a41',
+      });
+
+      expect(abi).toEqual(expect.stringMatching(/^\[{"inputs":/));
+    });
+
+    it('Then it should return null if not available', async () => {
+      const client = createPublicClient({
+        chain: chains.localhost,
+        transport: http(),
+      });
+
+      const abi = await getContractABI(client, {
+        address: '0x0000000000000000000000000000000000000000',
+      });
+
+      expect(abi).toBeNull();
     });
   });
 });

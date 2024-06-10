@@ -31,7 +31,7 @@ export type GetTokenInfoErrorType = RequestErrorType;
  * });
  *
  * const result = await getTokenInfo(client, {
- *   address: '0x1234567890123456789012345678901234567890'
+ *   address: '0x1234567…'
  * });
  *
  * // result: TokenInfoResult | null

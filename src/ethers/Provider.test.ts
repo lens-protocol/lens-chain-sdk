@@ -103,4 +103,22 @@ describe(`Given an ethers.js Provider instance`, () => {
       });
     });
   });
+
+  describe(`When calling "${Provider.prototype.getContractABI.name}" method`, () => {
+    it('Then it should return the contract ABI as JSON string', async () => {
+      const provider = getDefaultProvider(types.Network.Localhost);
+
+      const abi = await provider.getContractABI('0xA53ef3794DC285C20BEe9B51abD1942Ab5794a41');
+
+      expect(abi).toEqual(expect.stringMatching(/^\[{"inputs":/));
+    });
+
+    it('Then it should return null if not available', async () => {
+      const provider = getDefaultProvider(types.Network.Localhost);
+
+      const abi = await provider.getContractABI('0x0000000000000000000000000000000000000000');
+
+      expect(abi).toBeNull();
+    });
+  });
 });
