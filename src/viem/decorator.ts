@@ -16,6 +16,11 @@ import {
   getContractCreation,
 } from './actions/getContractCreation';
 import {
+  GetTokenBalanceParameters,
+  GetTokenBalanceReturnType,
+  getTokenBalance,
+} from './actions/getTokenBalance';
+import {
   GetTokenInfoParameters,
   GetTokenInfoReturnType,
   getTokenInfo,
@@ -37,6 +42,31 @@ import {
 } from './actions/sendRawTransactionWithDetailedOutput';
 
 export type LensNetworkActions = {
+  /**
+   * Retrieve token balance for a given address.
+   *
+   * @param params - {@link GetTokenBalanceParameters}
+   * @returns The token balance. {@link GetTokenBalanceReturnType}
+   *
+   * @example
+   * ```ts
+   * import { createPublicClient, http } from 'viem';
+   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
+   *
+   * const client = createPublicClient({
+   *   chain: chains.staging,
+   *   transport: http(),
+   * }).extend(lensNetworkActions();
+   *
+   * const balance = await client.getTokenBalance({
+   *   address: '0x1234567…',
+   *   contractAddress: '0x1234567…',
+   * });
+   *
+   * // balance: '0x10042…'
+   * ```
+   */
+  getTokenBalance(params: GetTokenBalanceParameters): Promise<GetTokenBalanceReturnType>;
   /**
    * Retrieve the ABI for a given contract address.
    *
@@ -225,6 +255,8 @@ export function lensNetworkActions() {
   >(
     client: Client<Transport, TChain, TAccount>,
   ): LensNetworkActions => ({
+    getTokenBalance: (params) => getTokenBalance(client, params),
+
     getContractABI: (params) => getContractABI(client, params),
 
     getTokenTxHistory: (params) => getTokenTxHistory(client, params),

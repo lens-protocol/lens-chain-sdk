@@ -6,9 +6,10 @@ import {
   getBlockNumberByTime,
   getContractABI,
   getContractCreation,
+  getTokenBalance,
+  getTokenInfo,
   getTokenTxHistory,
 } from '.';
-import { getTokenInfo } from './actions/getTokenInfo';
 
 describe('Given the Viem actions', () => {
   describe(`When calling "${getBlockNumberByTime.name}"`, () => {
@@ -134,12 +135,12 @@ describe('Given the Viem actions', () => {
   });
 
   describe(`When calling "${getContractABI.name}"`, () => {
-    it('Then it should return the contract ABI as JSON string', async () => {
-      const client = createPublicClient({
-        chain: chains.localhost,
-        transport: http(),
-      });
+    const client = createPublicClient({
+      chain: chains.localhost,
+      transport: http(),
+    });
 
+    it('Then it should return the contract ABI as JSON string', async () => {
       const abi = await getContractABI(client, {
         address: '0xA53ef3794DC285C20BEe9B51abD1942Ab5794a41',
       });
@@ -148,16 +149,36 @@ describe('Given the Viem actions', () => {
     });
 
     it('Then it should return null if not available', async () => {
-      const client = createPublicClient({
-        chain: chains.localhost,
-        transport: http(),
-      });
-
       const abi = await getContractABI(client, {
         address: '0x0000000000000000000000000000000000000000',
       });
 
       expect(abi).toBeNull();
+    });
+  });
+
+  describe(`When calling "${getTokenBalance.name}"`, () => {
+    const client = createPublicClient({
+      chain: chains.localhost,
+      transport: http(),
+    });
+
+    it('Then it should return the balance as hex string', async () => {
+      const balance = await getTokenBalance(client, {
+        address: '0x00A58BA275E6BFC004E2bf9be121a15a2c543e71',
+        contractAddress: '0x175a469603aA24EE4ef1F9B0B609e3F0988668B1',
+      });
+
+      expect(balance).toEqual(expect.hexString());
+    });
+
+    it('Then it should return "0x0" in any other scenario', async () => {
+      const balance = await getTokenBalance(client, {
+        address: '0x0000000000000000000000000000000000000000',
+        contractAddress: '0x0000000000000000000000000000000000000000',
+      });
+
+      expect(balance).toEqual('0x0');
     });
   });
 });

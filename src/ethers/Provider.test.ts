@@ -39,9 +39,9 @@ describe(`Given an ethers.js Provider instance`, () => {
   });
 
   describe(`When calling "${Provider.prototype.getTokenInfo.name}" method`, () => {
-    it('Then it should return the given token info', async () => {
-      const provider = getDefaultProvider(types.Network.Localhost);
+    const provider = getDefaultProvider(types.Network.Localhost);
 
+    it('Then it should return the given token info', async () => {
       const result = await provider.getTokenInfo('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1');
 
       expect(result).toMatchObject({
@@ -57,8 +57,6 @@ describe(`Given an ethers.js Provider instance`, () => {
     });
 
     it('Then it should return null if token not found', async () => {
-      const provider = getDefaultProvider(types.Network.Localhost);
-
       const result = await provider.getTokenInfo('0x0000000000000000000000000000000000000000');
 
       expect(result).toBeNull();
@@ -105,20 +103,40 @@ describe(`Given an ethers.js Provider instance`, () => {
   });
 
   describe(`When calling "${Provider.prototype.getContractABI.name}" method`, () => {
-    it('Then it should return the contract ABI as JSON string', async () => {
-      const provider = getDefaultProvider(types.Network.Localhost);
+    const provider = getDefaultProvider(types.Network.Localhost);
 
+    it('Then it should return the contract ABI as JSON string', async () => {
       const abi = await provider.getContractABI('0xA53ef3794DC285C20BEe9B51abD1942Ab5794a41');
 
       expect(abi).toEqual(expect.stringMatching(/^\[{"inputs":/));
     });
 
     it('Then it should return null if not available', async () => {
-      const provider = getDefaultProvider(types.Network.Localhost);
-
       const abi = await provider.getContractABI('0x0000000000000000000000000000000000000000');
 
       expect(abi).toBeNull();
+    });
+  });
+
+  describe(`When calling "${Provider.prototype.getTokenBalance.name}" method`, () => {
+    const provider = getDefaultProvider(types.Network.Localhost);
+
+    it('Then it should return the balance as hex string', async () => {
+      const balance = await provider.getTokenBalance(
+        '0x00A58BA275E6BFC004E2bf9be121a15a2c543e71',
+        '0x175a469603aA24EE4ef1F9B0B609e3F0988668B1',
+      );
+
+      expect(balance).toEqual(expect.hexString());
+    });
+
+    it('Then it should return "0x0" in any other scenario', async () => {
+      const balance = await provider.getTokenBalance(
+        '0x0000000000000000000000000000000000000000',
+        '0x0000000000000000000000000000000000000000',
+      );
+
+      expect(balance).toEqual('0x0');
     });
   });
 });

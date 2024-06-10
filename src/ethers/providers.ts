@@ -32,6 +32,16 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
 ) {
   return class Provider extends ProviderType {
     /**
+     * Retrieve token balance for a given address.
+     *e
+     * @param address - The address to retrieve the balance for.
+     * @param contractAddress - The contract address of the token.
+     * @returns The token balance. {@link GetTokenBalanceReturnType}
+     */
+    getTokenBalance(address: string, contractAddress: string): Promise<string> {
+      return this.send('lens_getTokenBalance', [{ address, contractAddress }]) as Promise<string>;
+    }
+    /**
      * Retrieve the ABI for a given contract address.
      *
      * @param address - The address of the contract.
@@ -138,7 +148,23 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    *
    * const provider = getDefaultProvider(types.Network.Staging);
    *
+   * const balance = await provider.getTokenBalance('0x1234567…', '0x1234567…');
+   * ```
+   */
+  getTokenBalance(address: string, contractAddress: string): Promise<string> {
+    return super.getTokenBalance(address, contractAddress);
+  }
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { Provider, types } from '@lens-network/sdk/ethers';
+   *
+   * const provider = getDefaultProvider(types.Network.Staging);
+   *
    * const abi = await provider.getContractABI('0x123456…');
+   * ```
    */
   getContractABI(address: string): Promise<string | null> {
     return super.getContractABI(address);
@@ -254,6 +280,21 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
  * (e.g., MetaMask, WalletConnect).
  */
 export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider) {
+  /**
+   * @inheritDoc
+   *
+   * @example
+   * ```ts
+   * import { BrowserProvider } from '@lens-network/sdk/ethers';
+   *
+   * const provider = new ethers.BrowserProvider(window.ethereum);
+   *
+   * const balance = await provider.getTokenBalance('0x1234567…', '0x1234567…');
+   * ```
+   */
+  getTokenBalance(address: string, contractAddress: string): Promise<string> {
+    return super.getTokenBalance(address, contractAddress);
+  }
   /**
    * @inheritDoc
    *

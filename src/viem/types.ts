@@ -101,6 +101,11 @@ export type TokenTxHistoryItem = {
   transactionType: Hex;
 };
 
+export type TokenBalanceRequest = {
+  address: Address;
+  contractAddress: Address;
+};
+
 export type PublicLensNetworkRpcSchema = [
   {
     Method: 'zks_sendRawTransactionWithDetailedOutput';
@@ -135,6 +140,11 @@ export type PublicLensNetworkRpcSchema = [
   {
     Method: 'lens_getContractABI';
     Parameters: [string];
+    ReturnType: string;
+  },
+  {
+    Method: 'lens_getTokenBalance';
+    Parameters: [TokenBalanceRequest];
     ReturnType: string;
   },
 ];
