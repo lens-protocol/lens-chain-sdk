@@ -6,7 +6,7 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@lens-network/sdk": "file:../../",
+    "@lens-network/sdk": "canary",
     "ethers": "^6.12.1",
     "zksync-ethers": "^6.7.1"
   },

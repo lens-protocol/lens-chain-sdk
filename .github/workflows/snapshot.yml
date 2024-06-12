@@ -1,4 +1,4 @@
-name: Canary Release
+name: Snapshot Release
 
 on:
   push:
@@ -35,3 +35,19 @@ jobs:
       - name: Publish Canary Release
         if: env.changeset_exists == 'true'
         run: pnpm changeset publish --snapshot --tag canary --no-git-tag
+
+  examples:
+    name: Verify Examples
+    runs-on: ubuntu-latest
+    needs: publish
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Repository
+        uses: ./.github/actions/setup
+
+      - name: Lint Examples
+        run: |
+          pnpm install:examples
+          pnpm lint:examples

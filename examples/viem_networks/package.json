@@ -6,7 +6,7 @@
     "dev": "vite"
   },
   "dependencies": {
-    "@lens-network/sdk": "file:../../",
+    "@lens-network/sdk": "canary",
     "viem": "2"
   },
   "devDependencies": {
