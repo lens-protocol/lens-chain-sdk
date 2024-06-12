@@ -58,7 +58,7 @@ describe('Given the Viem actions', () => {
   describe(`When calling "${getTokenInfo.name}"`, () => {
     it('Then it should return the given token info', async () => {
       const client = createPublicClient({
-        chain: chains.localhost,
+        chain: chains.staging,
         transport: http(),
       });
 
@@ -80,7 +80,7 @@ describe('Given the Viem actions', () => {
 
     it('Then it should return null if token not found', async () => {
       const client = createPublicClient({
-        chain: chains.localhost,
+        chain: chains.staging,
         transport: http(),
       });
 
@@ -95,7 +95,7 @@ describe('Given the Viem actions', () => {
   describe(`When calling "${getTokenTxHistory.name}"`, () => {
     it('Then it should return a paginated list of token transfers', async () => {
       const client = createPublicClient({
-        chain: chains.localhost,
+        chain: chains.staging,
         transport: http(),
       });
 
@@ -136,7 +136,7 @@ describe('Given the Viem actions', () => {
 
   describe(`When calling "${getContractABI.name}"`, () => {
     const client = createPublicClient({
-      chain: chains.localhost,
+      chain: chains.staging,
       transport: http(),
     });
 
@@ -159,7 +159,7 @@ describe('Given the Viem actions', () => {
 
   describe(`When calling "${getTokenBalance.name}"`, () => {
     const client = createPublicClient({
-      chain: chains.localhost,
+      chain: chains.staging,
       transport: http(),
     });
 

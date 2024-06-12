@@ -39,7 +39,7 @@ describe(`Given an ethers.js Provider instance`, () => {
   });
 
   describe(`When calling "${Provider.prototype.getTokenInfo.name}" method`, () => {
-    const provider = getDefaultProvider(types.Network.Localhost);
+    const provider = getDefaultProvider(types.Network.Staging);
 
     it('Then it should return the given token info', async () => {
       const result = await provider.getTokenInfo('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1');
@@ -65,7 +65,7 @@ describe(`Given an ethers.js Provider instance`, () => {
 
   describe(`When calling "${Provider.prototype.getTokenTxHistory.name}" method`, () => {
     it('Then it should return a paginated list of token transfers', async () => {
-      const provider = getDefaultProvider(types.Network.Localhost);
+      const provider = getDefaultProvider(types.Network.Staging);
 
       const { items } = await provider.getTokenTxHistory({
         address: '0x00a58ba275e6bfc004e2bf9be121a15a2c543e71',
@@ -103,7 +103,7 @@ describe(`Given an ethers.js Provider instance`, () => {
   });
 
   describe(`When calling "${Provider.prototype.getContractABI.name}" method`, () => {
-    const provider = getDefaultProvider(types.Network.Localhost);
+    const provider = getDefaultProvider(types.Network.Staging);
 
     it('Then it should return the contract ABI as JSON string', async () => {
       const abi = await provider.getContractABI('0xA53ef3794DC285C20BEe9B51abD1942Ab5794a41');
@@ -119,7 +119,7 @@ describe(`Given an ethers.js Provider instance`, () => {
   });
 
   describe(`When calling "${Provider.prototype.getTokenBalance.name}" method`, () => {
-    const provider = getDefaultProvider(types.Network.Localhost);
+    const provider = getDefaultProvider(types.Network.Staging);
 
     it('Then it should return the balance as hex string', async () => {
       const balance = await provider.getTokenBalance(
