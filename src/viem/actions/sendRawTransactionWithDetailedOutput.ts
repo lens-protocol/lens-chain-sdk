@@ -25,10 +25,13 @@ export type SendRawTransactionWithDetailedOutputErrorType = SendRawTransactionEr
  *
  * @example
  * ```ts
- * import { createPublicClient, http } from 'viem';
+ * import { createWalletClient, Hex, http, privateKeyToAccount } from 'viem';
  * import { chains, sendRawTransactionWithDetailedOutput } from '@lens-network/sdk/viem';
  *
- * const client = createPublicClient({
+ * const account = privateKeyToAccount(process.env.PRIVATE_KEY as Hex);
+ *
+ * export const walletClient = createWalletClient({
+ *   account,
  *   chain: chains.staging,
  *   transport: http(),
  * });

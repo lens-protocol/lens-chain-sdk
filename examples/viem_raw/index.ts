@@ -13,16 +13,6 @@ const client = createWalletClient({
   transport: http(),
 });
 
-const chainId = await client.getChainId();
-
-if (chainId !== chain.id) {
-  try {
-    await client.switchChain({ id: chain.id });
-  } catch {
-    await client.addChain({ chain });
-  }
-}
-
 const request = await client.prepareTransactionRequest({
   to: account.address,
   value: parseEther('0.0001'),

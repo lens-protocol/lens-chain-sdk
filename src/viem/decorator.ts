@@ -46,7 +46,7 @@ import {
   type SendRawTransactionWithDetailedOutputReturnType,
 } from './actions/sendRawTransactionWithDetailedOutput';
 
-export type LensNetworkActions = {
+export type PublicActions = {
   /**
    * Retrieve token balance for a given address.
    *
@@ -56,12 +56,12 @@ export type LensNetworkActions = {
    * @example
    * ```ts
    * import { createPublicClient, http } from 'viem';
-   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
+   * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
    *   chain: chains.staging,
    *   transport: http(),
-   * }).extend(lensNetworkActions();
+   * }).extend(publicActions());
    *
    * const balance = await client.getTokenBalance({
    *   address: '0x1234567…',
@@ -81,12 +81,12 @@ export type LensNetworkActions = {
    * @example
    * ```ts
    * import { createPublicClient, http } from 'viem';
-   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
+   * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
    *   chain: chains.staging,
    *   transport: http(),
-   * }).extend(lensNetworkActions();
+   * }).extend(publicActions());
    *
    * const abi = await client.getContractABI({
    *   address: '0x1234567…',
@@ -105,12 +105,12 @@ export type LensNetworkActions = {
    * @example
    * ```ts
    * import { createPublicClient, http } from 'viem';
-   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
+   * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
    *   chain: chains.staging,
    *   transport: http(),
-   * }).extend(lensNetworkActions();
+   * }).extend(publicActions());
    *
    * const { items } = await client.getTokenTxHistory({
    *   address: '0x1234567…',
@@ -130,12 +130,12 @@ export type LensNetworkActions = {
    * @example
    * ```ts
    * import { createPublicClient, http } from 'viem';
-   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
+   * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
    *   chain: chains.staging,
    *   transport: http(),
-   * }).extend(lensNetworkActions();
+   * }).extend(publicActions());
    *
    * const { items } = await client.getNftTxHistory({
    *   address: '0x1234567…',
@@ -157,12 +157,12 @@ export type LensNetworkActions = {
    * @example
    * ```ts
    * import { createPublicClient, http } from 'viem';
-   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
+   * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
    *   chain: chains.staging,
    *   transport: http(),
-   * }).extend(lensNetworkActions();
+   * }).extend(publicActions());
    *
    * const result = await client.getTokenInfo({
    *   address: '0x1234567…'
@@ -181,12 +181,12 @@ export type LensNetworkActions = {
    * @example
    * ```ts
    * import { createPublicClient, http } from 'viem';
-   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
+   * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
    *   chain: chains.staging,
    *   transport: http(),
-   * }).extend(lensNetworkActions();
+   * }).extend(publicActions());
    *
    * const result = await client.getContractCreation({
    *   addresses: [ '0x1234567…' ]
@@ -207,12 +207,12 @@ export type LensNetworkActions = {
    * @example
    * ```ts
    * import { createPublicClient, http } from 'viem';
-   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
+   * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
    *   chain: chains.staging,
    *   transport: http(),
-   * }).extend(lensNetworkActions();
+   * }).extend(publicActions());
    *
    * const { items } = await client.getTxHistory({
    *   address: '0x1234…',
@@ -232,12 +232,12 @@ export type LensNetworkActions = {
    * @example
    * ```ts
    * import { createPublicClient, http } from 'viem';
-   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
+   * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
    *   chain: chains.staging,
    *   transport: http(),
-   * }).extends(lensNetworkActions());
+   * }).extends(publicActions());
    *
    * const result = await client.getBlockNumberByTime({
    *   address: '0x1234567…',
@@ -250,40 +250,15 @@ export type LensNetworkActions = {
   getBlockNumberByTime: (
     params: GetBlockNumberByTimeParameters,
   ) => Promise<GetBlockNumberByTimeReturnType>;
-  /**
-   * Executes a transaction and returns its hash, storage logs, and events that would have
-   * been generated if the transaction had already been included in the block.
-   *
-   * @param params - {@link SendRawTransactionWithDetailedOutputParameters}
-   * @returns The [Transaction](https://viem.sh/docs/glossary/terms#transaction) hash, storage logs, and events. {@link SendRawTransactionWithDetailedOutputReturnType}
-   *
-   * @example
-   * ```ts
-   * import { createPublicClient, http } from 'viem';
-   * import { chains, lensNetworkActions } from '@lens-network/sdk/viem';
-   *
-   * const client = createPublicClient({
-   *   chain: chains.staging,
-   *   transport: http(),
-   * }).extend(lensNetworkActions();
-   *
-   * const result = await client.sendRawTransactionWithDetailedOutput({
-   *   serializedTransaction: '0x02f8500182031180…',
-   * });
-   * ```
-   */
-  sendRawTransactionWithDetailedOutput: (
-    params: SendRawTransactionWithDetailedOutputParameters,
-  ) => Promise<SendRawTransactionWithDetailedOutputReturnType>;
 };
 
-export function lensNetworkActions() {
+export function publicActions() {
   return <
     TChain extends Chain | undefined = Chain | undefined,
     TAccount extends Account | undefined = Account | undefined,
   >(
     client: Client<Transport, TChain, TAccount>,
-  ): LensNetworkActions => ({
+  ): PublicActions => ({
     getTokenBalance: (params) => getTokenBalance(client, params),
 
     getContractABI: (params) => getContractABI(client, params),
@@ -299,7 +274,47 @@ export function lensNetworkActions() {
     getTxHistory: (params) => getTxHistory(client, params),
 
     getBlockNumberByTime: (params) => getBlockNumberByTime(client, params),
+  });
+}
 
+export type WalletActions = {
+  /**
+   * Executes a transaction and returns its hash, storage logs, and events that would have
+   * been generated if the transaction had already been included in the block.
+   *
+   * @param params - {@link SendRawTransactionWithDetailedOutputParameters}
+   * @returns The [Transaction](https://viem.sh/docs/glossary/terms#transaction) hash, storage logs, and events. {@link SendRawTransactionWithDetailedOutputReturnType}
+   *
+   * @example
+   * ```ts
+   * import { createWalletClient, Hex, http, privateKeyToAccount } from 'viem';
+   * import { chains, walletActions } from '@lens-network/sdk/viem';
+   *
+   * const account = privateKeyToAccount(process.env.PRIVATE_KEY as Hex);
+   *
+   * export const walletClient = createWalletClient({
+   *   account,
+   *   chain: chains.staging,
+   *   transport: http(),
+   * }).extend(walletActions());
+   *
+   * const result = await client.sendRawTransactionWithDetailedOutput({
+   *   serializedTransaction: '0x02f8500182031180…',
+   * });
+   * ```
+   */
+  sendRawTransactionWithDetailedOutput: (
+    params: SendRawTransactionWithDetailedOutputParameters,
+  ) => Promise<SendRawTransactionWithDetailedOutputReturnType>;
+};
+
+export function walletActions() {
+  return <
+    TChain extends Chain | undefined = Chain | undefined,
+    TAccount extends Account | undefined = Account | undefined,
+  >(
+    client: Client<Transport, TChain, TAccount>,
+  ): WalletActions => ({
     sendRawTransactionWithDetailedOutput: (params) =>
       sendRawTransactionWithDetailedOutput(client, params),
   });
