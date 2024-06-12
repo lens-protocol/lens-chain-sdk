@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -37,6 +37,6 @@ jobs:
         id: check_changeset
         run: echo "changeset_exists=$(grep -q 'No unreleased changesets found' <<< '${{ steps.create_canary.outputs.stdout }}' && echo false || echo true)" >> $GITHUB_ENV
 
-      # - name: Publish Canary Release
-      #   if: env.changeset_exists == 'true'
-      #   run: pnpm changeset publish --snapshot --tag canary --no-git-tag
+      - name: Publish Canary Release
+        if: env.changeset_exists == 'true'
+        run: pnpm changeset publish --snapshot --tag canary --no-git-tag
