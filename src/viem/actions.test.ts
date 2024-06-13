@@ -13,18 +13,27 @@ import {
 
 describe('Given the Viem actions', () => {
   describe(`When calling "${getBlockNumberByTime.name}"`, () => {
-    it('Then it should return the closest block number', async () => {
-      const client = createPublicClient({
-        chain: chains.staging,
-        transport: http(),
-      });
+    const client = createPublicClient({
+      chain: chains.staging,
+      transport: http(),
+    });
 
+    it('Then it should return the closest block number', async () => {
       const result = await getBlockNumberByTime(client, {
         closest: 'before',
         timestamp: Math.floor(Date.now() / 1000),
       });
 
       expect(result).toEqual(expect.hexString());
+    });
+
+    it('Then it should return null if not found', async () => {
+      const result = await getBlockNumberByTime(client, {
+        closest: 'after', // 'after now': impossible to find
+        timestamp: Math.floor(Date.now() / 1000),
+      });
+
+      expect(result).toBeNull();
     });
   });
 

@@ -109,13 +109,13 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
      *
      * @param closest - The direction to search for the block.
      * @param timestamp - The timestamp, in seconds, from which to search for the block.
-     * @returns The block number as an hexadecimal string.
+     * @returns The block number as an hexadecimal string or null if not found.
      */
     async getBlockNumberByTime(
       closest: TimeDirection,
       timestamp: SecondsSinceEpoch,
-    ): Promise<string> {
-      return this.send('lens_getBlockNumberByTime', [closest, timestamp]) as Promise<string>;
+    ): Promise<string | null> {
+      return this.send('lens_getBlockNumberByTime', [closest, timestamp]) as Promise<string | null>;
     }
     /**
      * Executes a transaction and returns its hash, storage logs, and events that would have
@@ -275,7 +275,10 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    * const blockNumber = await provider.getBlockNumberByTime('before', 1630000000);
    * ```
    */
-  getBlockNumberByTime(closest: TimeDirection, timestamp: SecondsSinceEpoch): Promise<string> {
+  getBlockNumberByTime(
+    closest: TimeDirection,
+    timestamp: SecondsSinceEpoch,
+  ): Promise<string | null> {
     return super.getBlockNumberByTime(closest, timestamp);
   }
   /**
@@ -435,7 +438,10 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    * const blockNumber = await provider.getBlockNumberByTime('before', 1630000000);
    * ```
    */
-  getBlockNumberByTime(closest: TimeDirection, timestamp: SecondsSinceEpoch): Promise<string> {
+  getBlockNumberByTime(
+    closest: TimeDirection,
+    timestamp: SecondsSinceEpoch,
+  ): Promise<string | null> {
     return super.getBlockNumberByTime(closest, timestamp);
   }
   /**
