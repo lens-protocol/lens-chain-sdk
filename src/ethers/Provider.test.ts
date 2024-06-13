@@ -5,12 +5,18 @@ import { Provider } from './providers';
 
 describe(`Given an ethers.js Provider instance`, () => {
   describe(`When calling "${Provider.prototype.getBlockNumberByTime.name}" method`, () => {
-    it('Then it should return the closest block number', async () => {
-      const provider = getDefaultProvider(types.Network.Staging);
+    const provider = getDefaultProvider(types.Network.Staging);
 
+    it('Then it should return the closest block number', async () => {
       const result = await provider.getBlockNumberByTime('before', Math.floor(Date.now() / 1000));
 
       expect(result).toEqual(expect.hexString());
+    });
+
+    it('Then it should return null if not found', async () => {
+      const result = await provider.getBlockNumberByTime('after', Math.floor(Date.now() / 1000));
+
+      expect(result).toBeNull();
     });
   });
 

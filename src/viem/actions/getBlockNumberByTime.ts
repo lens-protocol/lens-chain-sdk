@@ -14,7 +14,7 @@ export type GetBlockNumberByTimeParameters = {
   timestamp: SecondsSinceEpoch;
 };
 
-export type GetBlockNumberByTimeReturnType = Hex;
+export type GetBlockNumberByTimeReturnType = Hex | null;
 
 export type GetBlockNumberByTimeErrorType = RequestErrorType;
 
@@ -23,7 +23,7 @@ export type GetBlockNumberByTimeErrorType = RequestErrorType;
  *
  * @param client - Client to use
  * @param params - {@link GetBlockNumberByTimeParameters}
- * @returns The block number. {@link GetBlockNumberByTimeReturnType}
+ * @returns The block number or null if not found. {@link GetBlockNumberByTimeReturnType}
  *
  * @example
  * ```ts
