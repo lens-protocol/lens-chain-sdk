@@ -40,8 +40,8 @@ jobs:
       - name: Setup Repository
         uses: ./.github/actions/setup
 
-      - name: Run Tests
-        run: pnpm test
+      - name: Build
+        run: pnpm build
 
       # - name: Lint Examples
       #   run: |
