@@ -42,8 +42,3 @@ jobs:
 
       - name: Build
         run: pnpm build
-
-      # - name: Lint Examples
-      #   run: |
-      #     pnpm install:examples
-      #     pnpm lint:examples
