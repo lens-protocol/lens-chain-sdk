@@ -145,7 +145,7 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
 /**
  * A `Provider` extends {@link zksync.Provider} and includes additional features for interacting with the Lens Network.
  *
- * It supports RPC endpoints within the `zks` namespace.
+ * It supports RPC methods within the `zks` and `lens` namespaces.
  */
 export class Provider extends LensNetworkProvider(zksync.Provider) {
   /**
@@ -304,7 +304,7 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
 /**
  * A `BrowserProvider` extends {@link zksync.BrowserProvider} and includes additional features for interacting with the Lens Network.
  *
- * It supports RPC endpoints within the `zks` namespace.
+ * It supports RPC methods within the `zks` and `lens` namespaces.
  *
  * This provider is designed for frontend use in a browser environment and integration for browser wallets
  * (e.g., MetaMask, WalletConnect).
