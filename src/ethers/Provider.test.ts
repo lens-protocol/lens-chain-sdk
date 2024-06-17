@@ -4,6 +4,20 @@ import { getDefaultProvider, types } from '.';
 import { Provider } from './providers';
 
 describe(`Given an ethers.js Provider instance`, () => {
+  describe(`When calling "${Provider.prototype.getTransactionReceipt.name}" method`, () => {
+    it('Then should return the transaction receipt', async () => {
+      const provider = getDefaultProvider(types.Network.Staging);
+
+      const receipt = await provider.getTransactionReceipt(
+        '0x4d5e0020567e12da69a0ffb432389261fac84bcf020ab2680299a67349945171',
+      );
+
+      expect(receipt).toMatchObject({
+        type: 113, // ZK EIP-712
+      });
+    });
+  });
+
   describe(`When calling "${Provider.prototype.getBlockNumberByTime.name}" method`, () => {
     const provider = getDefaultProvider(types.Network.Staging);
 
