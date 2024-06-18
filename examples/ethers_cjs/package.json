@@ -1,0 +1,20 @@
+{
+  "name": "example-ethers-cjs",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "dependencies": {
+    "@lens-network/sdk": "file:../../",
+    "ethers": "^6.12.1",
+    "zksync-ethers": "^6.7.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "es6": true,
+      "commonjs": true
+    }
+  }
+}

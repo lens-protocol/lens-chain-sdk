@@ -6,8 +6,8 @@ export type { SecondsSinceEpoch, TimeDirection } from '../types';
  * Network types.
  */
 export enum Network {
-  Mainnet = 1000000,
-  Testnet = 6000000,
+  Mainnet = NaN,
+  Testnet = NaN,
   Staging = staging.id,
   Localhost = 9,
 }

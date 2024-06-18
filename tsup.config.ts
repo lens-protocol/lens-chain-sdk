@@ -17,5 +17,5 @@ export default defineConfig((options) => ({
   minify: !options.watch,
   dts: true,
   platform: 'neutral',
-  format: ['esm'],
+  format: ['esm', 'cjs'],
 }));
