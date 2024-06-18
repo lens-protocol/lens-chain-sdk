@@ -56,7 +56,7 @@
     "install:examples": "pnpm install:examples:ethers_cjs && pnpm install:examples:ethers_eip-1193 && pnpm install:examples:ethers_misc && pnpm install:examples:ethers_networks && pnpm install:examples:ethers_tx-history && pnpm install:examples:viem_eip-1193 && pnpm install:examples:viem_misc && pnpm install:examples:viem_networks && pnpm install:examples:viem_raw && pnpm install:examples:viem_tx-history",
     "prepublish": "pnpm clean && pnpm build",
     "run:examples:ethers_cjs": "pnpm -C examples/ethers_cjs start",
-    "run:examples": "pnpm verify:examples:ethers_cjs",
+    "run:examples": "pnpm run:examples:ethers_cjs",
     "test": "vitest"
   },
   "keywords": [
