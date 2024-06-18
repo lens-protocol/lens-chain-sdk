@@ -58,3 +58,4 @@ jobs:
         run: |
           pnpm install:examples
           pnpm lint:examples
+          pnpm run:examples

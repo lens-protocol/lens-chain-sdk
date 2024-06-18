@@ -12,10 +12,4 @@ jobs:
   verify:
     name: Verify
     uses: ./.github/workflows/verify.yml
-    secrets:
-      inherit
-
-      # - name: Lint Examples
-      #   run: |
-      #     pnpm install:examples
-      #     pnpm lint:examples
+    secrets: inherit
