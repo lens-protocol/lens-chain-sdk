@@ -27,6 +27,10 @@ jobs:
       - name: Setup Repository
         uses: ./.github/actions/setup
 
+      - name: Setup Environment Variables
+        shell: bash
+        run: echo "PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}" > .env
+
       - name: Run Tests
         run: pnpm test
 

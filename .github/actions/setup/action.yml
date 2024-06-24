@@ -16,7 +16,3 @@ runs:
     - name: Install Dependencies
       shell: bash
       run: pnpm install --frozen-lockfile
-
-    - name: Setup Environment Variables
-      shell: bash
-      run: echo "PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}" > .env
