@@ -56,6 +56,23 @@ Install the dependencies:
 pnpm install
 ```
 
+Create `.env` file from the `.env.example` template:
+
+```bash
+cp .env.example .env
+```
+
+and populate the `PRIVATE_KEY` environment variable:
+
+```bash filename=".env"
+PRIVATE_KEY=0x…
+```
+
+with the private key of an account with Lens Network tokens.
+
+> [!TIP]
+> Use a Sepolia faucet (e.g., [Alchemy Sepolia Faucer](https://www.alchemy.com/faucets/ethereum-sepolia)) to get some SepoliaETH and then [bridge](https://portal.staging.lens.zksync.dev/bridge) them to the Lens Network.
+
 ### Usage <!-- omit in toc -->
 
 Run the tests:
