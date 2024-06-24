@@ -1,7 +1,7 @@
-export * as chains from './chains';
-
-export { getDefaultProvider } from './getDefaultProvider';
+import './networks';
 
 export { BrowserProvider, Provider } from './providers';
-
-export * as types from './types';
+export { getDefaultProvider } from './getDefaultProvider';
+export * as chains from './chains';
+export * from './accounts';
+export * from './types';

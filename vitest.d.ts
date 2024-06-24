@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import type { AsymmetricMatchersContaining as BaseAsymmetricMatchersContaining } from 'vitest';

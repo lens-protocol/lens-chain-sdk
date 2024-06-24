@@ -1,7 +1,9 @@
-import { staging } from '../chains';
+import { DeployedContracts, staging } from '../chains';
 import { PagingResult } from '../types';
 
 export type { SecondsSinceEpoch, TimeDirection } from '../types';
+export type { DeployedContracts, PagingResult };
+
 /**
  * Network types.
  */
@@ -9,7 +11,6 @@ export enum Network {
   Mainnet = NaN,
   Testnet = NaN,
   Staging = staging.id,
-  Localhost = 9,
 }
 
 export type StorageEntry = {
@@ -20,7 +21,7 @@ export type StorageEntry = {
 
 export type OptimisticLog = {
   /**
-   *  The transaction hash for the transaxction the log occurred in.
+   *  The transaction hash for the transaction the log occurred in.
    */
   transactionHash: string;
   /**

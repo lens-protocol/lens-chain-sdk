@@ -11,17 +11,13 @@ import { invariant } from '../invariant';
  *
  * @example
  * ```ts
- * import { getDefaultProvider, types } from '@lens-network/sdk/ethers';
+ * import { getDefaultProvider, Network } from '@lens-network/sdk/ethers';
  *
- * const provider = getDefaultProvider(types.Networks.Staging); // Lens Network testnet (L2)
- * const custom = getDefaultProvider('http://localhost:8545/'); // Local node
+ * const provider = getDefaultProvider(Network.Staging); // Lens Network testnet (L2)
  * ```
  */
-export function getDefaultProvider(network: string | Network): Provider {
+export function getDefaultProvider(network: Network): Provider {
   switch (network) {
-    case Network.Localhost:
-      return new Provider('http://localhost:4096');
-
     case Network.Staging:
       return new Provider(staging.rpcUrl);
 
@@ -29,5 +25,4 @@ export function getDefaultProvider(network: string | Network): Provider {
     case Network.Mainnet:
       invariant(false, 'Network supported yet');
   }
-  return new Provider(network);
 }

@@ -131,7 +131,6 @@ function LensNetworkProvider<TBase extends Constructor<BaseLensNetworkProvider>>
         serializedTransaction,
       ]) as Promise<SendRawTransactionDetails>;
     }
-
     /**
      * @deprecated Use `getDefaultProvider` from `@lens-network/sdk/ethers` instead.
      * @internal
@@ -153,9 +152,9 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    *
    * @example
    * ```ts
-   * import { Provider, types } from '@lens-network/sdk/ethers';
+   * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(types.Network.Staging);
+   * const provider = getDefaultProvider(Network.Staging);
    *
    * const balance = await provider.getTokenBalance('0x1234567…', '0x1234567…');
    * ```
@@ -168,9 +167,9 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    *
    * @example
    * ```ts
-   * import { Provider, types } from '@lens-network/sdk/ethers';
+   * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(types.Network.Staging);
+   * const provider = getDefaultProvider(Network.Staging);
    *
    * const abi = await provider.getContractABI('0x123456…');
    * ```
@@ -183,9 +182,9 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    *
    * @example
    * ```ts
-   * import { Provider, types } from '@lens-network/sdk/ethers';
+   * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(types.Network.Staging);
+   * const provider = getDefaultProvider(Network.Staging);
    *
    * const result = await provider.getTokenTxHistory({
    *   address: '0x…',
@@ -201,9 +200,9 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    *
    * @example
    * ```ts
-   * import { Provider, types } from '@lens-network/sdk/ethers';
+   * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(types.Network.Staging);
+   * const provider = getDefaultProvider(Network.Staging);
    *
    * const result = await provider.getNftTxHistory({
    *   address: '0x…',
@@ -219,9 +218,9 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    *
    * @example
    * ```ts
-   * import { Provider, types } from '@lens-network/sdk/ethers';
+   * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(types.Networks.Staging);
+   * const provider = getDefaultProvider(Network.Staging);
    *
    * const result = await provider.getTokenInfo('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1');
    * ```
@@ -234,9 +233,9 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    *
    * @example
    * ```ts
-   * import { Provider, types } from '@lens-network/sdk/ethers';
+   * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(types.Networks.Staging);
+   * const provider = getDefaultProvider(Network.Staging);
    *
    * const [result] = await provider.getContractCreation([
    *  '0x175a469603aa24ee4ef1f9b0b609e3f0988668b1'
@@ -251,9 +250,9 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    *
    * @example
    * ```ts
-   * import { Provider, types } from '@lens-network/sdk/ethers';
+   * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(types.Networks.Staging);
+   * const provider = getDefaultProvider(Network.Staging);
    *
    * const { items } = await provider.getTxHistory({
    *   address: '0x…',
@@ -268,9 +267,9 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    *
    * @example
    * ```ts
-   * import { Provider, types } from '@lens-network/sdk/ethers';
+   * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(types.Networks.Staging);
+   * const provider = getDefaultProvider(Network.Staging);
    *
    * const blockNumber = await provider.getBlockNumberByTime('before', 1630000000);
    * ```
@@ -286,9 +285,9 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    *
    * @example
    * ```ts
-   * import { Provider, types } from '@lens-network/sdk/ethers';
+   * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(types.Networks.Staging);
+   * const provider = getDefaultProvider(Network.Staging);
    *
    * const signedTransaction = '0x02f8500182031180…';
    * const result = await provider.sendRawTransactionWithDetailedOutput(signedTransaction);
@@ -317,7 +316,7 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    * ```ts
    * import { BrowserProvider } from '@lens-network/sdk/ethers';
    *
-   * const provider = new ethers.BrowserProvider(window.ethereum);
+   * const provider = new BrowserProvider(window.ethereum);
    *
    * const balance = await provider.getTokenBalance('0x1234567…', '0x1234567…');
    * ```
@@ -332,7 +331,7 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    * ```ts
    * import { BrowserProvider } from '@lens-network/sdk/ethers';
    *
-   * const provider = new ethers.BrowserProvider(window.ethereum);
+   * const provider = new BrowserProvider(window.ethereum);
    *
    * const abi = await provider.getContractABI('0x123456…');
    * ```
@@ -347,7 +346,7 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    * ```ts
    * import { BrowserProvider } from '@lens-network/sdk/ethers';
    *
-   * const provider = new ethers.BrowserProvider(window.ethereum);
+   * const provider = new BrowserProvider(window.ethereum);
    *
    * const result = await provider.getTokenTxHistory({
    *   address: '0x…',
@@ -365,7 +364,7 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    * ```ts
    * import { BrowserProvider } from '@lens-network/sdk/ethers';
    *
-   * const provider = new ethers.BrowserProvider(window.ethereum);
+   * const provider = new BrowserProvider(window.ethereum);
    *
    * const result = await provider.getNftTxHistory({
    *   address: '0x…',
@@ -383,7 +382,7 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    * ```ts
    * import { BrowserProvider } from '@lens-network/sdk/ethers';
    *
-   * const provider = new ethers.BrowserProvider(window.ethereum);
+   * const provider = new BrowserProvider(window.ethereum);
    *
    * const result = await provider.getTokenInfo('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1');
    * ```
@@ -398,7 +397,7 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    * ```ts
    * import { BrowserProvider } from '@lens-network/sdk/ethers';
    *
-   * const provider = new ethers.BrowserProvider(window.ethereum);
+   * const provider = new BrowserProvider(window.ethereum);
    *
    * const [result] = await provider.getContractCreation([
    *  '0x175a469603aa24ee4ef1f9b0b609e3f0988668b1'
@@ -415,7 +414,7 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    * ```ts
    * import { BrowserProvider } from '@lens-network/sdk/ethers';
    *
-   * const provider = new ethers.BrowserProvider(window.ethereum);
+   * const provider = new BrowserProvider(window.ethereum);
    *
    * const { items } = await provider.getTxHistory({
    *   address: '0x…',
@@ -433,7 +432,7 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    * ```ts
    * import { BrowserProvider } from '@lens-network/sdk/ethers';
    *
-   * const provider = new ethers.BrowserProvider(window.ethereum);
+   * const provider = new BrowserProvider(window.ethereum);
    *
    * const blockNumber = await provider.getBlockNumberByTime('before', 1630000000);
    * ```
@@ -451,7 +450,7 @@ export class BrowserProvider extends LensNetworkProvider(zksync.BrowserProvider)
    * ```ts
    * import { BrowserProvider } from '@lens-network/sdk/ethers';
    *
-   * const provider = new ethers.BrowserProvider(window.ethereum);
+   * const provider = new BrowserProvider(window.ethereum);
    *
    * const signedTransaction = '0x02f8500182031180…';
    * const result = await provider.sendRawTransactionWithDetailedOutput(signedTransaction);

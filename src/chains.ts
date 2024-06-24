@@ -1,3 +1,7 @@
+export type DeployedContracts = {
+  erc20Factory: string;
+};
+
 export type ChainDefinition = {
   id: number;
   name: string;
@@ -5,6 +9,7 @@ export type ChainDefinition = {
   rpcUrl: string;
   blockExplorerUrl: string;
   testnet: boolean;
+  contracts: DeployedContracts;
 };
 
 /**
@@ -17,6 +22,9 @@ export const staging: ChainDefinition = {
   rpcUrl: 'https://rpc.staging.lens-network.crtlkey.com/',
   blockExplorerUrl: 'https://explorer.staging.lens.zksync.dev/',
   testnet: true,
+  contracts: {
+    erc20Factory: '0x40bef8fc597752305170829a81097612e00Dc3A8',
+  },
 };
 
 /**
@@ -29,4 +37,7 @@ export const localhost: ChainDefinition = {
   rpcUrl: 'http://localhost:4096',
   blockExplorerUrl: 'https://explorer.staging.lens.zksync.dev/',
   testnet: true,
+  contracts: {
+    erc20Factory: '0x40bef8fc597752305170829a81097612e00Dc3A8',
+  },
 };
