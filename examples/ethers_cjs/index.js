@@ -1,3 +1,3 @@
-const { types } = require('@lens-network/sdk/ethers');
+const { Network } = require('@lens-network/sdk/ethers');
 
-console.table(Object.entries(types.Network).filter(([, value]) => typeof value !== 'string'));
+console.table(Object.entries(Network).filter(([, value]) => typeof value !== 'string'));

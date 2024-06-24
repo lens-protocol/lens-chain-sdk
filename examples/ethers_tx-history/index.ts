@@ -1,8 +1,8 @@
 import '@lens-network/sdk/ethers/globals';
-import { getDefaultProvider, types } from '@lens-network/sdk/ethers';
+import { getDefaultProvider, Network } from '@lens-network/sdk/ethers';
 import { ZeroAddress } from 'ethers/constants';
 
-const chain = types.Network.Staging;
+const chain = Network.Staging;
 
 const provider = getDefaultProvider(chain);
 
