@@ -1,6 +1,6 @@
 import { getDefaultProvider, Network } from '@lens-network/sdk/ethers';
 
-const provider = getDefaultProvider(Network.Localhost);
+const provider = getDefaultProvider(Network.Staging);
 
 export default [
   `<h2>${(await provider.getNetwork()).name}</h2>`,

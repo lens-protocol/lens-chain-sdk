@@ -25,7 +25,12 @@ function defineViemChain(chain: chains.ChainDefinition) {
         url: chain.blockExplorerUrl,
       },
     },
-    contracts: {},
+    // TODO use getChainContractAddress to extract values from a chain instance
+    contracts: {
+      erc20Factory: {
+        address: chain.contracts.erc20Factory,
+      },
+    },
     testnet: chain.testnet,
     fees: {
       /**
