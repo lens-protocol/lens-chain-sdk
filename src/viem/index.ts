@@ -10,6 +10,6 @@ export * from './actions/sendRawTransactionWithDetailedOutput';
 
 export * as chains from './chains';
 
-export { type PublicActions, publicActions, type WalletActions, walletActions } from './decorator';
+export { type PublicActions, publicActions, type WalletActions, walletActions } from './decorators';
 
 export * from './types';

@@ -1,5 +1,5 @@
 export type DeployedContracts = {
-  erc20Factory: string;
+  erc20Factory: `0x${string}`;
 };
 
 export type ChainDefinition = {

@@ -38,6 +38,9 @@
     "dist"
   ],
   "scripts": {
+    "abi:ethers": "typechain --target ethers-v6 --out-dir src/ethers/typechain abi/*.json",
+    "abi:viem": "./scripts/jsonToTsConst.ts ./abi/\\*.json ./src/viem/abi",
+    "abi": "pnpm abi:ethers && pnpm abi:viem",
     "build": "tsup",
     "clean": "rimraf dist",
     "lint:code": "eslint . --ignore-pattern 'examples/*'",
@@ -57,8 +60,8 @@
     "prepublish": "pnpm clean && pnpm build",
     "run:examples:ethers_cjs": "pnpm -C examples/ethers_cjs start",
     "run:examples": "pnpm run:examples:ethers_cjs",
-    "test": "vitest",
-    "typechain": "typechain --target ethers-v6 --out-dir src/ethers/typechain abi/*.json"
+    "test": "vitest --passWithNoTests",
+    "test:write": "TEST_TAGS=@write vitest -t \"\\[tag:\\s@write\\]\""
   },
   "keywords": [
     "lens-network",
@@ -78,17 +81,20 @@
     "@types/node": "^20.12.12",
     "@typescript-eslint/eslint-plugin": "^7.10.0",
     "@typescript-eslint/parser": "^7.10.0",
+    "change-case": "^5.4.4",
     "eslint": "8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "ethers": "^6.12.1",
+    "glob": "^10.4.2",
     "rimraf": "^5.0.7",
     "tsup": "^8.0.2",
+    "tsx": "^4.15.7",
     "typechain": "^8.3.2",
     "typedoc": "^0.25.13",
     "typedoc-plugin-markdown": "^4.0.3",
-    "typescript": "^5.4.5",
-    "viem": "^2.12.0",
+    "typescript": "^5.5.2",
+    "viem": "^2.16.2",
     "vite": "^5.3.1",
     "vitest": "^1.6.0",
     "zksync-ethers": "^6.7.1"

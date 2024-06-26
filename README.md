@@ -81,6 +81,15 @@ Run the tests:
 pnpm test
 ```
 
+Run tests tagged with `write`:
+
+> [!WARNING]
+> These tests requires funds in the account specified within the `.env` file.
+
+```bash
+pnpm test:write
+```
+
 Lint the code:
 
 ```bash

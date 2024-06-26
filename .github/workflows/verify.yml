@@ -1,6 +1,12 @@
 name: 'Verify'
 on:
   workflow_call:
+    inputs:
+      include_writes:
+        description: 'Run tests for write operations'
+        type: boolean
+        required: false
+        default: false
   workflow_dispatch:
 
 jobs:
@@ -33,6 +39,10 @@ jobs:
 
       - name: Run Tests
         run: pnpm test
+
+      - name: Run Write Tests
+        if: inputs.include_writes
+        run: pnpm test:write
 
   build:
     name: Build

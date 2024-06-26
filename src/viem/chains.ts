@@ -1,13 +1,26 @@
 /**
  * TODO: Move these definitions under `viem/chains` once stable.
  */
+import { Chain, ChainContract } from 'viem';
+import { Assign, Prettify } from 'viem/chains';
 import { defineChain } from 'viem/utils';
 import { chainConfig } from 'viem/zksync';
 
 import * as chains from '../chains';
 import { nativeCurrency } from '../constants';
 
-function defineViemChain(chain: chains.ChainDefinition) {
+export type LensNetworkChain = Prettify<
+  Assign<
+    Chain,
+    {
+      contracts: {
+        erc20Factory: ChainContract;
+      };
+    }
+  >
+>;
+
+function defineViemChain(chain: chains.ChainDefinition): LensNetworkChain {
   return defineChain({
     ...chainConfig,
     id: chain.id,
@@ -25,7 +38,6 @@ function defineViemChain(chain: chains.ChainDefinition) {
         url: chain.blockExplorerUrl,
       },
     },
-    // TODO use getChainContractAddress to extract values from a chain instance
     contracts: {
       erc20Factory: {
         address: chain.contracts.erc20Factory,
