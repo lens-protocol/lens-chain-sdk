@@ -1,4 +1,6 @@
-import { createPublicClient, http } from 'viem';
+import { createPublicClient, createWalletClient, http } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
+import { readContract } from 'viem/actions';
 import { expect, describe, it } from 'vitest';
 
 import {
@@ -10,6 +12,9 @@ import {
   getTokenInfo,
   getTokenTxHistory,
 } from '.';
+import { abi as basicErc20Abi } from './abi/basicErc20';
+import { createErc20 } from './actions/createErc20';
+import { tag } from '../../test';
 
 describe('Given the Viem actions', () => {
   describe(`When calling "${getBlockNumberByTime.name}"`, () => {
@@ -188,6 +193,33 @@ describe('Given the Viem actions', () => {
       });
 
       expect(balance).toEqual('0x0');
+    });
+  });
+
+  tag('@write', () => {
+    describe(`When calling "${createErc20.name}"`, () => {
+      it('Then should return the ERC-20 contract address @smoke', {}, async () => {
+        const account = privateKeyToAccount(import.meta.env.PRIVATE_KEY);
+        const client = createWalletClient({
+          account,
+          chain: chains.staging,
+          transport: http(),
+        });
+
+        const tokenAddress = await createErc20(client, {
+          initialOwner: account.address,
+          initialSupply: 100_000_000_000_000_000_000n,
+          name: 'SDK Test Token',
+          symbol: 'SDK',
+        });
+
+        const name = await readContract(client, {
+          abi: basicErc20Abi,
+          address: tokenAddress,
+          functionName: 'name',
+        });
+        expect(name).toBe('SDK Test Token');
+      });
     });
   });
 });

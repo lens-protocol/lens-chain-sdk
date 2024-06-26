@@ -1,5 +1,6 @@
 import { Account, Chain, Client, Transport } from 'viem';
 
+import { CreateErc20Parameters, CreateErc20ReturnType, createErc20 } from './actions/createErc20';
 import {
   GetBlockNumberByTimeParameters,
   GetBlockNumberByTimeReturnType,
@@ -45,6 +46,7 @@ import {
   type SendRawTransactionWithDetailedOutputParameters,
   type SendRawTransactionWithDetailedOutputReturnType,
 } from './actions/sendRawTransactionWithDetailedOutput';
+import { LensNetworkChain } from './chains';
 
 export type PublicActions = {
   /**
@@ -279,6 +281,37 @@ export function publicActions() {
 
 export type WalletActions = {
   /**
+   * Create an ERC-20 token with the given parameters.
+   *
+   * @param client - Client to use
+   * @param parameters - {@link CreateErc20Parameters}
+   * @returns The newly created ERC-20 token address. {@link CreateErc20ReturnType}
+   *
+   * @example
+   * ```ts
+   * import { createWalletClient, Hex, http, privateKeyToAccount } from 'viem';
+   * import { chains, walletActions } from '@lens-network/sdk/viem';
+   *
+   * const account = privateKeyToAccount(process.env.PRIVATE_KEY as Hex);
+   *
+   * export const walletClient = createWalletClient({
+   *   account,
+   *   chain: chains.staging,
+   *   transport: http(),
+   * }).extend(walletActions());
+   *
+   * const tokenAddress = await client.createErc20({
+   *   initialOwner: account.address,
+   *   initialSupply: 100_000_000_000_000_000_000n,
+   *   name: 'SDK Test Token',
+   *   symbol: 'SDK',
+   * });
+   *
+   * // tokenAddress: 0x…
+   * ```
+   */
+  createErc20: (params: CreateErc20Parameters) => Promise<CreateErc20ReturnType>;
+  /**
    * Executes a transaction and returns its hash, storage logs, and events that would have
    * been generated if the transaction had already been included in the block.
    *
@@ -310,11 +343,12 @@ export type WalletActions = {
 
 export function walletActions() {
   return <
-    TChain extends Chain | undefined = Chain | undefined,
+    TChain extends LensNetworkChain = LensNetworkChain,
     TAccount extends Account | undefined = Account | undefined,
   >(
     client: Client<Transport, TChain, TAccount>,
   ): WalletActions => ({
+    createErc20: (params) => createErc20(client, params),
     sendRawTransactionWithDetailedOutput: (params) =>
       sendRawTransactionWithDetailedOutput(client, params),
   });

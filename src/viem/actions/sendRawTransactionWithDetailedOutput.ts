@@ -30,7 +30,7 @@ export type SendRawTransactionWithDetailedOutputErrorType = SendRawTransactionEr
  *
  * const account = privateKeyToAccount(process.env.PRIVATE_KEY as Hex);
  *
- * export const walletClient = createWalletClient({
+ * const walletClient = createWalletClient({
  *   account,
  *   chain: chains.staging,
  *   transport: http(),
