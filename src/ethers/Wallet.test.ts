@@ -22,5 +22,22 @@ tag('@write', () => {
         expect(await contract.name()).toBe('SDK Test Token');
       });
     });
+
+    describe(`When calling "${Wallet.prototype.createErc20.name}" method`, () => {
+      it(`Then should return the ERC-721 contract address`, async () => {
+        const provider = getDefaultProvider(Network.Staging);
+        const signer = new Wallet(import.meta.env.PRIVATE_KEY, provider);
+
+        const address = await signer.createErc721({
+          initialOwner: signer.address,
+          maxSupply: 100,
+          name: 'My Collection',
+          symbol: 'SDK',
+        });
+
+        const contract = factories.BasicErc721__factory.connect(address, signer);
+        expect(await contract.name()).toBe('My Collection');
+      });
+    });
   });
 });
