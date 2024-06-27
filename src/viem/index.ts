@@ -1,3 +1,4 @@
+export * from './actions/createErc20';
 export * from './actions/getBlockNumberByTime';
 export * from './actions/getContractABI';
 export * from './actions/getContractCreation';
