@@ -23,7 +23,7 @@ export const staging: ChainDefinition = {
   blockExplorerUrl: 'https://explorer.staging.lens.zksync.dev/',
   testnet: true,
   contracts: {
-    erc20Factory: '0x40bef8fc597752305170829a81097612e00Dc3A8',
+    erc20Factory: '0xCAb3353b6055d6FDE858f8b862B90c9f81f63Ec3',
   },
 };
 
@@ -38,6 +38,6 @@ export const localhost: ChainDefinition = {
   blockExplorerUrl: 'https://explorer.staging.lens.zksync.dev/',
   testnet: true,
   contracts: {
-    erc20Factory: '0x40bef8fc597752305170829a81097612e00Dc3A8',
+    erc20Factory: '0xCAb3353b6055d6FDE858f8b862B90c9f81f63Ec3',
   },
 };

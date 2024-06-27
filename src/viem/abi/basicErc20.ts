@@ -25,7 +25,7 @@ export const abi = [
           },
         ],
         internalType: 'struct BasicErc20.TokenParams',
-        name: 'details',
+        name: 'params',
         type: 'tuple',
       },
     ],

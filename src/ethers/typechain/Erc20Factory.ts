@@ -44,7 +44,7 @@ export declare namespace BasicErc20 {
   };
 }
 
-export interface BasicErc20FactoryInterface extends Interface {
+export interface Erc20FactoryInterface extends Interface {
   getFunction(
     nameOrSignature:
       | "createToken"
@@ -160,11 +160,11 @@ export namespace TokenCreatedEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
-export interface BasicErc20Factory extends BaseContract {
-  connect(runner?: ContractRunner | null): BasicErc20Factory;
+export interface Erc20Factory extends BaseContract {
+  connect(runner?: ContractRunner | null): Erc20Factory;
   waitForDeployment(): Promise<this>;
 
-  interface: BasicErc20FactoryInterface;
+  interface: Erc20FactoryInterface;
 
   queryFilter<TCEvent extends TypedContractEvent>(
     event: TCEvent,

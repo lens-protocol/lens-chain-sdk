@@ -12,7 +12,7 @@ import {
 import { waitForTransactionReceipt, writeContract } from 'viem/actions';
 import { RequestErrorType } from 'viem/utils';
 
-import { abi } from '../abi/basicErc20Factory';
+import { abi } from '../abi/erc20Factory';
 import { LensNetworkChain } from '../chains';
 
 export type CreateErc20Parameters = ContractFunctionArgs<

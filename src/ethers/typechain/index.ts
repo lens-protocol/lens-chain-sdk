@@ -2,7 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { BasicErc20 } from "./BasicErc20";
-export type { BasicErc20Factory } from "./BasicErc20Factory";
+export type { Erc20Factory } from "./Erc20Factory";
 export * as factories from "./factories";
 export { BasicErc20__factory } from "./factories/BasicErc20__factory";
-export { BasicErc20Factory__factory } from "./factories/BasicErc20Factory__factory";
+export { Erc20Factory__factory } from "./factories/Erc20Factory__factory";
