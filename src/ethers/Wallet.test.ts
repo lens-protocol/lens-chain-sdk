@@ -23,7 +23,7 @@ tag('@write', () => {
       });
     });
 
-    describe(`When calling "${Wallet.prototype.createErc20.name}" method`, () => {
+    describe(`When calling "${Wallet.prototype.createErc721.name}" method`, () => {
       it(`Then should return the ERC-721 contract address`, async () => {
         const provider = getDefaultProvider(Network.Staging);
         const signer = new Wallet(import.meta.env.PRIVATE_KEY, provider);
