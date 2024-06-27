@@ -2,6 +2,11 @@ import { Account, Chain, Client, Transport } from 'viem';
 
 import { CreateErc20Parameters, CreateErc20ReturnType, createErc20 } from './actions/createErc20';
 import {
+  CreateErc721Parameters,
+  CreateErc721ReturnType,
+  createErc721,
+} from './actions/createErc721';
+import {
   GetBlockNumberByTimeParameters,
   GetBlockNumberByTimeReturnType,
   getBlockNumberByTime,
@@ -281,11 +286,11 @@ export function publicActions() {
 
 export type WalletActions = {
   /**
-   * Create an ERC-20 token with the given parameters.
+   * Create an ERC-20 contract with the given parameters.
    *
    * @param client - Client to use
    * @param parameters - {@link CreateErc20Parameters}
-   * @returns The newly created ERC-20 token address. {@link CreateErc20ReturnType}
+   * @returns The newly created ERC-20 contract address. {@link CreateErc20ReturnType}
    *
    * @example
    * ```ts
@@ -311,6 +316,37 @@ export type WalletActions = {
    * ```
    */
   createErc20: (params: CreateErc20Parameters) => Promise<CreateErc20ReturnType>;
+  /**
+   * Create an ERC-721 contract with the given parameters.
+   *
+   * @param client - Client to use
+   * @param parameters - {@link CreateErc20Parameters}
+   * @returns The newly created ERC-721 contract address. {@link CreateErc20ReturnType}
+   *
+   * @example
+   * ```ts
+   * import { createWalletClient, Hex, http, privateKeyToAccount } from 'viem';
+   * import { chains, walletActions } from '@lens-network/sdk/viem';
+   *
+   * const account = privateKeyToAccount(process.env.PRIVATE_KEY as Hex);
+   *
+   * export const walletClient = createWalletClient({
+   *   account,
+   *   chain: chains.staging,
+   *   transport: http(),
+   * }).extend(walletActions());
+   *
+   * const tokenAddress = await client.createErc721({
+   *   initialOwner: account.address,
+   *   maxSupply: 100n,
+   *   name: 'My collection',
+   *   symbol: 'SDK',
+   * });
+   *
+   * // tokenAddress: 0x…
+   * ```
+   */
+  createErc721: (params: CreateErc721Parameters) => Promise<CreateErc721ReturnType>;
   /**
    * Executes a transaction and returns its hash, storage logs, and events that would have
    * been generated if the transaction had already been included in the block.
@@ -349,6 +385,7 @@ export function walletActions() {
     client: Client<Transport, TChain, TAccount>,
   ): WalletActions => ({
     createErc20: (params) => createErc20(client, params),
+    createErc721: (params) => createErc721(client, params),
     sendRawTransactionWithDetailedOutput: (params) =>
       sendRawTransactionWithDetailedOutput(client, params),
   });

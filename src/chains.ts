@@ -1,5 +1,6 @@
 export type DeployedContracts = {
   erc20Factory: `0x${string}`;
+  erc721Factory: `0x${string}`;
 };
 
 export type ChainDefinition = {
@@ -24,6 +25,7 @@ export const staging: ChainDefinition = {
   testnet: true,
   contracts: {
     erc20Factory: '0xCAb3353b6055d6FDE858f8b862B90c9f81f63Ec3',
+    erc721Factory: '0xCfBDe041302aA0Fdee0dbAd4E22cc937fdC184ED',
   },
 };
 
@@ -39,5 +41,6 @@ export const localhost: ChainDefinition = {
   testnet: true,
   contracts: {
     erc20Factory: '0xCAb3353b6055d6FDE858f8b862B90c9f81f63Ec3',
+    erc721Factory: '0xCfBDe041302aA0Fdee0dbAd4E22cc937fdC184ED',
   },
 };
