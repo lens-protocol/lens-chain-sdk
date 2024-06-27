@@ -3,10 +3,7 @@
 /* eslint-disable */
 
 import { Contract, Interface, type ContractRunner } from "ethers";
-import type {
-  BasicErc20Factory,
-  BasicErc20FactoryInterface,
-} from "../BasicErc20Factory";
+import type { Erc20Factory, Erc20FactoryInterface } from "../Erc20Factory";
 
 const _abi = [
   {
@@ -212,15 +209,15 @@ const _abi = [
   },
 ] as const;
 
-export class BasicErc20Factory__factory {
+export class Erc20Factory__factory {
   static readonly abi = _abi;
-  static createInterface(): BasicErc20FactoryInterface {
-    return new Interface(_abi) as BasicErc20FactoryInterface;
+  static createInterface(): Erc20FactoryInterface {
+    return new Interface(_abi) as Erc20FactoryInterface;
   }
   static connect(
     address: string,
     runner?: ContractRunner | null
-  ): BasicErc20Factory {
-    return new Contract(address, _abi, runner) as unknown as BasicErc20Factory;
+  ): Erc20Factory {
+    return new Contract(address, _abi, runner) as unknown as Erc20Factory;
   }
 }

@@ -40,7 +40,7 @@ function Adapter<TBase extends Constructor<L2TxSender>>(Base: TBase) {
 
       assertLensContractsNetworkPlugin(plugin);
 
-      const contract = factories.BasicErc20Factory__factory.connect(
+      const contract = factories.Erc20Factory__factory.connect(
         plugin.contracts.erc20Factory,
         this._signerL2(),
       );
@@ -55,7 +55,7 @@ function Adapter<TBase extends Constructor<L2TxSender>>(Base: TBase) {
 
       assert(eventLog instanceof EventLog, 'Event log not found', 'NETWORK_ERROR');
 
-      const iface = factories.BasicErc20Factory__factory.createInterface();
+      const iface = factories.Erc20Factory__factory.createInterface();
       const decodedLog = iface.parseLog(eventLog);
 
       assert(decodedLog?.name === 'TokenCreated', 'Token not created', 'NETWORK_ERROR');
