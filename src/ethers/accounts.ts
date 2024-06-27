@@ -12,6 +12,13 @@ export type Erc20TokenParams = {
   symbol: string;
 };
 
+export type Erc721TokenParams = {
+  initialOwner: string;
+  maxSupply: ethers.BigNumberish;
+  name: string;
+  symbol: string;
+};
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T = object> = new (...args: any[]) => T;
 
@@ -28,9 +35,9 @@ type L2TxSender = {
 function Adapter<TBase extends Constructor<L2TxSender>>(Base: TBase) {
   return class LensNetworkAdapter extends Base {
     /**
-     * Create an ERC-20 token with the given parameters.
+     * Create an ERC-20 contract with the given parameters.
      *
-     * @params params - The parameters to create the ERC-20 token.
+     * @params params - The parameters to create the ERC-20 contract.
      * @returns The ERC-20 contract address.
      */
     async createErc20(params: Erc20TokenParams): Promise<string> {
@@ -55,8 +62,41 @@ function Adapter<TBase extends Constructor<L2TxSender>>(Base: TBase) {
 
       assert(eventLog instanceof EventLog, 'Event log not found', 'NETWORK_ERROR');
 
-      const iface = factories.Erc20Factory__factory.createInterface();
-      const decodedLog = iface.parseLog(eventLog);
+      const decodedLog = contract.interface.parseLog(eventLog);
+
+      assert(decodedLog?.name === 'TokenCreated', 'Token not created', 'NETWORK_ERROR');
+
+      return decodedLog.args.tokenAddress as string;
+    }
+    /**
+     * Create an ERC-721 contract with the given parameters.
+     *
+     * @params params - The parameters to create the ERC-721 contract.
+     * @returns The ERC-721 contract address.
+     */
+    async createErc721(params: Erc721TokenParams): Promise<string> {
+      const { chainId } = await this._providerL2().getNetwork();
+
+      const plugin = Network.from(chainId)?.getPlugin(LensNetworkPlugin.name);
+
+      assertLensContractsNetworkPlugin(plugin);
+
+      const contract = factories.Erc721Factory__factory.connect(
+        plugin.contracts.erc721Factory,
+        this._signerL2(),
+      );
+
+      const tx = await contract.createToken(params);
+
+      const receipt = await tx.wait();
+
+      assert(receipt !== null, 'Transaction failed', 'NETWORK_ERROR');
+
+      const eventLog = receipt.logs.find((log) => log.address === plugin.contracts.erc721Factory);
+
+      assert(eventLog instanceof EventLog, 'Event log not found', 'NETWORK_ERROR');
+
+      const decodedLog = contract.interface.parseLog(eventLog);
 
       assert(decodedLog?.name === 'TokenCreated', 'Token not created', 'NETWORK_ERROR');
 
@@ -94,6 +134,28 @@ export class Wallet extends Adapter(zksync.Wallet) {
     return super.createErc20(params);
   }
   /**
+   * @inheritdoc
+   *
+   * @example
+   * ```ts
+   * import { getDefaultProvider, Network, Wallet } from '@lens-network/sdk/ethers';
+   *
+   * const provider = getDefaultProvider(Network.Staging);
+   *
+   * const wallet = new Wallet(process.env.PRIVATE_KEY, provider);
+   *
+   * const address = await wallet.createErc721({
+   *   initialOwner: wallet.address,
+   *   maxSupply: 100,
+   *   name: 'My Collection',
+   *   symbol: 'SDK',
+   * });
+   * ```
+   */
+  override createErc721(params: Erc721TokenParams): Promise<string> {
+    return super.createErc721(params);
+  }
+  /**
    * Connects to the Lens Network using `provider`.
    *
    * @param provider The provider instance for connecting to an L2 network.
@@ -127,14 +189,21 @@ export class Signer extends Adapter(zksync.Signer) {
    *
    * @example
    * ```ts
-   * import { getDefaultProvider, Network, Wallet } from '@lens-network/sdk/ethers';
+   * import { BrowserProvider, getDefaultProvider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(Network.Staging);
+   * const browserProvider = new BrowserProvider(window.ethereum);
+   * const lensProvider = getDefaultProvider(Network.Staging);
    *
-   * const wallet = new Wallet(process.env.PRIVATE_KEY, provider);
+   * const network = await browserProvider.getNetwork();
    *
-   * const address = await wallet.createErc20({
-   *   initialOwner: wallet.address,
+   * const signer = Signer.from(
+   *   await browserProvider.getSigner(),
+   *   Number(network.chainId),
+   *   lensProvider,
+   * );
+   *
+   * const address = await signer.createErc20({
+   *   initialOwner: signer.address,
    *   initialSupply: 100_000_000_000_000_000_000n,
    *   name: 'SDK Test Token',
    *   symbol: 'SDK',
@@ -143,6 +212,35 @@ export class Signer extends Adapter(zksync.Signer) {
    */
   override createErc20(params: Erc20TokenParams): Promise<string> {
     return super.createErc20(params);
+  }
+  /**
+   * @inheritdoc
+   *
+   * @example
+   * ```ts
+   * import { BrowserProvider, getDefaultProvider, Network } from '@lens-network/sdk/ethers';
+   *
+   * const browserProvider = new BrowserProvider(window.ethereum);
+   * const lensProvider = getDefaultProvider(Network.Staging);
+   *
+   * const network = await browserProvider.getNetwork();
+   *
+   * const signer = Signer.from(
+   *   await browserProvider.getSigner(),
+   *   Number(network.chainId),
+   *   lensProvider,
+   * );
+   *
+   * const address = await signer.createErc721({
+   *   initialOwner: signer.address,
+   *   maxSupply: 100,
+   *   name: 'My Collection',
+   *   symbol: 'SDK',
+   * });
+   * ```
+   */
+  override createErc721(params: Erc721TokenParams): Promise<string> {
+    return super.createErc721(params);
   }
   /**
    * Creates a new Singer with provided `signer` and `chainId`.
@@ -155,7 +253,7 @@ export class Signer extends Adapter(zksync.Signer) {
    *
    * @example
    * ```ts
-   * import { BrowserProvider, Network } from '@lens-network/sdk/ethers';
+   * import { BrowserProvider, getDefaultProvider, Network } from '@lens-network/sdk/ethers';
    *
    * const browserProvider = new BrowserProvider(window.ethereum);
    * const lensProvider = getDefaultProvider(Network.Staging);

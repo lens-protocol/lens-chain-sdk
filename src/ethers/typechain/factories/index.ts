@@ -2,4 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export { BasicErc20__factory } from "./BasicErc20__factory";
+export { BasicErc721__factory } from "./BasicErc721__factory";
 export { Erc20Factory__factory } from "./Erc20Factory__factory";
+export { Erc721Factory__factory } from "./Erc721Factory__factory";
