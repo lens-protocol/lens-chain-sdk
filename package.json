@@ -61,7 +61,7 @@
     "run:examples:ethers_cjs": "pnpm -C examples/ethers_cjs start",
     "run:examples": "pnpm run:examples:ethers_cjs",
     "test": "vitest --passWithNoTests",
-    "test:write": "TEST_TAGS=@write vitest -t \"\\[tag:\\s@write\\]\""
+    "test:write": "TEST_TAGS=@write vitest -t \"\\[tag:\\s@write\\]\" --allowOnly"
   },
   "keywords": [
     "lens-network",
