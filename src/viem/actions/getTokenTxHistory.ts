@@ -23,7 +23,7 @@ export type GetTokenTxHistoryErrorType = RequestErrorType;
  * import { chains, getTokenTxHistory } from '@lens-network/sdk/viem';
  *
  * const client = createPublicClient({
- *   chain: chains.staging,
+ *   chain: chains.testnet,
  *   transport: http(),
  * });
  *

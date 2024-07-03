@@ -1,7 +1,7 @@
 import { getDefaultProvider, Network } from '@lens-network/sdk/ethers';
 
 const providers = [
-  getDefaultProvider(Network.Staging),
+  getDefaultProvider(Network.Testnet),
   // getDefaultProvider(types.Network.Mainnet),
 ];
 

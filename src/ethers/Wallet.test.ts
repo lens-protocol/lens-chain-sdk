@@ -8,7 +8,7 @@ tag('@write', () => {
   describe(`Given an "${Wallet.name}" instance`, () => {
     describe(`When calling "${Wallet.prototype.createErc20.name}" method`, () => {
       it(`Then should return the ERC-20 contract address`, async () => {
-        const provider = getDefaultProvider(Network.Staging);
+        const provider = getDefaultProvider(Network.Testnet);
         const signer = new Wallet(import.meta.env.PRIVATE_KEY, provider);
 
         const address = await signer.createErc20({
@@ -25,7 +25,7 @@ tag('@write', () => {
 
     describe(`When calling "${Wallet.prototype.createErc721.name}" method`, () => {
       it(`Then should return the ERC-721 contract address`, async () => {
-        const provider = getDefaultProvider(Network.Staging);
+        const provider = getDefaultProvider(Network.Testnet);
         const signer = new Wallet(import.meta.env.PRIVATE_KEY, provider);
 
         const address = await signer.createErc721({

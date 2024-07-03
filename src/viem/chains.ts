@@ -61,6 +61,6 @@ function defineViemChain(chain: chains.ChainDefinition): LensNetworkChain {
   });
 }
 
-export const staging = /*#__PURE__*/ defineViemChain(chains.staging);
+export const testnet = /*#__PURE__*/ defineViemChain(chains.testnet);
 
 export const localhost = /*#__PURE__*/ defineViemChain(chains.localhost);

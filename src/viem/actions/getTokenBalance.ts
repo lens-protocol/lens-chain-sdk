@@ -22,7 +22,7 @@ export type GetTokenBalanceErrorType = RequestErrorType;
  * import { chains, getTokenBalance } from '@lens-network/sdk/viem';
  *
  * const client = createPublicClient({
- *   chain: chains.staging,
+ *   chain: chains.testnet,
  *   transport: http(),
  * });
  *

@@ -1,6 +1,6 @@
 import { assert, Network, NetworkPlugin } from 'ethers';
 
-import { ChainDefinition, DeployedContracts, staging } from '../chains';
+import { ChainDefinition, DeployedContracts, testnet } from '../chains';
 
 /**
  * @internal
@@ -44,4 +44,4 @@ function networkFactoryFrom(chain: ChainDefinition) {
 }
 
 // TODO: add other Lens Network chains once available
-[staging].forEach((chain) => Network.register(chain.id, networkFactoryFrom(chain)));
+[testnet].forEach((chain) => Network.register(chain.id, networkFactoryFrom(chain)));

@@ -2,7 +2,7 @@ import { chains, getBlockNumberByTime } from '@lens-network/sdk/viem';
 import { createPublicClient, http } from 'viem';
 
 const client = createPublicClient({
-  chain: chains.staging,
+  chain: chains.testnet,
   transport: http(),
 });
 

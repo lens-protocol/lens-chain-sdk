@@ -3,7 +3,7 @@ import 'viem/window';
 import { chains } from '@lens-network/sdk/viem';
 import { Address, createWalletClient, custom } from 'viem';
 
-const chain = chains.staging;
+const chain = chains.testnet;
 
 // hoist account
 const [account] = (await window.ethereum!.request({ method: 'eth_requestAccounts' })) as [Address];

@@ -3,7 +3,7 @@ import { createPublicClient, http } from 'viem';
 
 const publicClients = [
   createPublicClient({
-    chain: chains.staging,
+    chain: chains.testnet,
     transport: http(),
   }),
 ];

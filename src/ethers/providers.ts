@@ -154,7 +154,7 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    * ```ts
    * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(Network.Staging);
+   * const provider = getDefaultProvider(Network.Testnet);
    *
    * const balance = await provider.getTokenBalance('0x1234567…', '0x1234567…');
    * ```
@@ -169,7 +169,7 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    * ```ts
    * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(Network.Staging);
+   * const provider = getDefaultProvider(Network.Testnet);
    *
    * const abi = await provider.getContractABI('0x123456…');
    * ```
@@ -184,7 +184,7 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    * ```ts
    * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(Network.Staging);
+   * const provider = getDefaultProvider(Network.Testnet);
    *
    * const result = await provider.getTokenTxHistory({
    *   address: '0x…',
@@ -202,7 +202,7 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    * ```ts
    * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(Network.Staging);
+   * const provider = getDefaultProvider(Network.Testnet);
    *
    * const result = await provider.getNftTxHistory({
    *   address: '0x…',
@@ -220,7 +220,7 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    * ```ts
    * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(Network.Staging);
+   * const provider = getDefaultProvider(Network.Testnet);
    *
    * const result = await provider.getTokenInfo('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1');
    * ```
@@ -235,7 +235,7 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    * ```ts
    * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(Network.Staging);
+   * const provider = getDefaultProvider(Network.Testnet);
    *
    * const [result] = await provider.getContractCreation([
    *  '0x175a469603aa24ee4ef1f9b0b609e3f0988668b1'
@@ -252,7 +252,7 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    * ```ts
    * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(Network.Staging);
+   * const provider = getDefaultProvider(Network.Testnet);
    *
    * const { items } = await provider.getTxHistory({
    *   address: '0x…',
@@ -269,7 +269,7 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    * ```ts
    * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(Network.Staging);
+   * const provider = getDefaultProvider(Network.Testnet);
    *
    * const blockNumber = await provider.getBlockNumberByTime('before', 1630000000);
    * ```
@@ -287,7 +287,7 @@ export class Provider extends LensNetworkProvider(zksync.Provider) {
    * ```ts
    * import { Provider, Network } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(Network.Staging);
+   * const provider = getDefaultProvider(Network.Testnet);
    *
    * const signedTransaction = '0x02f8500182031180…';
    * const result = await provider.sendRawTransactionWithDetailedOutput(signedTransaction);

@@ -118,7 +118,7 @@ export class Wallet extends Adapter(zksync.Wallet) {
    * ```ts
    * import { getDefaultProvider, Network, Wallet } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(Network.Staging);
+   * const provider = getDefaultProvider(Network.Testnet);
    *
    * const wallet = new Wallet(process.env.PRIVATE_KEY, provider);
    *
@@ -140,7 +140,7 @@ export class Wallet extends Adapter(zksync.Wallet) {
    * ```ts
    * import { getDefaultProvider, Network, Wallet } from '@lens-network/sdk/ethers';
    *
-   * const provider = getDefaultProvider(Network.Staging);
+   * const provider = getDefaultProvider(Network.Testnet);
    *
    * const wallet = new Wallet(process.env.PRIVATE_KEY, provider);
    *
@@ -168,7 +168,7 @@ export class Wallet extends Adapter(zksync.Wallet) {
    *
    * const unconnectedWallet = new Wallet(process.env.PRIVATE_KEY,
    *
-   * const provider = getDefaultProvider(Network.Staging);
+   * const provider = getDefaultProvider(Network.Testnet);
    * const wallet = unconnectedWallet.connect(provider);
    * ```
    */
@@ -192,7 +192,7 @@ export class Signer extends Adapter(zksync.Signer) {
    * import { BrowserProvider, getDefaultProvider, Network } from '@lens-network/sdk/ethers';
    *
    * const browserProvider = new BrowserProvider(window.ethereum);
-   * const lensProvider = getDefaultProvider(Network.Staging);
+   * const lensProvider = getDefaultProvider(Network.Testnet);
    *
    * const network = await browserProvider.getNetwork();
    *
@@ -221,7 +221,7 @@ export class Signer extends Adapter(zksync.Signer) {
    * import { BrowserProvider, getDefaultProvider, Network } from '@lens-network/sdk/ethers';
    *
    * const browserProvider = new BrowserProvider(window.ethereum);
-   * const lensProvider = getDefaultProvider(Network.Staging);
+   * const lensProvider = getDefaultProvider(Network.Testnet);
    *
    * const network = await browserProvider.getNetwork();
    *
@@ -256,7 +256,7 @@ export class Signer extends Adapter(zksync.Signer) {
    * import { BrowserProvider, getDefaultProvider, Network } from '@lens-network/sdk/ethers';
    *
    * const browserProvider = new BrowserProvider(window.ethereum);
-   * const lensProvider = getDefaultProvider(Network.Staging);
+   * const lensProvider = getDefaultProvider(Network.Testnet);
    *
    * const network = await browserProvider.getNetwork();
    *

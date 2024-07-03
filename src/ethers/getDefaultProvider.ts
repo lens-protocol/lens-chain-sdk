@@ -1,6 +1,6 @@
 import { Provider } from './providers';
 import { Network } from './types';
-import { staging } from '../chains';
+import { testnet } from '../chains';
 import { invariant } from '../invariant';
 
 /**
@@ -13,15 +13,14 @@ import { invariant } from '../invariant';
  * ```ts
  * import { getDefaultProvider, Network } from '@lens-network/sdk/ethers';
  *
- * const provider = getDefaultProvider(Network.Staging); // Lens Network testnet (L2)
+ * const provider = getDefaultProvider(Network.Testnet); // Lens Network testnet (L2)
  * ```
  */
 export function getDefaultProvider(network: Network): Provider {
   switch (network) {
-    case Network.Staging:
-      return new Provider(staging.rpcUrl);
-
     case Network.Testnet:
+      return new Provider(testnet.rpcUrl);
+
     case Network.Mainnet:
       invariant(false, 'Network supported yet');
   }

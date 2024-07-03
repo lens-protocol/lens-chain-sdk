@@ -66,7 +66,7 @@ export type PublicActions = {
    * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
-   *   chain: chains.staging,
+   *   chain: chains.testnet,
    *   transport: http(),
    * }).extend(publicActions());
    *
@@ -91,7 +91,7 @@ export type PublicActions = {
    * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
-   *   chain: chains.staging,
+   *   chain: chains.testnet,
    *   transport: http(),
    * }).extend(publicActions());
    *
@@ -115,7 +115,7 @@ export type PublicActions = {
    * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
-   *   chain: chains.staging,
+   *   chain: chains.testnet,
    *   transport: http(),
    * }).extend(publicActions());
    *
@@ -140,7 +140,7 @@ export type PublicActions = {
    * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
-   *   chain: chains.staging,
+   *   chain: chains.testnet,
    *   transport: http(),
    * }).extend(publicActions());
    *
@@ -167,7 +167,7 @@ export type PublicActions = {
    * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
-   *   chain: chains.staging,
+   *   chain: chains.testnet,
    *   transport: http(),
    * }).extend(publicActions());
    *
@@ -191,7 +191,7 @@ export type PublicActions = {
    * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
-   *   chain: chains.staging,
+   *   chain: chains.testnet,
    *   transport: http(),
    * }).extend(publicActions());
    *
@@ -217,7 +217,7 @@ export type PublicActions = {
    * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
-   *   chain: chains.staging,
+   *   chain: chains.testnet,
    *   transport: http(),
    * }).extend(publicActions());
    *
@@ -242,7 +242,7 @@ export type PublicActions = {
    * import { chains, publicActions } from '@lens-network/sdk/viem';
    *
    * const client = createPublicClient({
-   *   chain: chains.staging,
+   *   chain: chains.testnet,
    *   transport: http(),
    * }).extends(publicActions());
    *
@@ -301,7 +301,7 @@ export type WalletActions = {
    *
    * export const walletClient = createWalletClient({
    *   account,
-   *   chain: chains.staging,
+   *   chain: chains.testnet,
    *   transport: http(),
    * }).extend(walletActions());
    *
@@ -332,7 +332,7 @@ export type WalletActions = {
    *
    * export const walletClient = createWalletClient({
    *   account,
-   *   chain: chains.staging,
+   *   chain: chains.testnet,
    *   transport: http(),
    * }).extend(walletActions());
    *
@@ -363,7 +363,7 @@ export type WalletActions = {
    *
    * export const walletClient = createWalletClient({
    *   account,
-   *   chain: chains.staging,
+   *   chain: chains.testnet,
    *   transport: http(),
    * }).extend(walletActions());
    *
