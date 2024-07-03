@@ -1,4 +1,4 @@
-import { DeployedContracts, staging } from '../chains';
+import { DeployedContracts, testnet } from '../chains';
 import { PagingResult } from '../types';
 
 export type { SecondsSinceEpoch, TimeDirection } from '../types';
@@ -9,8 +9,7 @@ export type { DeployedContracts, PagingResult };
  */
 export enum Network {
   Mainnet = NaN,
-  Testnet = NaN,
-  Staging = staging.id,
+  Testnet = testnet.id,
 }
 
 export type StorageEntry = {

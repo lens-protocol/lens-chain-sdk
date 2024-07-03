@@ -25,7 +25,7 @@ export type GetContractCreationErrorType = RequestErrorType;
  * import { chains, getContractCreation } from '@lens-network/sdk/viem';
  *
  * const client = createPublicClient({
- *   chain: chains.staging,
+ *   chain: chains.testnet,
  *   transport: http(),
  * });
  *

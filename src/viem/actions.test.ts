@@ -21,7 +21,7 @@ import { tag } from '../../test';
 describe('Given the Viem actions', () => {
   describe(`When calling "${getBlockNumberByTime.name}"`, () => {
     const client = createPublicClient({
-      chain: chains.staging,
+      chain: chains.testnet,
       transport: http(),
     });
 
@@ -46,7 +46,7 @@ describe('Given the Viem actions', () => {
 
   describe(`When calling "${getContractCreation.name}"`, () => {
     const client = createPublicClient({
-      chain: chains.staging,
+      chain: chains.testnet,
       transport: http(),
     });
 
@@ -74,7 +74,7 @@ describe('Given the Viem actions', () => {
   describe(`When calling "${getTokenInfo.name}"`, () => {
     it('Then it should return the given token info', async () => {
       const client = createPublicClient({
-        chain: chains.staging,
+        chain: chains.testnet,
         transport: http(),
       });
 
@@ -96,7 +96,7 @@ describe('Given the Viem actions', () => {
 
     it('Then it should return null if token not found', async () => {
       const client = createPublicClient({
-        chain: chains.staging,
+        chain: chains.testnet,
         transport: http(),
       });
 
@@ -111,7 +111,7 @@ describe('Given the Viem actions', () => {
   describe(`When calling "${getTokenTxHistory.name}"`, () => {
     it('Then it should return a paginated list of token transfers', async () => {
       const client = createPublicClient({
-        chain: chains.staging,
+        chain: chains.testnet,
         transport: http(),
       });
 
@@ -152,7 +152,7 @@ describe('Given the Viem actions', () => {
 
   describe(`When calling "${getContractABI.name}"`, () => {
     const client = createPublicClient({
-      chain: chains.staging,
+      chain: chains.testnet,
       transport: http(),
     });
 
@@ -175,7 +175,7 @@ describe('Given the Viem actions', () => {
 
   describe(`When calling "${getTokenBalance.name}"`, () => {
     const client = createPublicClient({
-      chain: chains.staging,
+      chain: chains.testnet,
       transport: http(),
     });
 
@@ -204,7 +204,7 @@ describe('Given the Viem actions', () => {
         const account = privateKeyToAccount(import.meta.env.PRIVATE_KEY);
         const client = createWalletClient({
           account,
-          chain: chains.staging,
+          chain: chains.testnet,
           transport: http(),
         });
 
@@ -229,7 +229,7 @@ describe('Given the Viem actions', () => {
         const account = privateKeyToAccount(import.meta.env.PRIVATE_KEY);
         const client = createWalletClient({
           account,
-          chain: chains.staging,
+          chain: chains.testnet,
           transport: http(),
         });
 

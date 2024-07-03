@@ -3,7 +3,7 @@ import { Hex, createWalletClient, http, parseEther } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 import { sendRawTransaction } from 'viem/actions';
 
-const chain = chains.staging;
+const chain = chains.testnet;
 
 const account = privateKeyToAccount(process.env.PRIVATE_KEY as Hex);
 

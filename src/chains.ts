@@ -14,12 +14,12 @@ export type ChainDefinition = {
 };
 
 /**
- * The Lens Development Network.
+ * The Lens Testnet Network.
  */
-export const staging: ChainDefinition = {
+export const testnet: ChainDefinition = {
   id: 37111,
-  name: 'Lens Development Network',
-  network: 'lens-development-network',
+  name: 'Lens Testnet Network',
+  network: 'lens-testnet-network',
   rpcUrl: 'https://rpc.staging.lens-network.crtlkey.com/',
   blockExplorerUrl: 'https://explorer.staging.lens.zksync.dev/',
   testnet: true,
@@ -30,7 +30,7 @@ export const staging: ChainDefinition = {
 };
 
 /**
- * Localhost using staging nodes.
+ * Localhost using testnet nodes.
  */
 export const localhost: ChainDefinition = {
   id: 37111,

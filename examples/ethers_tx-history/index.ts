@@ -2,7 +2,7 @@ import '@lens-network/sdk/ethers/globals';
 import { getDefaultProvider, Network } from '@lens-network/sdk/ethers';
 import { ZeroAddress } from 'ethers/constants';
 
-const chain = Network.Staging;
+const chain = Network.Testnet;
 
 const provider = getDefaultProvider(chain);
 

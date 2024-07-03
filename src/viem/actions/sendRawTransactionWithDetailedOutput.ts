@@ -32,7 +32,7 @@ export type SendRawTransactionWithDetailedOutputErrorType = SendRawTransactionEr
  *
  * const walletClient = createWalletClient({
  *   account,
- *   chain: chains.staging,
+ *   chain: chains.testnet,
  *   transport: http(),
  * });
  *

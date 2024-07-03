@@ -71,7 +71,7 @@ PRIVATE_KEY=0x…
 with the private key of an account with Lens Network tokens.
 
 > [!TIP]
-> Use a Sepolia faucet (e.g., [Alchemy Sepolia Faucer](https://www.alchemy.com/faucets/ethereum-sepolia)) to get some SepoliaETH and then [bridge](https://portal.staging.lens.zksync.dev/bridge) them to the Lens Network.
+> Ask the Lens Team for some $GRASS tokens and then [bridge](https://portal.staging.lens.zksync.dev/bridge) them to the Lens Network.
 
 ### Usage <!-- omit in toc -->
 
@@ -141,4 +141,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 
-Lens Network SDK is [MIT licensed](./LICENSE)
+Lens Network SDK is [MIT licensed](./LICENSE).

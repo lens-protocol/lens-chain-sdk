@@ -41,7 +41,7 @@ export type CreateErc20ErrorType = RequestErrorType;
  *
  * const walletClient = createWalletClient({
  *   account,
- *   chain: chains.staging,
+ *   chain: chains.testnet,
  *   transport: http(),
  * });
  *

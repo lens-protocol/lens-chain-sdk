@@ -4,9 +4,9 @@ import { Eip1193Provider } from 'ethers';
 
 const provider = new BrowserProvider(window.ethereum as Eip1193Provider);
 
-await provider.send('wallet_addEthereumChain', [chains.staging]);
+await provider.send('wallet_addEthereumChain', [chains.testnet]);
 
-await provider.send('wallet_switchEthereumChain', [{ chainId: chains.staging.chainId }]);
+await provider.send('wallet_switchEthereumChain', [{ chainId: chains.testnet.chainId }]);
 
 const network = await provider.getNetwork();
 
