@@ -66,13 +66,13 @@ describe(`Given a "${Provider.name}" instance`, () => {
 
       expect(result).toMatchObject({
         contractAddress: expect.evmAddress('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1'),
-        iconURL: '',
-        l1Address: '',
-        liquidity: '',
+        iconURL: null,
+        l1Address: null,
+        liquidity: null,
         symbol: 'MTK',
-        tokenDecimal: '18',
+        tokenDecimal: 18,
         tokenName: 'TestErc20Token',
-        tokenPriceUSD: '',
+        tokenPriceUSD: null,
       });
     });
 
@@ -111,6 +111,8 @@ describe(`Given a "${Provider.name}" instance`, () => {
         l1BatchNumber: expect.hexString(),
         timeStamp: expect.hexString(),
         contractAddress: expect.evmAddress(),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        tokenId: expect.toBeOneOf([null, expect.hexString()]),
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         tokenName: expect.any(String),
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

@@ -84,13 +84,13 @@ describe('Given the Viem actions', () => {
 
       expect(result).toMatchObject({
         contractAddress: expect.evmAddress('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1'),
-        iconURL: '',
-        l1Address: '',
-        liquidity: '',
+        iconURL: null,
+        l1Address: null,
+        liquidity: null,
         symbol: 'MTK',
-        tokenDecimal: '18',
+        tokenDecimal: 18,
         tokenName: 'TestErc20Token',
-        tokenPriceUSD: '',
+        tokenPriceUSD: null,
       });
     });
 

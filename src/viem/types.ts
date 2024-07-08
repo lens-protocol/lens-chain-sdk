@@ -33,11 +33,11 @@ export type TokenInfoResult = {
   contractAddress: Address;
   tokenName: string;
   symbol: string;
-  tokenDecimal: string;
-  tokenPriceUSD: string;
-  liquidity: string;
-  l1Address: string;
-  iconURL: string;
+  tokenDecimal: number;
+  tokenPriceUSD: string | null;
+  liquidity: string | null;
+  l1Address: Address | null;
+  iconURL: string | null;
 };
 
 export type TxHistoryItem = {
@@ -82,7 +82,7 @@ export type TokenTxHistoryItem = {
   from: Address;
   transactionIndex: Hex;
   input: Hex;
-  value: Hex;
+  value: Hex | null;
   gas: Hex;
   gasPrice: Hex;
   gasUsed: Hex;
@@ -95,9 +95,10 @@ export type TokenTxHistoryItem = {
   l1BatchNumber: Hex;
   timeStamp: Hex;
   contractAddress: Address;
-  tokenName: string;
-  tokenSymbol: string;
-  tokenDecimal: string;
+  tokenId: string | null;
+  tokenName: string | null;
+  tokenSymbol: string | null;
+  tokenDecimal: string | null;
   transactionType: Hex;
 };
 
