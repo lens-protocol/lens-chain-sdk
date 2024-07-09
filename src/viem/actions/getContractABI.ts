@@ -1,10 +1,10 @@
-import { Account, Chain, Client, Transport } from 'viem';
+import { Account, Address, Chain, Client, Transport } from 'viem';
 import { RequestErrorType } from 'viem/utils';
 
 import { PublicLensNetworkRpcSchema } from '../types';
 
 export type GetContractAbiParameters = {
-  address: string;
+  address: Address;
 };
 
 export type GetContractAbiReturnType = string;

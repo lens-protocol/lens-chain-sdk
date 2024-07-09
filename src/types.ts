@@ -36,8 +36,8 @@ export type PagingResult<T> = {
   items: readonly T[];
 };
 
-export type TxHistoryRequest = {
-  address: string;
+export type TxHistoryRequest<TAddress = string> = {
+  address: TAddress;
 
   endBlock?: number;
 
@@ -46,17 +46,17 @@ export type TxHistoryRequest = {
   pageInfo: PagingInformation;
 };
 
-export type ContractCreationAddresses =
-  | [string]
-  | [string, string]
-  | [string, string, string]
-  | [string, string, string, string]
-  | [string, string, string, string, string];
+export type ContractCreationAddresses<TAddress = string> =
+  | [TAddress]
+  | [TAddress, TAddress]
+  | [TAddress, TAddress, TAddress]
+  | [TAddress, TAddress, TAddress, TAddress]
+  | [TAddress, TAddress, TAddress, TAddress, TAddress];
 
-export type TokenTxHistoryRequest = {
-  address: string;
+export type TokenTxHistoryRequest<TAddress = string> = {
+  address: TAddress;
 
-  filterForContractAddress?: string;
+  filterForContractAddress?: TAddress;
 
   endBlock?: number;
 
