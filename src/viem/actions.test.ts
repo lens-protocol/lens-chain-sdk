@@ -139,12 +139,11 @@ describe('Given the Viem actions', () => {
         l1BatchNumber: expect.hexString(),
         timeStamp: expect.hexString(),
         contractAddress: expect.evmAddress(),
+        tokenId: expect.toBeOneOf([null, expect.hexString()]),
+        tokenName: expect.toBeOneOf([null, expect.any(String)]),
+        tokenSymbol: expect.toBeOneOf([null, expect.any(String)]),
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        tokenName: expect.any(String),
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        tokenSymbol: expect.any(String),
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        tokenDecimal: expect.any(String),
+        tokenDecimal: expect.any(Number),
         transactionType: expect.hexString(),
       });
     });
