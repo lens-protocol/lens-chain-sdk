@@ -87,6 +87,7 @@
     "eslint-plugin-import": "^2.29.1",
     "ethers": "^6.12.1",
     "glob": "^10.4.2",
+    "jest-extended": "^4.0.2",
     "rimraf": "^5.0.7",
     "tsup": "^8.0.2",
     "tsx": "^4.15.7",
