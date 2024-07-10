@@ -1,11 +1,11 @@
-import { Account, Chain, Client, Transport } from 'viem';
+import { Account, Address, Chain, Client, Transport } from 'viem';
 import { RequestErrorType } from 'viem/utils';
 
 import { ContractCreationAddresses } from '../../types';
 import { ContractsCreationResult, PublicLensNetworkRpcSchema } from '../types';
 
 export type GetContractCreationParameters = {
-  addresses: ContractCreationAddresses;
+  addresses: ContractCreationAddresses<Address>;
 };
 
 export type GetContractCreationReturnType = ReadonlyArray<ContractsCreationResult>;

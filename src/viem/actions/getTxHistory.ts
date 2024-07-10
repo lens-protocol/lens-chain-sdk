@@ -1,10 +1,10 @@
-import { Account, Chain, Client, Transport } from 'viem';
+import { Account, Address, Chain, Client, Transport } from 'viem';
 import { RequestErrorType } from 'viem/utils';
 
 import { TxHistoryRequest, PagingResult } from '../../types';
 import { PublicLensNetworkRpcSchema, TxHistoryItem } from '../types';
 
-export type GetTxHistoryParameters = TxHistoryRequest;
+export type GetTxHistoryParameters = TxHistoryRequest<Address>;
 
 export type GetTxHistoryReturnType = PagingResult<TxHistoryItem>;
 

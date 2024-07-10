@@ -41,15 +41,6 @@ module.exports = {
             varsIgnorePattern: '^_',
           },
         ],
-
-        '@typescript-eslint/naming-convention': [
-          'error',
-          {
-            selector: 'interface',
-            format: ['PascalCase'],
-            prefix: ['I'],
-          },
-        ],
       },
     },
 

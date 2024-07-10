@@ -1,4 +1,7 @@
+import * as matchers from 'jest-extended';
 import { expect } from 'vitest';
+
+expect.extend(matchers);
 
 function isHexString(value: unknown): value is string {
   return typeof value === 'string' && value.startsWith('0x') && value.length > 2;
