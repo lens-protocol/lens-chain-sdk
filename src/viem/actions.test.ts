@@ -10,10 +10,11 @@ import {
   getContractCreation,
   getTokenBalance,
   getTokenInfo,
-  getTokenTxHistory,
+  getTokenTxHistory, createPaymaster,
 } from '.';
 import { abi as basicErc20Abi } from './abi/basicErc20';
 import { abi as basicErc721 } from './abi/basicErc721';
+import { abi as lensPaymaster } from './abi/lensPaymaster';
 import { createErc20 } from './actions/createErc20';
 import { createErc721 } from './actions/createErc721';
 import { tag } from '../../test';
@@ -246,6 +247,50 @@ describe('Given the Viem actions', () => {
           functionName: 'name',
         });
         expect(name).toBe('My Collection');
+      });
+    });
+
+    describe(`When calling "${createPaymaster.name}"`, () => {
+      it('Then should return the paymaster contract address', {}, async () => {
+        const account = privateKeyToAccount(import.meta.env.PRIVATE_KEY);
+        const client = createWalletClient({
+          account,
+          chain: chains.testnet,
+          transport: http(),
+        });
+
+        const erc20Address = await createErc20(
+          client,
+          {
+            initialOwner: account.address,
+            initialSupply: 100n,
+            name: 'My Collection',
+            symbol: 'SDK',
+          }
+        )
+
+        const paymasterAddress = await createPaymaster(client, {
+          initialOwner: account.address,
+          payment: {
+            token: erc20Address,
+            amount: 1n,
+          },
+          withAllowlist: true,
+          withTargetContractAllowlist: true,
+          rateLimits: {
+            globalLimit: 100n,
+            userLimit: 10n,
+            timeWindow: 3600,
+          },
+        });
+
+        const owner = await readContract(client, {
+          abi: lensPaymaster,
+          address: paymasterAddress,
+          functionName: 'owner',
+        });
+
+        expect(owner).toBe(account.address);
       });
     });
   });

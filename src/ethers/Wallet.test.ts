@@ -39,5 +39,37 @@ tag('@write', () => {
         expect(await contract.name()).toBe('My Collection');
       });
     });
+
+    describe(`When calling "${Wallet.prototype.createPaymaster.name}" method`, () => {
+      it(`Then should return the Paymaster contract address`, async () => {
+        const provider = getDefaultProvider(Network.Testnet);
+        const signer = new Wallet(import.meta.env.PRIVATE_KEY, provider);
+
+        const erc20 = await signer.createErc20({
+          initialOwner: signer.address,
+          initialSupply: 1000000,
+          name: 'SDK Test Token',
+          symbol: 'SDK',
+        });
+
+        const address = await signer.createPaymaster({
+          initialOwner: signer.address,
+          payment: {
+            amount: 1,
+            token: erc20,
+          },
+          withAllowlist: true,
+          withTargetContractAllowlist: true,
+          rateLimits: {
+            globalLimit: 100,
+            userLimit: 10,
+            timeWindow: 3600,
+          }
+        });
+
+        const contract = factories.BasicErc721__factory.connect(address, signer);
+        expect(await contract.name()).toBe('My Collection');
+      });
+    });
   });
 });

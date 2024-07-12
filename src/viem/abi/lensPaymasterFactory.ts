@@ -16,6 +16,25 @@ export const abi = [
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "_paymaster",
+        "type": "address"
+      }
+    ],
+    "name": "LensPaymasterCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": true,
         "internalType": "address",
         "name": "previousOwner",
@@ -32,89 +51,55 @@ export const abi = [
     "type": "event"
   },
   {
-    "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
         "internalType": "address",
-        "name": "tokenAddress",
+        "name": "_owner",
         "type": "address"
       },
       {
-        "indexed": true,
         "internalType": "address",
-        "name": "owner",
+        "name": "_erc20",
         "type": "address"
       },
       {
-        "indexed": false,
-        "internalType": "string",
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "symbol",
-        "type": "string"
-      },
-      {
-        "indexed": false,
         "internalType": "uint256",
-        "name": "maxSupply",
+        "name": "_price",
         "type": "uint256"
-      }
-    ],
-    "name": "TokenCreated",
-    "type": "event"
-  },
-  {
-    "inputs": [
+      },
       {
-        "components": [
-          {
-            "internalType": "address",
-            "name": "initialOwner",
-            "type": "address"
-          },
-          {
-            "internalType": "uint256",
-            "name": "maxSupply",
-            "type": "uint256"
-          },
-          {
-            "internalType": "string",
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "symbol",
-            "type": "string"
-          }
-        ],
-        "internalType": "struct BasicErc721.TokenParams",
-        "name": "params",
-        "type": "tuple"
-      }
-    ],
-    "name": "createToken",
-    "outputs": [
+        "internalType": "bool",
+        "name": "_withAllowlist",
+        "type": "bool"
+      },
       {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
+        "internalType": "bool",
+        "name": "_withTargetContractAllowlist",
+        "type": "bool"
+      },
+      {
+        "internalType": "bytes",
+        "name": "_rateLimits",
+        "type": "bytes"
       }
     ],
+    "name": "createPaymaster",
+    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getTokens",
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_owner",
+        "type": "address"
+      }
+    ],
+    "name": "getPaymasters",
     "outputs": [
       {
-        "internalType": "contract BasicErc721[]",
+        "internalType": "contract LensPaymaster[]",
         "name": "",
         "type": "address[]"
       }
@@ -149,6 +134,30 @@ export const abi = [
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "paymasters",
+    "outputs": [
+      {
+        "internalType": "contract LensPaymaster",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
@@ -163,25 +172,6 @@ export const abi = [
         "internalType": "uint16",
         "name": "",
         "type": "uint16"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "tokens",
-    "outputs": [
-      {
-        "internalType": "contract BasicErc721",
-        "name": "",
-        "type": "address"
       }
     ],
     "stateMutability": "view",

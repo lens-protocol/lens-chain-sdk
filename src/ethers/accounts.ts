@@ -19,6 +19,21 @@ export type Erc721TokenParams = {
   symbol: string;
 };
 
+export type PaymasterParams = {
+  initialOwner: string;
+  payment: {
+    token: string;
+    amount: ethers.BigNumberish;
+  };
+  withAllowlist: boolean;
+  withTargetContractAllowlist: boolean;
+  rateLimits: {
+    globalLimit: ethers.BigNumberish;
+    userLimit: ethers.BigNumberish;
+    timeWindow: number;
+  }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T = object> = new (...args: any[]) => T;
 
@@ -102,6 +117,68 @@ function Adapter<TBase extends Constructor<L2TxSender>>(Base: TBase) {
 
       return decodedLog.args.tokenAddress as string;
     }
+
+    /**
+     * Create a paymaster contract with the given parameters.
+     * The paymaster contract comes with support for the following features:
+     *   - Payment with ERC20 - the sponsored txns can be free or paid with an ERC20 token.
+     *   - Allowlist - permits sponsoring transactions only for specific addresses.
+     *     Enabled during contract creation.
+     *   - Blocklist - prevents sponsoring transactions for specific addresses.
+     *   - Admin list - a list of addresses that can manage the paymaster.
+     *   - Validation bypassing - a list of addresses that can bypass rate limiting validations.
+     *   - Target Contract Allowlist - permits sponsoring transactions only to specific contracts.
+     *     Enabled during contract creation.
+     *   - Rate Limits - restricts the number of transactions a user can sponsor within a given
+     *     time window. Rate limiting can be global (ie. rate limiting the total number of sponsored
+     *     txns per time window) or per user. The time window is specified in seconds.
+     *   - Pausing - allows the paymaster owner and admins to pause and unpause the paymaster contract.
+     *
+     * @params params - The parameters to create the paymaster contract.
+     * @returns The paymaster contract address.
+     *
+     */
+    async createPaymaster(params: PaymasterParams): Promise<string> {
+      const { chainId } = await this._providerL2().getNetwork();
+
+      const plugin = Network.from(chainId)?.getPlugin(LensNetworkPlugin.name);
+
+      assertLensContractsNetworkPlugin(plugin);
+
+      const contract = factories.LensPaymasterFactory__factory.connect(
+        plugin.contracts.paymasterFactory,
+        this._signerL2(),
+      );
+
+      const tx = await contract.createPaymaster(
+        params.initialOwner,
+        params.payment.token,
+        params.payment.amount,
+        params.withAllowlist,
+        params.withTargetContractAllowlist,
+        ethers.AbiCoder.defaultAbiCoder().encode(
+          ['uint64', 'uint64', 'uint32', 'uint256'],
+          Object.values({
+            ...params.rateLimits,
+            windowStart: Math.floor(Date.now() / 1000 / 3600) * 3600, // beginning of this hour
+          }),
+        )
+      );
+
+      const receipt = await tx.wait();
+
+      assert(receipt !== null, 'Transaction failed', 'NETWORK_ERROR');
+
+      const eventLog = receipt.logs.find((log) => log.address === plugin.contracts.paymasterFactory);
+
+      assert(eventLog instanceof EventLog, 'Event log not found', 'NETWORK_ERROR');
+
+      const decodedLog = contract.interface.parseLog(eventLog);
+
+      assert(decodedLog?.name === 'LensPaymasterCreated', 'Paymaster not created', 'NETWORK_ERROR');
+
+      return decodedLog.args._paymaster as string;
+    }
   };
 }
 
@@ -155,6 +232,38 @@ export class Wallet extends Adapter(zksync.Wallet) {
   override createErc721(params: Erc721TokenParams): Promise<string> {
     return super.createErc721(params);
   }
+
+  /**
+   * @inheritdoc
+   *
+   * @example
+   * ```ts
+   * import { getDefaultProvider, Network, Wallet } from '@lens-network/sdk/ethers';
+   *
+   * const provider = getDefaultProvider(Network.Testnet);
+   *
+   * const wallet = new Wallet(process.env.PRIVATE_KEY, provider);
+   *
+   * const address = await wallet.createPaymaster({
+   *   initialOwner: wallet.address,
+   *   payment: {
+   *     token: '0x1234567890123456789012345678901234567890',
+   *     amount: 1,
+   *   },
+   *   withAllowlist: true,
+   *   withTargetContractAllowlist: true,
+   *   rateLimits: {
+   *     globalLimit: 100,
+   *     userLimit: 10,
+   *     timeWindow: 3600,
+   *   }
+   * });
+   * ```
+   */
+  override createPaymaster(params: PaymasterParams): Promise<string> {
+    return super.createPaymaster(params);
+  }
+
   /**
    * Connects to the Lens Network using `provider`.
    *
@@ -242,6 +351,45 @@ export class Signer extends Adapter(zksync.Signer) {
   override createErc721(params: Erc721TokenParams): Promise<string> {
     return super.createErc721(params);
   }
+
+  /**
+   * @inheritdoc
+   *
+   * @example
+   * ```ts
+   * import { BrowserProvider, getDefaultProvider, Network } from '@lens-network/sdk/ethers';
+   *
+   * const browserProvider = new BrowserProvider(window.ethereum);
+   * const lensProvider = getDefaultProvider(Network.Testnet);
+   *
+   * const network = await browserProvider.getNetwork();
+   *
+   * const signer = Signer.from(
+   *   await browserProvider.getSigner(),
+   *   Number(network.chainId),
+   *   lensProvider,
+   * );
+   *
+   * const address = await signer.createPaymaster({
+   * initialOwner: signer.address,
+   * payment: {
+   *   token: '0x1234567890123456789012345678901234567890',
+   *   amount: 1,
+   *   },
+   *   withAllowlist: true,
+   *   withTargetContractAllowlist: true,
+   *   rateLimits: {
+   *     globalLimit: 100,
+   *     userLimit: 10,
+   *     timeWindow: 3600,
+   *   }
+   * });
+   * @param params
+   */
+  override async createPaymaster(params: PaymasterParams): Promise<string> {
+    return super.createPaymaster(params);
+  }
+
   /**
    * Creates a new Singer with provided `signer` and `chainId`.
    *
