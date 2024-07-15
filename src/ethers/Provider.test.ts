@@ -84,11 +84,12 @@ describe(`Given a "${Provider.name}" instance`, () => {
   });
 
   describe(`When calling "${Provider.prototype.getTokenTxHistory.name}" method`, () => {
-    it('Then it should return a paginated list of token transfers', async () => {
+    it.only('Then it should return a paginated list of token transfers', async () => {
       const provider = getDefaultProvider(Network.Testnet);
 
       const { items } = await provider.getTokenTxHistory({
-        address: '0x00a58ba275e6bfc004e2bf9be121a15a2c543e71',
+        address: '0x00A58BA275E6BFC004E2bf9be121a15a2c543e71',
+        filterForContractAddress: '0xe0fF46E1B235AEefa1F242d6d91357f88CcAc78a',
         pageInfo: { page: 1, limit: 10, sort: 'asc' },
       });
 
