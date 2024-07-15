@@ -112,7 +112,7 @@ describe(`Given a "${Provider.name}" instance`, () => {
         l1BatchNumber: expect.hexString(),
         timeStamp: expect.hexString(),
         contractAddress: expect.evmAddress(),
-        tokenId: expect.toBeOneOf([null, expect.hexString()]),
+        tokenID: expect.toBeOneOf([null, expect.hexString()]),
         tokenName: expect.toBeOneOf([null, expect.any(String)]),
         tokenSymbol: expect.toBeOneOf([null, expect.any(String)]),
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
