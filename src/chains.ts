@@ -20,7 +20,7 @@ export const testnet: ChainDefinition = {
   id: 37111,
   name: 'Lens Testnet Network',
   network: 'lens-testnet-network',
-  rpcUrl: 'https://rpc.staging.lens-network.crtlkey.com/',
+  rpcUrl: 'https://sepolia.rpc.lens.dev',
   blockExplorerUrl: 'https://explorer.staging.lens.zksync.dev/',
   testnet: true,
   contracts: {
