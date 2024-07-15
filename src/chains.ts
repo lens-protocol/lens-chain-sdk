@@ -25,6 +25,6 @@ export const testnet: ChainDefinition = {
   testnet: true,
   contracts: {
     erc20Factory: '0x44D3f533C370C9Ed8cfbe2d77b4440DC74959508',
-    erc721Factory: '0xCfBDe041302aA0Fdee0dbAd4E22cc937fdC184ED',
+    erc721Factory: '0x1299E25078d91f3aE5ff8A44DEbc7f25b2A1f314',
   },
 };

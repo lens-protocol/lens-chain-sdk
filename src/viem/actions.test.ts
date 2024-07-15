@@ -52,7 +52,7 @@ describe('Given the Viem actions', () => {
 
     it('Then it should return the relevant contract creation information', async () => {
       const [details] = await getContractCreation(client, {
-        addresses: ['0x175a469603aa24ee4ef1f9b0b609e3f0988668b1'],
+        addresses: ['0xe05715a3e605bbb7f058d83de829bb5063f3da1c'],
       });
 
       expect(details).toMatchObject({
@@ -79,17 +79,17 @@ describe('Given the Viem actions', () => {
       });
 
       const result = await getTokenInfo(client, {
-        address: '0x175a469603aa24ee4ef1f9b0b609e3f0988668b1',
+        address: '0xe05715a3e605bbb7f058d83de829bb5063f3da1c',
       });
 
       expect(result).toMatchObject({
-        contractAddress: expect.evmAddress('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1'),
+        contractAddress: expect.evmAddress('0xe05715a3e605bbb7f058d83de829bb5063f3da1c'),
         iconURL: null,
         l1Address: null,
         liquidity: null,
-        symbol: 'MTK',
+        symbol: 'SDK',
         tokenDecimal: 18,
-        tokenName: 'TestErc20Token',
+        tokenName: 'SDK Test Token',
         tokenPriceUSD: null,
       });
     });
@@ -157,7 +157,7 @@ describe('Given the Viem actions', () => {
 
     it('Then it should return the contract ABI as JSON string', async () => {
       const abi = await getContractABI(client, {
-        address: '0xA53ef3794DC285C20BEe9B51abD1942Ab5794a41',
+        address: '0x44D3f533C370C9Ed8cfbe2d77b4440DC74959508',
       });
 
       expect(abi).toEqual(expect.stringMatching(/^\[{"inputs":/));
