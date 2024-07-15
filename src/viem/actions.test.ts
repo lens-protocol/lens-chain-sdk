@@ -109,7 +109,7 @@ describe('Given the Viem actions', () => {
   });
 
   describe(`When calling "${getTokenTxHistory.name}"`, () => {
-    it.only('Then it should return a paginated list of token transfers', async () => {
+    it('Then it should return a paginated list of token transfers', async () => {
       const client = createPublicClient({
         chain: chains.testnet,
         transport: http(),

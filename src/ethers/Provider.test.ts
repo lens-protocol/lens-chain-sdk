@@ -84,7 +84,7 @@ describe(`Given a "${Provider.name}" instance`, () => {
   });
 
   describe(`When calling "${Provider.prototype.getTokenTxHistory.name}" method`, () => {
-    it.only('Then it should return a paginated list of token transfers', async () => {
+    it('Then it should return a paginated list of token transfers', async () => {
       const provider = getDefaultProvider(Network.Testnet);
 
       const { items } = await provider.getTokenTxHistory({
