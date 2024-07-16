@@ -62,5 +62,3 @@ function defineViemChain(chain: chains.ChainDefinition): LensNetworkChain {
 }
 
 export const testnet = /*#__PURE__*/ defineViemChain(chains.testnet);
-
-export const localhost = /*#__PURE__*/ defineViemChain(chains.localhost);

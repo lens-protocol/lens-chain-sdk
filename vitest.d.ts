@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-
-import type { AsymmetricMatchersContaining as BaseAsymmetricMatchersContaining } from 'vitest';
+import 'vitest';
 
 interface CustomMatchers<R = unknown> {
   evmAddress: (expected?: R) => R;
@@ -8,7 +6,5 @@ interface CustomMatchers<R = unknown> {
 }
 
 declare module 'vitest' {
-  interface AsymmetricMatchersContaining
-    extends CustomMatchers,
-      BaseAsymmetricMatchersContaining<R> {}
+  interface AsymmetricMatchersContaining extends JestExtendedMatchers, CustomMatchers {}
 }

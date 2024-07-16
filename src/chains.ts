@@ -21,26 +21,10 @@ export const testnet: ChainDefinition = {
   name: 'Lens Testnet Network',
   network: 'lens-testnet-network',
   rpcUrl: 'https://sepolia.rpc.lens.dev',
-  blockExplorerUrl: 'https://explorer.staging.lens.zksync.dev/',
+  blockExplorerUrl: 'https://explorer.staging.lens.zksync.dev',
   testnet: true,
   contracts: {
-    erc20Factory: '0xCAb3353b6055d6FDE858f8b862B90c9f81f63Ec3',
-    erc721Factory: '0xCfBDe041302aA0Fdee0dbAd4E22cc937fdC184ED',
-  },
-};
-
-/**
- * Localhost using testnet nodes.
- */
-export const localhost: ChainDefinition = {
-  id: 37111,
-  name: 'Lens Local Network',
-  network: 'lens-local-network',
-  rpcUrl: 'http://localhost:4096',
-  blockExplorerUrl: 'https://explorer.staging.lens.zksync.dev/',
-  testnet: true,
-  contracts: {
-    erc20Factory: '0xCAb3353b6055d6FDE858f8b862B90c9f81f63Ec3',
-    erc721Factory: '0xCfBDe041302aA0Fdee0dbAd4E22cc937fdC184ED',
+    erc20Factory: '0x44D3f533C370C9Ed8cfbe2d77b4440DC74959508',
+    erc721Factory: '0x1299E25078d91f3aE5ff8A44DEbc7f25b2A1f314',
   },
 };

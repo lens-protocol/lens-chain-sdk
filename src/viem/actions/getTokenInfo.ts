@@ -1,13 +1,13 @@
-import { Account, Chain, Client, Transport } from 'viem';
+import { Account, Address, Chain, Client, Transport } from 'viem';
 import { RequestErrorType } from 'viem/utils';
 
 import { PublicLensNetworkRpcSchema, TokenInfoResult } from '../types';
 
 export type GetTokenInfoParameters = {
-  address: string;
+  address: Address;
 };
 
-export type GetTokenInfoReturnType = TokenInfoResult;
+export type GetTokenInfoReturnType = TokenInfoResult | null;
 
 export type GetTokenInfoErrorType = RequestErrorType;
 

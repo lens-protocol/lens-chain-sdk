@@ -9,11 +9,11 @@ describe(`Given a "${Provider.name}" instance`, () => {
       const provider = getDefaultProvider(Network.Testnet);
 
       const receipt = await provider.getTransactionReceipt(
-        '0x4d5e0020567e12da69a0ffb432389261fac84bcf020ab2680299a67349945171',
+        '0x2fe9d9df84dc96d942e4430af9a0344201a534f79e0c4026a9086901cc28163b',
       );
 
       expect(receipt).toMatchObject({
-        type: 113, // ZK EIP-712
+        type: 2,
       });
     });
   });
@@ -39,7 +39,7 @@ describe(`Given a "${Provider.name}" instance`, () => {
 
     it('Then it should return the relevant contract creation information', async () => {
       const [details] = await provider.getContractCreation([
-        '0x175a469603aa24ee4ef1f9b0b609e3f0988668b1',
+        '0xe05715a3e605bbb7f058d83de829bb5063f3da1c',
       ]);
 
       expect(details).toMatchObject({
@@ -62,17 +62,17 @@ describe(`Given a "${Provider.name}" instance`, () => {
     const provider = getDefaultProvider(Network.Testnet);
 
     it('Then it should return the given token info', async () => {
-      const result = await provider.getTokenInfo('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1');
+      const result = await provider.getTokenInfo('0xe05715a3e605bbb7f058d83de829bb5063f3da1c');
 
       expect(result).toMatchObject({
-        contractAddress: expect.evmAddress('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1'),
-        iconURL: '',
-        l1Address: '',
-        liquidity: '',
-        symbol: 'MTK',
-        tokenDecimal: '18',
-        tokenName: 'TestErc20Token',
-        tokenPriceUSD: '',
+        contractAddress: expect.evmAddress('0xe05715a3e605bbb7f058d83de829bb5063f3da1c'),
+        iconURL: null,
+        l1Address: null,
+        liquidity: null,
+        symbol: 'SDK',
+        tokenDecimal: 18,
+        tokenName: 'SDK Test Token',
+        tokenPriceUSD: null,
       });
     });
 
@@ -88,7 +88,8 @@ describe(`Given a "${Provider.name}" instance`, () => {
       const provider = getDefaultProvider(Network.Testnet);
 
       const { items } = await provider.getTokenTxHistory({
-        address: '0x00a58ba275e6bfc004e2bf9be121a15a2c543e71',
+        address: '0x00A58BA275E6BFC004E2bf9be121a15a2c543e71',
+        filterForContractAddress: '0xe0fF46E1B235AEefa1F242d6d91357f88CcAc78a',
         pageInfo: { page: 1, limit: 10, sort: 'asc' },
       });
 
@@ -111,12 +112,11 @@ describe(`Given a "${Provider.name}" instance`, () => {
         l1BatchNumber: expect.hexString(),
         timeStamp: expect.hexString(),
         contractAddress: expect.evmAddress(),
+        tokenID: expect.toBeOneOf([null, expect.hexString()]),
+        tokenName: expect.toBeOneOf([null, expect.any(String)]),
+        tokenSymbol: expect.toBeOneOf([null, expect.any(String)]),
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        tokenName: expect.any(String),
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        tokenSymbol: expect.any(String),
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        tokenDecimal: expect.any(String),
+        tokenDecimal: expect.any(Number),
         transactionType: expect.hexString(),
       });
     });
@@ -126,7 +126,7 @@ describe(`Given a "${Provider.name}" instance`, () => {
     const provider = getDefaultProvider(Network.Testnet);
 
     it('Then it should return the contract ABI as JSON string', async () => {
-      const abi = await provider.getContractABI('0xA53ef3794DC285C20BEe9B51abD1942Ab5794a41');
+      const abi = await provider.getContractABI('0x44D3f533C370C9Ed8cfbe2d77b4440DC74959508');
 
       expect(abi).toEqual(expect.stringMatching(/^\[{"inputs":/));
     });

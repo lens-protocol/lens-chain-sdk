@@ -33,18 +33,18 @@ export type TokenInfoResult = {
   contractAddress: Address;
   tokenName: string;
   symbol: string;
-  tokenDecimal: string;
-  tokenPriceUSD: string;
-  liquidity: string;
-  l1Address: string;
-  iconURL: string;
+  tokenDecimal: number;
+  tokenPriceUSD: string | null;
+  liquidity: string | null;
+  l1Address: Address | null;
+  iconURL: string | null;
 };
 
 export type TxHistoryItem = {
   /**
    * The transaction hash.
    */
-  hash: Hex;
+  hash: Hash;
   to: Address;
   from: Address;
   transactionIndex: Hex;
@@ -58,14 +58,14 @@ export type TxHistoryItem = {
   nonce: Hex;
   confirmations: Hex;
   blockNumber: Hex;
-  blockHash: Hex;
+  blockHash: Hash;
   /**
    * Timestamp in seconds since the Unix epoch.
    */
   timeStamp: Hex;
-  commitTxHash: Hex | null;
-  proveTxHash: Hex | null;
-  executeTxHash: Hex | null;
+  commitTxHash: Hash | null;
+  proveTxHash: Hash | null;
+  executeTxHash: Hash | null;
   isL1Originated: Hex;
   l1BatchNumber: Hex;
   contractAddress: Address | null;
@@ -77,12 +77,12 @@ export type TxHistoryItem = {
 };
 
 export type TokenTxHistoryItem = {
-  hash: Hex;
+  hash: Hash;
   to: Address;
   from: Address;
   transactionIndex: Hex;
   input: Hex;
-  value: Hex;
+  value: Hex | null;
   gas: Hex;
   gasPrice: Hex;
   gasUsed: Hex;
@@ -91,13 +91,14 @@ export type TokenTxHistoryItem = {
   nonce: Hex;
   confirmations: Hex;
   blockNumber: Hex;
-  blockHash: Hex;
+  blockHash: Hash;
   l1BatchNumber: Hex;
   timeStamp: Hex;
   contractAddress: Address;
-  tokenName: string;
-  tokenSymbol: string;
-  tokenDecimal: string;
+  tokenId: string | null;
+  tokenName: string | null;
+  tokenSymbol: string | null;
+  tokenDecimal: string | null;
   transactionType: Hex;
 };
 
@@ -119,12 +120,12 @@ export type PublicLensNetworkRpcSchema = [
   },
   {
     Method: 'lens_getTxHistory';
-    Parameters: [TxHistoryRequest];
+    Parameters: [TxHistoryRequest<Address>];
     ReturnType: readonly TxHistoryItem[];
   },
   {
     Method: 'lens_getContractCreation';
-    Parameters: ContractCreationAddresses;
+    Parameters: ContractCreationAddresses<Address>;
     ReturnType: readonly ContractsCreationResult[] | null;
   },
   {
@@ -134,12 +135,12 @@ export type PublicLensNetworkRpcSchema = [
   },
   {
     Method: 'lens_getTokenTxHistory';
-    Parameters: [TokenTxHistoryRequest];
+    Parameters: [TokenTxHistoryRequest<Address>];
     ReturnType: readonly TokenTxHistoryItem[];
   },
   {
     Method: 'lens_getNftTxHistory';
-    Parameters: [TokenTxHistoryRequest];
+    Parameters: [TokenTxHistoryRequest<Address>];
     ReturnType: readonly TokenTxHistoryItem[];
   },
   {

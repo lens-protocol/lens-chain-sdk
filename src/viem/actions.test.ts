@@ -52,7 +52,7 @@ describe('Given the Viem actions', () => {
 
     it('Then it should return the relevant contract creation information', async () => {
       const [details] = await getContractCreation(client, {
-        addresses: ['0x175a469603aa24ee4ef1f9b0b609e3f0988668b1'],
+        addresses: ['0xe05715a3e605bbb7f058d83de829bb5063f3da1c'],
       });
 
       expect(details).toMatchObject({
@@ -79,18 +79,18 @@ describe('Given the Viem actions', () => {
       });
 
       const result = await getTokenInfo(client, {
-        address: '0x175a469603aa24ee4ef1f9b0b609e3f0988668b1',
+        address: '0xe05715a3e605bbb7f058d83de829bb5063f3da1c',
       });
 
       expect(result).toMatchObject({
-        contractAddress: expect.evmAddress('0x175a469603aa24ee4ef1f9b0b609e3f0988668b1'),
-        iconURL: '',
-        l1Address: '',
-        liquidity: '',
-        symbol: 'MTK',
-        tokenDecimal: '18',
-        tokenName: 'TestErc20Token',
-        tokenPriceUSD: '',
+        contractAddress: expect.evmAddress('0xe05715a3e605bbb7f058d83de829bb5063f3da1c'),
+        iconURL: null,
+        l1Address: null,
+        liquidity: null,
+        symbol: 'SDK',
+        tokenDecimal: 18,
+        tokenName: 'SDK Test Token',
+        tokenPriceUSD: null,
       });
     });
 
@@ -116,7 +116,8 @@ describe('Given the Viem actions', () => {
       });
 
       const { items } = await getTokenTxHistory(client, {
-        address: '0x00a58ba275e6bfc004e2bf9be121a15a2c543e71',
+        address: '0x00A58BA275E6BFC004E2bf9be121a15a2c543e71',
+        filterForContractAddress: '0xe0fF46E1B235AEefa1F242d6d91357f88CcAc78a',
         pageInfo: { page: 1, limit: 10, sort: 'asc' },
       });
 
@@ -139,12 +140,11 @@ describe('Given the Viem actions', () => {
         l1BatchNumber: expect.hexString(),
         timeStamp: expect.hexString(),
         contractAddress: expect.evmAddress(),
+        tokenID: expect.toBeOneOf([null, expect.hexString()]),
+        tokenName: expect.toBeOneOf([null, expect.any(String)]),
+        tokenSymbol: expect.toBeOneOf([null, expect.any(String)]),
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        tokenName: expect.any(String),
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        tokenSymbol: expect.any(String),
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        tokenDecimal: expect.any(String),
+        tokenDecimal: expect.any(Number),
         transactionType: expect.hexString(),
       });
     });
@@ -158,7 +158,7 @@ describe('Given the Viem actions', () => {
 
     it('Then it should return the contract ABI as JSON string', async () => {
       const abi = await getContractABI(client, {
-        address: '0xA53ef3794DC285C20BEe9B51abD1942Ab5794a41',
+        address: '0x44D3f533C370C9Ed8cfbe2d77b4440DC74959508',
       });
 
       expect(abi).toEqual(expect.stringMatching(/^\[{"inputs":/));
