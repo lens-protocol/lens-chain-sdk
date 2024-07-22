@@ -1,0 +1,6 @@
+{
+  "startCommand": "pnpm start",
+  "env": {
+    "PRIVATE_KEY": "0x..."
+  }
+}

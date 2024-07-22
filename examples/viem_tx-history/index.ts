@@ -2,7 +2,7 @@ import { chains, getTxHistory } from '@lens-network/sdk/viem';
 import { createPublicClient, zeroAddress, http } from 'viem';
 
 const client = createPublicClient({
-  chain: chains.staging,
+  chain: chains.testnet,
   transport: http(),
 });
 
