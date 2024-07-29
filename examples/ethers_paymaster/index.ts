@@ -15,7 +15,7 @@ const request = {
   value: 100000000000000n,
   from: '0x00A58BA275E6BFC004E2bf9be121a15a2c543e71',
   chainId: 37111,
-  nonce: 31,
+  nonce: await lensProvider.getTransactionCount(wallet.address),
   maxPriorityFeePerGas: 0n,
   maxFeePerGas: 120000000n,
   // gas: 232534n,
