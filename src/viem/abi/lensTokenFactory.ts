@@ -1,0 +1,493 @@
+export const abi = [
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint8',
+        name: 'version',
+        type: 'uint8',
+      },
+    ],
+    name: 'Initialized',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'tokenAddress',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'owner',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'string',
+        name: 'metadataURI',
+        type: 'string',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'maxSupply',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'mintRate',
+        type: 'uint256',
+      },
+    ],
+    name: 'Lens_Token_ERC1155Created',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'tokenAddress',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'owner',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'string',
+        name: 'name',
+        type: 'string',
+      },
+      {
+        indexed: false,
+        internalType: 'string',
+        name: 'symbol',
+        type: 'string',
+      },
+      {
+        indexed: false,
+        internalType: 'uint8',
+        name: 'decimals',
+        type: 'uint8',
+      },
+      {
+        indexed: false,
+        internalType: 'string',
+        name: 'iconURI',
+        type: 'string',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'maxSupply',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'mintRate',
+        type: 'uint256',
+      },
+    ],
+    name: 'Lens_Token_ERC20Created',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'tokenAddress',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'owner',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'string',
+        name: 'name',
+        type: 'string',
+      },
+      {
+        indexed: false,
+        internalType: 'string',
+        name: 'symbol',
+        type: 'string',
+      },
+      {
+        indexed: false,
+        internalType: 'string',
+        name: 'iconURI',
+        type: 'string',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'maxSupply',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'mintRate',
+        type: 'uint256',
+      },
+    ],
+    name: 'Lens_Token_ERC721Created',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'previousOwner',
+        type: 'address',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'newOwner',
+        type: 'address',
+      },
+    ],
+    name: 'OwnershipTransferred',
+    type: 'event',
+  },
+  {
+    inputs: [],
+    name: 'MINT_RATE_COOLDOWN',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'initialOwner',
+        type: 'address',
+      },
+      {
+        components: [
+          {
+            internalType: 'string',
+            name: 'metadataURI',
+            type: 'string',
+          },
+          {
+            internalType: 'uint256',
+            name: 'maxSupply',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'mintRate',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct LensERC1155.TokenParams',
+        name: 'params',
+        type: 'tuple',
+      },
+      {
+        internalType: 'address[]',
+        name: 'admins',
+        type: 'address[]',
+      },
+      {
+        components: [
+          {
+            internalType: 'address',
+            name: 'addr',
+            type: 'address',
+          },
+          {
+            internalType: 'string',
+            name: 'label',
+            type: 'string',
+          },
+        ],
+        internalType: 'struct BaseToken.Minter[]',
+        name: 'minters',
+        type: 'tuple[]',
+      },
+    ],
+    name: 'createERC1155',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'initialOwner',
+        type: 'address',
+      },
+      {
+        components: [
+          {
+            internalType: 'uint8',
+            name: 'decimals',
+            type: 'uint8',
+          },
+          {
+            internalType: 'string',
+            name: 'name',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'symbol',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'iconURI',
+            type: 'string',
+          },
+          {
+            internalType: 'uint256',
+            name: 'maxSupply',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'mintRate',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct LensERC20.TokenParams',
+        name: 'params',
+        type: 'tuple',
+      },
+      {
+        internalType: 'address[]',
+        name: 'admins',
+        type: 'address[]',
+      },
+      {
+        components: [
+          {
+            internalType: 'address',
+            name: 'addr',
+            type: 'address',
+          },
+          {
+            internalType: 'string',
+            name: 'label',
+            type: 'string',
+          },
+        ],
+        internalType: 'struct BaseToken.Minter[]',
+        name: 'minters',
+        type: 'tuple[]',
+      },
+    ],
+    name: 'createERC20',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'initialOwner',
+        type: 'address',
+      },
+      {
+        components: [
+          {
+            internalType: 'string',
+            name: 'name',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'symbol',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'iconURI',
+            type: 'string',
+          },
+          {
+            internalType: 'uint256',
+            name: 'maxSupply',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'mintRate',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct LensERC721.TokenParams',
+        name: 'params',
+        type: 'tuple',
+      },
+      {
+        internalType: 'address[]',
+        name: 'admins',
+        type: 'address[]',
+      },
+      {
+        components: [
+          {
+            internalType: 'address',
+            name: 'addr',
+            type: 'address',
+          },
+          {
+            internalType: 'string',
+            name: 'label',
+            type: 'string',
+          },
+        ],
+        internalType: 'struct BaseToken.Minter[]',
+        name: 'minters',
+        type: 'tuple[]',
+      },
+    ],
+    name: 'createERC721',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getTokens',
+    outputs: [
+      {
+        internalType: 'contract BaseToken[]',
+        name: '',
+        type: 'address[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'initialOwner',
+        type: 'address',
+      },
+    ],
+    name: 'initialize',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'owner',
+    outputs: [
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'renounceOwnership',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'revision',
+    outputs: [
+      {
+        internalType: 'uint16',
+        name: '',
+        type: 'uint16',
+      },
+    ],
+    stateMutability: 'pure',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    name: 'tokens',
+    outputs: [
+      {
+        internalType: 'contract BaseToken',
+        name: '',
+        type: 'address',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'newOwner',
+        type: 'address',
+      },
+    ],
+    name: 'transferOwnership',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+] as const;

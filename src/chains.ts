@@ -1,6 +1,5 @@
 export type DeployedContracts = {
-  erc20Factory: `0x${string}`;
-  erc721Factory: `0x${string}`;
+  tokenFactory: `0x${string}`;
 };
 
 export type ChainDefinition = {
@@ -24,7 +23,6 @@ export const testnet: ChainDefinition = {
   blockExplorerUrl: 'https://explorer.staging.lens.zksync.dev',
   testnet: true,
   contracts: {
-    erc20Factory: '0x44D3f533C370C9Ed8cfbe2d77b4440DC74959508',
-    erc721Factory: '0x1299E25078d91f3aE5ff8A44DEbc7f25b2A1f314',
+    tokenFactory: '0x48b6F39517153ed96C152335dCBfA5CF8FC492A2',
   },
 };

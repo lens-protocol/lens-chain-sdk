@@ -1,11 +1,11 @@
 import { Account, Chain, Client, Transport } from 'viem';
 
-import { CreateErc20Parameters, CreateErc20ReturnType, createErc20 } from './actions/createErc20';
+import { CreateERC20Parameters, CreateERC20ReturnType, createERC20 } from './actions/createERC20';
 import {
-  CreateErc721Parameters,
-  CreateErc721ReturnType,
-  createErc721,
-} from './actions/createErc721';
+  CreateERC721Parameters,
+  CreateERC721ReturnType,
+  createERC721,
+} from './actions/createERC721';
 import {
   GetBlockNumberByTimeParameters,
   GetBlockNumberByTimeReturnType,
@@ -289,8 +289,8 @@ export type WalletActions = {
    * Create an ERC-20 contract with the given parameters.
    *
    * @param client - Client to use
-   * @param parameters - {@link CreateErc20Parameters}
-   * @returns The newly created ERC-20 contract address. {@link CreateErc20ReturnType}
+   * @param parameters - {@link CreateERC20Parameters}
+   * @returns The newly created ERC-20 contract address. {@link CreateERC20ReturnType}
    *
    * @example
    * ```ts
@@ -305,9 +305,14 @@ export type WalletActions = {
    *   transport: http(),
    * }).extend(walletActions());
    *
-   * const tokenAddress = await client.createErc20({
+   * const tokenAddress = await client.createERC20({
+   *   admins: [],
+   *   decimals: 18,
+   *   iconURI: 'https://example.com/icon.png',
    *   initialOwner: account.address,
-   *   initialSupply: 100_000_000_000_000_000_000n,
+   *   maxSupply: 100_000_000_000_000_000_000n,
+   *   minters: [],
+   *   mintRate: 0n,
    *   name: 'SDK Test Token',
    *   symbol: 'SDK',
    * });
@@ -315,13 +320,13 @@ export type WalletActions = {
    * // tokenAddress: 0x…
    * ```
    */
-  createErc20: (params: CreateErc20Parameters) => Promise<CreateErc20ReturnType>;
+  createERC20: (params: CreateERC20Parameters) => Promise<CreateERC20ReturnType>;
   /**
    * Create an ERC-721 contract with the given parameters.
    *
    * @param client - Client to use
-   * @param parameters - {@link CreateErc20Parameters}
-   * @returns The newly created ERC-721 contract address. {@link CreateErc20ReturnType}
+   * @param parameters - {@link CreateERC20Parameters}
+   * @returns The newly created ERC-721 contract address. {@link CreateERC20ReturnType}
    *
    * @example
    * ```ts
@@ -336,17 +341,21 @@ export type WalletActions = {
    *   transport: http(),
    * }).extend(walletActions());
    *
-   * const tokenAddress = await client.createErc721({
+   * const tokenAddress = await client.createERC721({
+   *   admins: [],
+   *   iconURI: 'https://example.com/icon.png',
    *   initialOwner: account.address,
-   *   maxSupply: 100n,
-   *   name: 'My collection',
+   *   maxSupply: 100,
+   *   minters: [],
+   *   mintRate: 0n,
+   *   name: 'My Collection',
    *   symbol: 'SDK',
    * });
    *
    * // tokenAddress: 0x…
    * ```
    */
-  createErc721: (params: CreateErc721Parameters) => Promise<CreateErc721ReturnType>;
+  createERC721: (params: CreateERC721Parameters) => Promise<CreateERC721ReturnType>;
   /**
    * Executes a transaction and returns its hash, storage logs, and events that would have
    * been generated if the transaction had already been included in the block.
@@ -384,8 +393,8 @@ export function walletActions() {
   >(
     client: Client<Transport, TChain, TAccount>,
   ): WalletActions => ({
-    createErc20: (params) => createErc20(client, params),
-    createErc721: (params) => createErc721(client, params),
+    createERC20: (params) => createERC20(client, params),
+    createERC721: (params) => createERC721(client, params),
     sendRawTransactionWithDetailedOutput: (params) =>
       sendRawTransactionWithDetailedOutput(client, params),
   });

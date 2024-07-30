@@ -12,10 +12,10 @@ import {
   getTokenInfo,
   getTokenTxHistory,
 } from '.';
-import { abi as basicErc20Abi } from './abi/basicErc20';
-import { abi as basicErc721 } from './abi/basicErc721';
-import { createErc20 } from './actions/createErc20';
-import { createErc721 } from './actions/createErc721';
+import { abi as lensErc20 } from './abi/lensErc20';
+import { abi as lensErc721 } from './abi/lensErc721';
+import { createERC20 } from './actions/createERC20';
+import { createERC721 } from './actions/createERC721';
 import { tag } from '../../test';
 
 describe('Given the Viem actions', () => {
@@ -199,7 +199,7 @@ describe('Given the Viem actions', () => {
   });
 
   tag('@write', () => {
-    describe(`When calling "${createErc20.name}"`, () => {
+    describe(`When calling "${createERC20.name}"`, () => {
       it('Then should return the ERC-20 contract address', {}, async () => {
         const account = privateKeyToAccount(import.meta.env.PRIVATE_KEY);
         const client = createWalletClient({
@@ -208,15 +208,20 @@ describe('Given the Viem actions', () => {
           transport: http(),
         });
 
-        const tokenAddress = await createErc20(client, {
+        const tokenAddress = await createERC20(client, {
+          admins: [],
+          decimals: 18,
+          iconURI: 'https://example.com/icon.png',
           initialOwner: account.address,
-          initialSupply: 100_000_000_000_000_000_000n,
+          maxSupply: 100_000_000_000_000_000_000n,
+          minters: [],
+          mintRate: 0n,
           name: 'SDK Test Token',
           symbol: 'SDK',
         });
 
         const name = await readContract(client, {
-          abi: basicErc20Abi,
+          abi: lensErc20,
           address: tokenAddress,
           functionName: 'name',
         });
@@ -224,7 +229,7 @@ describe('Given the Viem actions', () => {
       });
     });
 
-    describe(`When calling "${createErc721.name}"`, () => {
+    describe(`When calling "${createERC721.name}"`, () => {
       it('Then should return the ERC-721 contract address', {}, async () => {
         const account = privateKeyToAccount(import.meta.env.PRIVATE_KEY);
         const client = createWalletClient({
@@ -233,15 +238,19 @@ describe('Given the Viem actions', () => {
           transport: http(),
         });
 
-        const tokenAddress = await createErc721(client, {
+        const tokenAddress = await createERC721(client, {
+          admins: [],
+          iconURI: 'https://example.com/icon.png',
           initialOwner: account.address,
-          maxSupply: 100n,
+          maxSupply: 100_000_000_000_000_000_000n,
+          minters: [],
+          mintRate: 0n,
           name: 'My Collection',
           symbol: 'SDK',
         });
 
         const name = await readContract(client, {
-          abi: basicErc721,
+          abi: lensErc721,
           address: tokenAddress,
           functionName: 'name',
         });

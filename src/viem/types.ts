@@ -11,6 +11,14 @@ import {
 
 export type { SecondsSinceEpoch, TimeDirection, PagingResult, PagingInformation } from '../types';
 
+/**
+ * A token minter address with a label.
+ */
+export type Minter = {
+  addr: Address;
+  label: string;
+};
+
 export type StorageEntry = {
   address: Address;
   key: Hex;

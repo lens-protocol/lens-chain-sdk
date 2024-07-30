@@ -19,6 +19,6 @@ export type TestLabel = '@write';
  */
 export function tag(label: TestLabel, fn: () => void) {
   if ((process.env.TEST_TAGS?.split(',') ?? []).includes(label)) {
-    describe.only(`[tag: ${label}]`, fn);
+    describe.only(`[tag: ${label}]`, fn, { timeout: 10000 });
   }
 }

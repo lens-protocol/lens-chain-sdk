@@ -14,8 +14,7 @@ export type LensNetworkChain = Prettify<
     Chain,
     {
       contracts: {
-        erc20Factory: ChainContract;
-        erc721Factory: ChainContract;
+        tokenFactory: ChainContract;
       };
     }
   >
@@ -40,11 +39,8 @@ function defineViemChain(chain: chains.ChainDefinition): LensNetworkChain {
       },
     },
     contracts: {
-      erc20Factory: {
-        address: chain.contracts.erc20Factory,
-      },
-      erc721Factory: {
-        address: chain.contracts.erc721Factory,
+      tokenFactory: {
+        address: chain.contracts.tokenFactory,
       },
     },
     testnet: chain.testnet,
