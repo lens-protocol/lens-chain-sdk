@@ -40,6 +40,9 @@ function defineViemChain(chain: chains.ChainDefinition): LensNetworkChain {
       },
     },
     contracts: {
+      multicall3: {
+        address: chain.contracts.multicall3,
+      },
       erc20Factory: {
         address: chain.contracts.erc20Factory,
       },
