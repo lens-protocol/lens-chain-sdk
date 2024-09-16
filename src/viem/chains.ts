@@ -14,6 +14,7 @@ export type LensNetworkChain = Prettify<
     Chain,
     {
       contracts: {
+        multicall3: ChainContract;
         erc20Factory: ChainContract;
         erc721Factory: ChainContract;
       };
