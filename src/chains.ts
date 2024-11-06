@@ -1,4 +1,8 @@
 export type DeployedContracts = {
+  // well known
+  multicall3: `0x${string}`;
+
+  // lens specific
   erc20Factory: `0x${string}`;
   erc721Factory: `0x${string}`;
 };
@@ -24,6 +28,7 @@ export const testnet: ChainDefinition = {
   blockExplorerUrl: 'https://explorer.staging.lens.zksync.dev',
   testnet: true,
   contracts: {
+    multicall3: '0x8A44EDE8a6843a997bC0Cc4659e4dB1Da8f91116',
     erc20Factory: '0x44D3f533C370C9Ed8cfbe2d77b4440DC74959508',
     erc721Factory: '0x1299E25078d91f3aE5ff8A44DEbc7f25b2A1f314',
   },
