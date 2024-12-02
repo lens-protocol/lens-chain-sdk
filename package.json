@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "description": "The quickest way to connect your dApp to the Lens Network.",
   "type": "module",
-  "sideEffects": false,
   "exports": {
     "./viem": {
       "types": "./dist/viem/index.d.ts",
