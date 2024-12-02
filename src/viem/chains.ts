@@ -41,6 +41,12 @@ function defineViemChain(chain: chains.ChainDefinition): LensNetworkChain {
       },
     },
     contracts: {
+      WETH: {
+        address: chain.contracts.WETH
+      },
+      WGRASS: {
+        address: chain.contracts.WGRASS
+      },
       multicall3: {
         address: chain.contracts.multicall3,
       },

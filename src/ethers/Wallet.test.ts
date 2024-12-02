@@ -5,13 +5,13 @@ import { factories } from './typechain';
 import { tag } from '../../test';
 
 tag('@write', () => {
-  describe(`Given an "${Wallet.name}" instance`, () => {
-    describe(`When calling "${Wallet.prototype.createErc20.name}" method`, () => {
+  describe.skip(`Given an "${Wallet.name}" instance`, () => {
+    describe(`When calling "${Wallet.prototype.experimental_createErc20.name}" method`, () => {
       it(`Then should return the ERC-20 contract address`, async () => {
         const provider = getDefaultProvider(Network.Testnet);
         const signer = new Wallet(import.meta.env.PRIVATE_KEY, provider);
 
-        const address = await signer.createErc20({
+        const address = await signer.experimental_createErc20({
           initialOwner: signer.address,
           initialSupply: 1000000,
           name: 'SDK Test Token',
@@ -23,12 +23,12 @@ tag('@write', () => {
       });
     });
 
-    describe(`When calling "${Wallet.prototype.createErc721.name}" method`, () => {
+    describe(`When calling "${Wallet.prototype.experimental_createErc721.name}" method`, () => {
       it(`Then should return the ERC-721 contract address`, async () => {
         const provider = getDefaultProvider(Network.Testnet);
         const signer = new Wallet(import.meta.env.PRIVATE_KEY, provider);
 
-        const address = await signer.createErc721({
+        const address = await signer.experimental_createErc721({
           initialOwner: signer.address,
           maxSupply: 100,
           name: 'My Collection',

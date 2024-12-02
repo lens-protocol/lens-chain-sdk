@@ -40,7 +40,7 @@ function Adapter<TBase extends Constructor<L2TxSender>>(Base: TBase) {
      * @params params - The parameters to create the ERC-20 contract.
      * @returns The ERC-20 contract address.
      */
-    async createErc20(params: Erc20TokenParams): Promise<string> {
+    async experimental_createErc20(params: Erc20TokenParams): Promise<string> {
       const { chainId } = await this._providerL2().getNetwork();
 
       const plugin = Network.from(chainId)?.getPlugin(LensNetworkPlugin.name);
@@ -74,7 +74,7 @@ function Adapter<TBase extends Constructor<L2TxSender>>(Base: TBase) {
      * @params params - The parameters to create the ERC-721 contract.
      * @returns The ERC-721 contract address.
      */
-    async createErc721(params: Erc721TokenParams): Promise<string> {
+    async experimental_createErc721(params: Erc721TokenParams): Promise<string> {
       const { chainId } = await this._providerL2().getNetwork();
 
       const plugin = Network.from(chainId)?.getPlugin(LensNetworkPlugin.name);
@@ -122,7 +122,7 @@ export class Wallet extends Adapter(zksync.Wallet) {
    *
    * const wallet = new Wallet(process.env.PRIVATE_KEY, provider);
    *
-   * const address = await wallet.createErc20({
+   * const address = await wallet.experimental_createErc20({
    *   initialOwner: wallet.address,
    *   initialSupply: 100_000_000_000_000_000_000n,
    *   name: 'SDK Test Token',
@@ -130,9 +130,10 @@ export class Wallet extends Adapter(zksync.Wallet) {
    * });
    * ```
    */
-  override createErc20(params: Erc20TokenParams): Promise<string> {
-    return super.createErc20(params);
+  override experimental_createErc20(params: Erc20TokenParams): Promise<string> {
+    return super.experimental_createErc20(params);
   }
+
   /**
    * @inheritdoc
    *
@@ -152,9 +153,10 @@ export class Wallet extends Adapter(zksync.Wallet) {
    * });
    * ```
    */
-  override createErc721(params: Erc721TokenParams): Promise<string> {
-    return super.createErc721(params);
+  override experimental_createErc721(params: Erc721TokenParams): Promise<string> {
+    return super.experimental_createErc721(params);
   }
+
   /**
    * Connects to the Lens Network using `provider`.
    *
@@ -202,7 +204,7 @@ export class Signer extends Adapter(zksync.Signer) {
    *   lensProvider,
    * );
    *
-   * const address = await signer.createErc20({
+   * const address = await signer.experimental_createErc20({
    *   initialOwner: signer.address,
    *   initialSupply: 100_000_000_000_000_000_000n,
    *   name: 'SDK Test Token',
@@ -210,9 +212,10 @@ export class Signer extends Adapter(zksync.Signer) {
    * });
    * ```
    */
-  override createErc20(params: Erc20TokenParams): Promise<string> {
-    return super.createErc20(params);
+  override experimental_createErc20(params: Erc20TokenParams): Promise<string> {
+    return super.experimental_createErc20(params);
   }
+
   /**
    * @inheritdoc
    *
@@ -231,7 +234,7 @@ export class Signer extends Adapter(zksync.Signer) {
    *   lensProvider,
    * );
    *
-   * const address = await signer.createErc721({
+   * const address = await signer.experimental_createErc721({
    *   initialOwner: signer.address,
    *   maxSupply: 100,
    *   name: 'My Collection',
@@ -239,9 +242,10 @@ export class Signer extends Adapter(zksync.Signer) {
    * });
    * ```
    */
-  override createErc721(params: Erc721TokenParams): Promise<string> {
-    return super.createErc721(params);
+  override experimental_createErc721(params: Erc721TokenParams): Promise<string> {
+    return super.experimental_createErc721(params);
   }
+
   /**
    * Creates a new Singer with provided `signer` and `chainId`.
    *
