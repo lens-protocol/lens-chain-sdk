@@ -1,0 +1,16 @@
+{
+  "name": "example-viem-bug-2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vite-node index.ts"
+  },
+  "dependencies": {
+    "@lens-network/sdk": "canary",
+    "viem": "^2.21.53"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "vite-node": "^1.6.0"
+  }
+}
