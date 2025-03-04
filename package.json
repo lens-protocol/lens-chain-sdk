@@ -63,10 +63,12 @@
     "test:write": "TEST_TAGS=@write vitest -t \"\\[tag:\\s@write\\]\" --allowOnly --no-file-parallelism"
   },
   "keywords": [
-    "lens-network",
-    "sdk",
+    "lens-chain",
     "lens",
-    "web3"
+    "chain",
+    "sdk",
+    "web3",
+    "defi"
   ],
   "license": "MIT",
   "engines": {
