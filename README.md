@@ -1,6 +1,6 @@
-# Lens Network SDK
+# Lens Chain SDK <!-- omit in toc -->
 
-The official SDK for the Lens Network 🌿.
+The official SDK for the Lens Chain 🌿.
 
 ## Table of Contents <!-- omit in toc -->
 
@@ -12,15 +12,15 @@ The official SDK for the Lens Network 🌿.
 ## Installation
 
 ```bash
-pnpm add @lens-network/sdk
+pnpm add @lens-chain/sdk
 
 # or
 
-npm install @lens-network/sdk
+npm install @lens-chain/sdk
 
 # or
 
-yarn add @lens-network/sdk
+yarn add @lens-chain/sdk
 ```
 
 ## Development Workflow
@@ -68,10 +68,7 @@ and populate the `PRIVATE_KEY` environment variable:
 PRIVATE_KEY=0x…
 ```
 
-with the private key of an account with Lens Network tokens.
-
-> [!TIP]
-> Ask the Lens Team for some $GRASS tokens and then [bridge](https://portal.staging.lens.zksync.dev/bridge) them to the Lens Network.
+with the private key of a test EOA.
 
 ### Usage <!-- omit in toc -->
 
@@ -84,7 +81,7 @@ pnpm test
 Run tests tagged with `write`:
 
 > [!WARNING]
-> These tests requires funds in the account specified within the `.env` file.
+> These tests requires funds in the account specified within the `.env` file. Use one of the [faucets](https://dev-preview.lens.xyz/docs/chain/tools/faucets/lenscan) to get $GRASS tokens.
 
 ```bash
 pnpm test:write
@@ -141,4 +138,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 
-Lens Network SDK is [MIT licensed](./LICENSE).
+Lens Chain SDK is [MIT licensed](./LICENSE).

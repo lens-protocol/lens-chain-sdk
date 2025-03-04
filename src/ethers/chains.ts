@@ -16,4 +16,5 @@ function defineAddEthereumChainParameter(chain: chains.ChainDefinition): AddEthe
 
 export type { AddEthereumChainParameter };
 
+export const mainnet = /*#__PURE__*/ defineAddEthereumChainParameter(chains.mainnet);
 export const testnet = /*#__PURE__*/ defineAddEthereumChainParameter(chains.testnet);

@@ -1,7 +1,7 @@
 {
-  "name": "@lens-network/sdk",
+  "name": "@lens-chain/sdk",
   "version": "0.0.0",
-  "description": "The quickest way to connect your dApp to the Lens Network.",
+  "description": "The quickest way to connect your dApp to Lens Chain.",
   "type": "module",
   "exports": {
     "./viem": {

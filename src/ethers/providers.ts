@@ -2,9 +2,6 @@ import { JsonRpcPayload, ethers, JsonRpcError, JsonRpcResult } from 'ethers';
 import * as zksync from 'zksync-ethers';
 
 import { SendRawTransactionDetails } from './types';
-import { ContractCreationAddresses, TokenTxHistoryRequest, TxHistoryRequest } from '../types';
-
-export type { ContractCreationAddresses, TxHistoryRequest, TokenTxHistoryRequest };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Constructor<T = object> = new (...args: any[]) => T;

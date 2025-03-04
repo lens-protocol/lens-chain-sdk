@@ -22,6 +22,6 @@ export function getDefaultProvider(network: Network): Provider {
       return new Provider(testnet.rpcUrl);
 
     case Network.Mainnet:
-      invariant(false, 'Network supported yet');
+      invariant(false, 'Lens Chain Mainnet is not supported yet');
   }
 }

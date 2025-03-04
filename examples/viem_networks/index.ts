@@ -1,4 +1,4 @@
-import { chains } from '@lens-network/sdk/viem';
+import { chains } from '@lens-chain/sdk/viem';
 import { createPublicClient, http } from 'viem';
 
 const publicClients = [

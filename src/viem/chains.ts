@@ -9,20 +9,23 @@ import { chainConfig } from 'viem/zksync';
 import * as chains from '../chains';
 import { nativeCurrency } from '../constants';
 
-export type LensNetworkChain = Prettify<
+export type LensChain = Prettify<
   Assign<
     Chain,
     {
       contracts: {
         multicall3: ChainContract;
-        erc20Factory: ChainContract;
-        erc721Factory: ChainContract;
       };
     }
   >
 >;
 
-function defineViemChain(chain: chains.ChainDefinition): LensNetworkChain {
+/**
+ * @deprecated Use {@link LensChain} instead.
+ */
+export type LensNetworkChain = LensChain;
+
+function defineViemChain(chain: chains.ChainDefinition): LensChain {
   return defineChain({
     ...chainConfig,
     id: chain.id,
@@ -41,20 +44,8 @@ function defineViemChain(chain: chains.ChainDefinition): LensNetworkChain {
       },
     },
     contracts: {
-      WETH: {
-        address: chain.contracts.WETH
-      },
-      WGRASS: {
-        address: chain.contracts.WGRASS
-      },
       multicall3: {
         address: chain.contracts.multicall3,
-      },
-      erc20Factory: {
-        address: chain.contracts.erc20Factory,
-      },
-      erc721Factory: {
-        address: chain.contracts.erc721Factory,
       },
     },
     testnet: chain.testnet,
@@ -71,4 +62,5 @@ function defineViemChain(chain: chains.ChainDefinition): LensNetworkChain {
   });
 }
 
+export const mainnet = /*#__PURE__*/ defineViemChain(chains.mainnet);
 export const testnet = /*#__PURE__*/ defineViemChain(chains.testnet);
