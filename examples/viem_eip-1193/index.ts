@@ -1,6 +1,6 @@
 import 'viem/window';
 
-import { chains } from '@lens-network/sdk/viem';
+import { chains } from '@lens-chain/sdk/viem';
 import { Address, createWalletClient, custom } from 'viem';
 
 const chain = chains.testnet;

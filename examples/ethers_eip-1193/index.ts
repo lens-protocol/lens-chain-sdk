@@ -1,5 +1,5 @@
-import '@lens-network/sdk/ethers/globals';
-import { BrowserProvider, chains } from '@lens-network/sdk/ethers';
+import '@lens-chain/sdk/ethers/globals';
+import { BrowserProvider, chains } from '@lens-chain/sdk/ethers';
 import { Eip1193Provider } from 'ethers';
 
 const provider = new BrowserProvider(window.ethereum as Eip1193Provider);

@@ -1,9 +1,6 @@
-import { getDefaultProvider, Network } from '@lens-network/sdk/ethers';
+import { getDefaultProvider, Network } from '@lens-chain/sdk/ethers';
 
-const providers = [
-  getDefaultProvider(Network.Testnet),
-  // getDefaultProvider(types.Network.Mainnet),
-];
+const providers = [getDefaultProvider(Network.Testnet), getDefaultProvider(Network.Mainnet)];
 
 export default await Promise.all(
   providers.map(async (provider) => {

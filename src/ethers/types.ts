@@ -1,14 +1,10 @@
-import { DeployedContracts, testnet } from '../chains';
-import { PagingResult } from '../types';
-
-export type { SecondsSinceEpoch, TimeDirection } from '../types';
-export type { DeployedContracts, PagingResult };
+import { mainnet, testnet } from '../chains';
 
 /**
  * Network types.
  */
 export enum Network {
-  Mainnet = NaN,
+  Mainnet = mainnet.id,
   Testnet = testnet.id,
 }
 
@@ -66,88 +62,3 @@ export type SendRawTransactionDetails = {
   storageLogs: StorageEntry[];
   events: OptimisticLog[];
 };
-
-export type TxHistoryItem = {
-  /**
-   * The transaction hash.
-   */
-  hash: string;
-  to: string;
-  from: string;
-  transactionIndex: string;
-  input: string;
-  value: string;
-  gas: string;
-  gasPrice: string;
-  gasUsed: string;
-  cumulativeGasUsed: string;
-  fee: string;
-  nonce: string;
-  confirmations: string;
-  blockNumber: string;
-  blockHash: string;
-  /**
-   * Timestamp in seconds since the Unix epoch.
-   */
-  timeStamp: string;
-  commitTxHash: string | null;
-  proveTxHash: string | null;
-  executeTxHash: string | null;
-  isL1Originated: string;
-  l1BatchNumber: string;
-  contractAddress: string | null;
-  isError: string;
-  txreceipt_status: string;
-  methodId: string;
-  functionName: string;
-  type: string;
-};
-
-export type TxHistoryResponse = PagingResult<TxHistoryItem>;
-
-export type ContractsCreationResult = {
-  contractAddress: string;
-  contractCreator: string;
-  txHash: string;
-};
-
-export type ContractCreationResponse = ReadonlyArray<ContractsCreationResult>;
-
-export type TokenInfoResult = {
-  contractAddress: string;
-  tokenName: string;
-  symbol: string;
-  tokenDecimal: number;
-  tokenPriceUSD: string | null;
-  liquidity: string | null;
-  l1Address: string | null;
-  iconURL: string | null;
-};
-
-export type TokenTxHistoryItem = {
-  hash: string;
-  to: string;
-  from: string;
-  transactionIndex: string;
-  input: string;
-  value: string | null;
-  gas: string;
-  gasPrice: string;
-  gasUsed: string;
-  cumulativeGasUsed: string;
-  fee: string;
-  nonce: string;
-  confirmations: string;
-  blockNumber: string;
-  blockHash: string;
-  l1BatchNumber: string;
-  timeStamp: string;
-  contractAddress: string;
-  tokenID: string | null;
-  tokenName: string | null;
-  tokenSymbol: string | null;
-  tokenDecimal: string | null;
-  transactionType: string;
-};
-
-export type TokenTxHistoryResponse = PagingResult<TokenTxHistoryItem>;
