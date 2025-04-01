@@ -1,7 +1,6 @@
 import { Provider } from './providers';
 import { Network } from './types';
-import { testnet } from '../chains';
-import { invariant } from '../invariant';
+import { mainnet, testnet } from '../chains';
 
 /**
  * Returns a default provider for the `network`.
@@ -22,6 +21,6 @@ export function getDefaultProvider(network: Network): Provider {
       return new Provider(testnet.rpcUrl);
 
     case Network.Mainnet:
-      invariant(false, 'Lens Chain Mainnet is not supported yet');
+      return new Provider(mainnet.rpcUrl);
   }
 }

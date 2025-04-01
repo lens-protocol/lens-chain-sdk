@@ -6,7 +6,7 @@
     "start": "vite-node index.ts"
   },
   "dependencies": {
-    "@lens-chain/sdk": "canary",
+    "@lens-chain/sdk": "latest",
     "viem": "^2.13.1"
   },
   "devDependencies": {
