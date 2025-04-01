@@ -1,6 +1,7 @@
 export type DeployedContracts = {
   // well known
   multicall3: `0x${string}`;
+  wrappedGasToken: `0x${string}`;
 };
 
 export type ChainDefinition = {
@@ -20,25 +21,27 @@ export const mainnet: ChainDefinition = {
   id: 232,
   name: 'Lens Chain Mainnet',
   network: 'lens-chain-mainnet',
-  rpcUrl: 'https://example.com',
-  blockExplorerUrl: 'https://example.com',
+  rpcUrl: 'https://rpc.lens.xyz',
+  blockExplorerUrl: 'https://explorer.lens.xyz/',
   testnet: false,
   contracts: {
-    multicall3: '0x000000000000000000000000000000000000dead',
+    multicall3: '0x6b6dEa4D80e3077D076733A04c48F63c3BA49320',
+    wrappedGasToken: '0x6bdc36e20d267ff0dd6097799f82e78907105e2f',
   },
 };
 
 /**
- * The Lens Chain Sepolia Testnet.
+ * The Lens Chain Testnet.
  */
 export const testnet: ChainDefinition = {
   id: 37111,
-  name: 'Lens Chain Sepolia Testnet',
+  name: 'Lens Chain Testnet',
   network: 'lens-chain-testnet',
-  rpcUrl: 'https://rpc.testnet.lens.dev',
-  blockExplorerUrl: 'https://block-explorer.testnet.lens.dev/',
+  rpcUrl: 'https://rpc.testnet.lens.xyz',
+  blockExplorerUrl: 'https://explorer.testnet.lens.xyz/',
   testnet: true,
   contracts: {
-    multicall3: '0x8A44EDE8a6843a997bC0Cc4659e4dB1Da8f91116',
+    multicall3: '0xeee5a340Cdc9c179Db25dea45AcfD5FE8d4d3eB8',
+    wrappedGasToken: '0xeee5a340Cdc9c179Db25dea45AcfD5FE8d4d3eB8',
   },
 };

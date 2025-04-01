@@ -1,6 +1,3 @@
-/**
- * TODO: Move these definitions under `viem/chains` once stable.
- */
 import { Chain, ChainContract } from 'viem';
 import { Assign, Prettify } from 'viem/chains';
 import { defineChain } from 'viem/utils';
@@ -15,6 +12,7 @@ export type LensChain = Prettify<
     {
       contracts: {
         multicall3: ChainContract;
+        wrappedGasToken: ChainContract;
       };
     }
   >
@@ -47,6 +45,9 @@ function defineViemChain(chain: chains.ChainDefinition): LensChain {
       multicall3: {
         address: chain.contracts.multicall3,
       },
+      wrappedGasToken: {
+        address: chain.contracts.wrappedGasToken,
+      },
     },
     testnet: chain.testnet,
     fees: {
@@ -55,7 +56,7 @@ function defineViemChain(chain: chains.ChainDefinition): LensChain {
        * call eth_maxPriorityFeePerGas which is not supported by
        * many Wallets (i.e., MetaMask).
        *
-       * This is safe because of the nature of gas on zkSync Validium.
+       * This is safe because of the nature of gas on ZKsync Validium.
        */
       estimateFeesPerGas: 0n,
     },

@@ -6,7 +6,7 @@
     "start": "node ./index.js"
   },
   "dependencies": {
-    "@lens-chain/sdk": "canary",
+    "@lens-chain/sdk": "latest",
     "ethers": "^6.12.1",
     "zksync-ethers": "^6.7.1"
   },
