@@ -1,14 +1,13 @@
 import { toBeHex } from 'ethers/utils';
 
 import * as chains from '../chains';
-import { nativeCurrency } from '../constants';
 import { AddEthereumChainParameter } from '../types';
 
 function defineAddEthereumChainParameter(chain: chains.ChainDefinition): AddEthereumChainParameter {
   return {
     chainId: toBeHex(chain.id),
     chainName: chain.name,
-    nativeCurrency,
+    nativeCurrency: chain.nativeCurrency,
     rpcUrls: [chain.rpcUrl],
     blockExplorerUrls: [chain.blockExplorerUrl],
   };

@@ -4,7 +4,6 @@ import { defineChain } from 'viem/utils';
 import { chainConfig } from 'viem/zksync';
 
 import * as chains from '../chains';
-import { nativeCurrency } from '../constants';
 
 export type LensChain = Prettify<
   Assign<
@@ -29,7 +28,7 @@ function defineViemChain(chain: chains.ChainDefinition): LensChain {
     id: chain.id,
     name: chain.name,
     network: chain.network,
-    nativeCurrency: nativeCurrency,
+    nativeCurrency: chain.nativeCurrency,
     rpcUrls: {
       default: {
         http: [chain.rpcUrl],
