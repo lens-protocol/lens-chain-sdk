@@ -61,7 +61,7 @@ export const testnet: ChainDefinition = {
   blockExplorerUrl: 'https://explorer.testnet.lens.xyz/',
   testnet: true,
   contracts: {
-    multicall3: '0xeee5a340Cdc9c179Db25dea45AcfD5FE8d4d3eB8',
+    multicall3: '0x8A44EDE8a6843a997bC0Cc4659e4dB1Da8f91116',
     wrappedGasToken: '0xeee5a340Cdc9c179Db25dea45AcfD5FE8d4d3eB8',
   },
   nativeCurrency: {
