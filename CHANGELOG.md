@@ -1,5 +1,11 @@
 # @lens-chain/sdk
 
+## 1.0.2
+
+### Patch Changes
+
+- 5c3d570: **fix:** multicall3 misconfiguration for testnet
+
 ## 1.0.1
 
 ### Patch Changes
