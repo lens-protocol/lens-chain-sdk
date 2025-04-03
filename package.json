@@ -1,6 +1,6 @@
 {
   "name": "@lens-chain/sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The quickest way to connect your dApp to Lens Chain.",
   "type": "module",
   "exports": {

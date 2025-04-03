@@ -1,5 +1,11 @@
 # @lens-chain/sdk
 
+## 1.0.1
+
+### Patch Changes
+
+- ba1955c: **fix:** mainnet native token config
+
 ## 1.0.0
 
 ### Major Changes
