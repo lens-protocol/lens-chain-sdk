@@ -1,5 +1,11 @@
 # @lens-chain/sdk
 
+## 1.0.3
+
+### Patch Changes
+
+- 01a963f: **fix:** updates Lens network names"
+
 ## 1.0.2
 
 ### Patch Changes
