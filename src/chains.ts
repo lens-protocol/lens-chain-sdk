@@ -33,7 +33,7 @@ export type ChainDefinition = {
  */
 export const mainnet: ChainDefinition = {
   id: 232,
-  name: 'Lens Chain Mainnet',
+  name: 'Lens',
   network: 'lens-chain-mainnet',
   rpcUrl: 'https://rpc.lens.xyz',
   blockExplorerUrl: 'https://explorer.lens.xyz/',
@@ -55,7 +55,7 @@ export const mainnet: ChainDefinition = {
  */
 export const testnet: ChainDefinition = {
   id: 37111,
-  name: 'Lens Chain Testnet',
+  name: 'Lens Testnet',
   network: 'lens-chain-testnet',
   rpcUrl: 'https://rpc.testnet.lens.xyz',
   blockExplorerUrl: 'https://explorer.testnet.lens.xyz/',
